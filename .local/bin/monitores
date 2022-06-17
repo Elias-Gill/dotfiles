@@ -1,0 +1,4 @@
+#!/bin/bash 
+read thing2execute <<< $(ls ~/.config/screenlayout/ | dmenu -l 20)
+~/.config/screenlayout/$thing2execute
+exit

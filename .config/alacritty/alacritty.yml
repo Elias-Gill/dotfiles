@@ -1,0 +1,271 @@
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+#env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  #TERM: alacritty
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+
+  # Spread additional padding evenly around the terminal content.
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  window:
+    opacity: 0.95
+    padding:
+      x: 4
+      y: 3
+    dynamic_padding: false
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: false
+
+   #Window class (Linux/BSD only):
+  class:
+     #Application instance name
+    instance: Alacritty
+     #General application class
+    general: Alacritty
+
+
+#scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 900
+
+  # Scrolling distance multiplier.
+  multiplier: 4
+
+ #Font configuration
+  font:
+    #Normal (roman) font face
+    normal:
+      family: FiraCode Nerd Font
+      style: regular
+
+    #Bold font face
+    bold:
+      family: Caskaydia Cove Nerd Font
+      style: Bold 
+
+      #Italic font face
+    italic:
+      family: Source Code Pro
+      style: Italic
+
+      #Bold italic font face
+    bold_italic:
+      family: Source Code Pro
+      style: Bold Italic
+
+    size: 11.9
+
+      #Offset is the extra space around each character. `offset.y` can be thought
+      #of as modifying the line spacing, and `offset.x` as modifying the letter
+      #spacing.
+    offset:
+      x: 0
+      y: 4
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
+
+# If `true`, bold text is drawn using the bright color variants.
+  draw_bold_text_with_bright_colors: true
+
+
+  # Search colors
+  #
+  # Colors used for the search bar and match highlighting.
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+
+  search:
+    matches:
+      foreground: '#000000'
+      background: '#ffffff'
+
+      focused_match:
+        foreground: '#000000'
+        background: '#f0c674'
+
+  colors: 
+    primary:
+      background: '#171717'
+      foreground: '#eeeeee'
+        
+   #Normal colors
+    normal:
+      black:   '#1d1f21'
+      red:     '#DA4438'
+      yellow:  '#35CE44'
+      green:   '#FF8602'
+      blue:    '#1FD2F6'
+      magenta: '#F61e6c'
+      cyan:    '#41EACD'
+      white:   '#ffffff'
+
+     #Bright colors
+    bright:
+      black:   '#666666'
+      red:     '#DA4438'
+      green:   '#35CE44'
+      yellow:  '#F6AB1F'
+      blue:    '#6bb6da'
+      magenta: '#F61F7D'
+      cyan:    '#41EACD'
+      white:   '#ffffff'
+
+    cursor:
+      text: '#000000'
+      cursor: '#cccccc'
+
+
+# Bell
+#
+# The bell is rung every time the BEL control character is received.
+  Bell:
+  # Visual Bell Animation
+  #
+  # Animation effect for flashing the screen when the visual bell is rung.
+  #
+  # Values for `animation`:
+  #   - Ease
+  #   - EaseOut
+  #   - EaseOutSine
+  #   - EaseOutQuad
+  #   - EaseOutCubic
+  #   - EaseOutQuart
+  #   - EaseOutQuint
+  #   - EaseOutExpo
+  #   - EaseOutCirc
+  #   - Linear
+    animation: EaseOutExpo
+
+    # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
+    # disable the visual bell animation.
+    duration: 20
+
+    # Visual bell animation color.
+    color: '#eeeeee'
+
+  # Bell Command
+  #
+  # This program is executed whenever the bell is rung.
+  #
+  # When set to `command: None`, no command will be executed.
+  #
+  # Example:
+  #   command:
+  #     program: notify-send
+  #     args: ["Hello, World!"]
+  #
+  #command: None
+
+#selection:
+  save_to_clipboard: true
+
+#cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Beam
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: On
+
+
+# Live config reload (changes require restart)
+  live_config_reload: true
+
+# Shell
+#
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+# shell.
+#
+# Default:
+#   - (macOS) /bin/bash --login
+#   - (Linux/BSD) user login shell
+#   - (Windows) powershell
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login
+
+# Startup directory
+#
+# Directory the shell is started in. If this is unset, or `None`, the working
+# directory of the parent process will be used.
+#working_directory: None
+
+# Send ESC (\x1b) before characters when alt is pressed.
+#alt_send_esc: true
+
+# Offer IPC using `alacritty msg` (unix only)
+#ipc_socket: true
+
+#mouse:
+  # Click settings
+  #
+  # The `double_click` and `triple_click` settings control the time
+  # alacritty should wait for accepting multiple clicks as one double
+  # or triple click.
+  #double_click: { threshold: 300 }
+  #triple_click: { threshold: 300 }
+
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  #hide_when_typing: false
+
+#
+# - Vi mode exclusive actions:
+#
+#   - Open
+#       Perform the action of the first matching hint under the vi mode cursor
+#       with `mouse.enabled` set to `true`.
+#   - ToggleNormalSelection
+#   - ToggleLineSelection
+#   - ToggleBlockSelection
+#   - ToggleSemanticSelection
+#       Toggle semantic selection based on `selection.semantic_escape_chars`.
+#
+  key_bindings:
+    - { key: Back, mods: Control, chars: "\x17" }
+    #- { key: Copy,                                        action: Copy           }
+    #- { key: L,         mods: Control,                    action: ClearLogNotice }
+    #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
+    #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
+    #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+    #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
+    #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
+
+
+  # Highlight window truedamage information.
+  highlight_damage: true
