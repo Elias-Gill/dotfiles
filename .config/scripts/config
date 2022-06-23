@@ -1,0 +1,63 @@
+# -- configuracion general y separador ---
+#full_text=|
+markup=pango
+align=center
+color=#888888
+separator=false
+separator_block_width=24
+border=#666666
+border_bottom=1.5
+border_top=0
+border_right=0
+border_left=0
+
+
+# ----- bateria ---- 
+[battery2]
+command=/home/elias/.config/scripts/battery
+markup=pango
+interval=50
+
+# ----- CPU ---- 
+[separator]
+[cpu_usage]
+command=/home/elias/.config/scripts/cpu_usage
+interval=5
+label=<span color='#EBDBB2'>💻 </span>
+#min_width=100%
+T_WARN=50
+T_CRIT=80
+#DECIMALS=0
+COLOR_NORMAL=#ffffff
+#COLOR_WARN=#FFFC00
+#COLOR_CRIT=#FF0000
+
+# ----- RAM ---- 
+[separator]
+[memory]
+command=/home/elias/.config/scripts/memory
+label=<span color='#EBDBB2'>💿 </span>
+interval=30
+color=#58E33A
+#[memory]
+#command=$SCRIPT_DIR/memory
+#label=SWAP
+#instance=swap
+#interval=30
+
+# ----- HORA Y FECHA ---- 
+[separator]
+[calendar]
+markup=pango
+command=/home/elias/.config/scripts/calendar
+interval=1
+color=#ffffff
+
+label=<span color='#00c0d6'>⏱ </span>
+DATEFMT=+%H:%M   <span color='#FFB71B'>🗓 </span> %a %d.%m.%Y 
+# SHORTFMT=+%H:%M:%S
+HEIGHT=180
+WIDTH=220
+border=#FF5DD4
+
+[separator]
