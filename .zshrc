@@ -58,7 +58,7 @@ plugins=(git fzf zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-# export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin
 export GOROOT=/usr/local/go 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 

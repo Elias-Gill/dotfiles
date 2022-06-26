@@ -289,7 +289,6 @@ exec_always --no-startup-id fix_xcursor
 bar {
 	i3bar_command i3bar
 	status_command i3blocks
-	#status_command i3blocks
 	position top
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
