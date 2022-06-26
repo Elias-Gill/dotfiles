@@ -52,6 +52,7 @@
   font:
     #Normal (roman) font face
     normal:
+      family: Noto Font Emoji
       family: FiraCode Nerd Font
       style: regular
 
@@ -63,7 +64,7 @@
       #Italic font face
     italic:
       family: Source Code Pro
-      style: Italic
+      style: Italic 
 
       #Bold italic font face
     bold_italic:
