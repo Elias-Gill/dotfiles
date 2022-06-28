@@ -22,7 +22,7 @@ interval=50
 [separator]
 [cpu_usage]
 command=/home/elias/.config/scripts/cpu_usage
-interval=5
+interval=4
 label=<span color='#EBDBB2'>💻 </span>
 #min_width=100%
 T_WARN=50
@@ -37,7 +37,7 @@ COLOR_NORMAL=#ffffff
 [memory]
 command=/home/elias/.config/scripts/memory
 label=<span color='#EBDBB2'>💿 </span>
-interval=30
+interval=10
 color=#58E33A
 #[memory]
 #command=$SCRIPT_DIR/memory
@@ -50,11 +50,11 @@ color=#58E33A
 [calendar]
 markup=pango
 command=/home/elias/.config/scripts/calendar
-interval=1
+interval=30
 color=#ffffff
 
 label=<span color='#00c0d6'>⏱ </span>
-DATEFMT=+%H:%M   <span color='#FFB71B'>🗓 </span> %a %d.%m.%Y 
+DATEFMT=+%H:%M   <span color='#FFB71B'>🗓</span> %a %d/%m/%Y 
 # SHORTFMT=+%H:%M:%S
 HEIGHT=180
 WIDTH=220
