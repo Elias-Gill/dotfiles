@@ -6,6 +6,7 @@
 set $mod Mod4
 set $mod1 Mod1
 
+border_radius 5
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -193,6 +194,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Pcmanfm"] floating enable border pixel 1
+for_window [title="Tlp-UI"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border pixel 1
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
