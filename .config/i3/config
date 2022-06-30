@@ -6,7 +6,7 @@
 set $mod Mod4
 set $mod1 Mod1
 
-border_radius 5
+border_radius 6
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -148,6 +148,7 @@ set $ws7 7
 set $ws8 8
 set $ws9 9
 set $ws10 10
+set $ws11 11
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -207,7 +208,8 @@ for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border pixel 1
+# solo funciona con betterlockscreen, actualiza el wallpaper de bloqueo con nitrogen
+for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
@@ -237,8 +239,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+backslash mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    # bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l workspace $ws11, exec --no-startup-id betterlockscreen -l blur, mode "default"
+    # bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym s workspace $ws11, exec --no-startup-id "systemctl suspend", mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"

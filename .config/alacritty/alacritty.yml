@@ -109,7 +109,7 @@
   colors: 
     primary:
       background: '#171717'
-      foreground: '#eeeeee'
+      foreground: '#ffffff'
         
    #Normal colors
     normal:
