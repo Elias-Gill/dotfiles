@@ -64,7 +64,7 @@ END {
 		print("#FF0000")
 	} else if (pct > 60) {
 		print("#FFAE00")
-	} else if (pct > 50) {
+	} else if (pct > 55) {
 		print("#FFF600")
 	}
 }
