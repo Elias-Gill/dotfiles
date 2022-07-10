@@ -31,6 +31,7 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec kitty
 bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty --title "float_alacritty"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -194,6 +195,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
+for_window [title="float_alacritty"] floating enable border pixel 1
 for_window [class="Pcmanfm"] floating enable border pixel 1
 for_window [title="Tlp-UI"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border pixel 1
