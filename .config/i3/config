@@ -69,17 +69,18 @@ bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
-# focus_follows_mouse no
+# screenshots
+bindsym Print exec --no-startup-id i3-scrot
+bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -w
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
 
 # change focus
 bindsym $mod1+h focus left
 bindsym $mod1+j focus down
 bindsym $mod1+k focus up
 bindsym $mod1+l focus right
+# focus_follows_mouse no
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -210,8 +211,12 @@ for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 for_window [title="MuseScore: Play Panel"] floating enable
-# solo funciona con betterlockscreen, actualiza el wallpaper de bloqueo con nitrogen
-for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
+
+for_window [class="Nitrogen"] floating enable sticky enable border pixel 1
+#; exec "sh ~/.config/scripts/update_lock_bg.sh"
+for_window [title="Walldo in go"] floating enable sticky enable border pixel 1
+#; exec "~/.config/scripts/update_lock_bg.sh --walldo"
+
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable

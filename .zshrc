@@ -65,9 +65,9 @@ alias la="exa -a"
 alias ll="exa -l"
 
 # vi mode
-bindkey -v
-export KEYTIMEOUT=20
-source ~/.config/scripts/vi-display-mode.zsh
+# bindkey -v
+# export KEYTIMEOUT=20
+# source ~/.config/scripts/vi-display-mode.zsh
 
 # -- NVM config -- 
 # export NVM_DIR="$HOME/.nvm"
