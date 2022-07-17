@@ -63,6 +63,7 @@ alias ls="exa"
 alias cl="clear"
 alias la="exa -a"
 alias ll="exa -l"
+alias tm="tmux"
 
 # vi mode
 # bindkey -v
