@@ -189,7 +189,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
+assign [class="Firefox"] $ws1
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
@@ -289,7 +289,7 @@ mode "resize" {
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec --no-startup-id ~/.fehbg; sleep 1; picom -b
+# exec --no-startup-id ~/.fehbg --restore; sleep 1; picom -b
 
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
