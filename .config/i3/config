@@ -62,7 +62,7 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-# exec --no-startup-id ~/.fehbg --restore; sleep 1; picom -b
+exec --no-startup-id ~/.fehbg; sleep 1; picom -b
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id pamac-tray
 
@@ -183,7 +183,6 @@ set $ws7 7
 set $ws8 8
 set $ws9 9
 set $ws10 10
-set $ws11 11
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -223,6 +222,9 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open applications on specific workspaces
 assign [class="firefox"] $ws1
+assign [class="obsidian"] $ws4
+assign [class="Xournalpp"] $ws5
+assign [title="Coding-session"] $ws2
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -241,6 +243,8 @@ for_window [title="float_alacritty"] floating enable border pixel 1
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 1
 #; exec "sh ~/.config/scripts/update_lock_bg.sh"
 for_window [title="Walldo in go"] floating enable sticky enable border pixel 1
+for_window [title="Pentablet"] floating enable border pixel 1
+for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
 #; exec "~/.config/scripts/update_lock_bg.sh --walldo"
 
 for_window [class="Pamac-manager"] floating enable
@@ -261,9 +265,9 @@ bindsym $mod+backslash mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     # bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym l workspace $ws11, exec --no-startup-id betterlockscreen -l blur, mode "default"
+    bindsym l workspace $ws10, exec --no-startup-id betterlockscreen -l blur, mode "default"
     # bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym s workspace $ws11, exec --no-startup-id "systemctl suspend", mode "default"
+    bindsym s workspace $ws10, exec --no-startup-id "systemctl suspend", mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
