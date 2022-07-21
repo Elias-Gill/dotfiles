@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+read election <<< $(echo -e "Coding-session\nStudy-session" | dmenu)
+exists=`sh ~/.config/i3/i3get.sh`
+
+# solo abrir una nueva terminal si es que no existe ya abierta
+if [[ $exists == "" ]]; then
+    if [[ `tmux ls -F\#S | grep $election` ]]; then
+        alacritty --hold --title $election -e tmux a
+    else
+        alacritty --hold --title $election -e tmux new-session -d -s $election -n Principal && tmux a -t $election
+    fi
+fi
