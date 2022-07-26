@@ -1,12 +1,16 @@
 #! /usr/bin/bash
-read election <<< $(echo -e "Coding-session\nStudy-session" | dmenu)
-exists=`sh ~/.config/i3/i3get.sh`
+# read election <<< $(echo -e "coding-session\nstudy-session" | dmenu)
+election="main-terminal"
+exists=`sh ~/.config/i3/i3get.sh -t "main-terminal"`
 
-# solo abrir una nueva terminal si es que no existe ya abierta
+# solo abrir una nueva terminal si es que no existe ya abierta con el mismo nombre
 if [[ $exists == "" ]]; then
+    # revisar si la sesion ya existe
     if [[ `tmux ls -F\#S | grep $election` ]]; then
-        alacritty --hold --title $election -e tmux a
+        alacritty --hold --title $election -e tmux a -t $election
     else
-        alacritty --hold --title $election -e tmux new-session -d -s $election -n Principal && tmux a -t $election
+        alacritty --hold --title $election -e tmux new -s $election -n Principal 
     fi
+else
+    i3-msg "[title=$election] focus"
 fi

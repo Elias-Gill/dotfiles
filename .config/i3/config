@@ -50,7 +50,7 @@ bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
 #  Screen and keyboard on startup  
 exec --no-startup-id "sudo tlp start"
 exec --no-startup-id "teclado"
-exec --no-startup-id ~/.config/screenlayout/redragon.sh
+exec --no-startup-id ~/.config/screenlayout/dual_redragon.sh
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -184,6 +184,19 @@ set $ws8 8
 set $ws9 9
 set $ws10 10
 
+# set workspace to specific monitor
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+workspace $ws7 output primary
+
+workspace $ws8 output eDP-1
+workspace $ws9 output eDP-1
+workspace $ws10 output eDP-1
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -229,6 +242,7 @@ assign [class="Xournalpp"] $ws5
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="arandr"] floating enable border pixel 1
 for_window [class="Pcmanfm"] floating enable border pixel 1
 for_window [title="Tlp-UI"] floating enable border pixel 1
 for_window [class="Clipgrab"] floating enable
@@ -308,7 +322,7 @@ bar {
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
-#	tray_output eDP1
+#	tray_output eDP-1
 
 	bindsym button4 nop
 	bindsym button5 nop
