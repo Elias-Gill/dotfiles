@@ -57,6 +57,7 @@ source ~/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export FZF_DEFAULT_COMMAND='rg --files --ignore-file /home/elias/.config/rg.ignore'
+export FZF_CTRL_T_COMMAND='rg --files --null -g '!.git' -g '!go/' -g '!.pdf' | xargs -0 dirname | uniq'
 
 # alias 
 alias ls="exa"
