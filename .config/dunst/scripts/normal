@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+paplay "/home/elias/.config/dunst/sounds/normal.wav"

@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+paplay "/home/elias/.config/dunst/sounds/Windows Logoff Sound.wav"

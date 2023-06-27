@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+if [[ -z $1 ]]; then
+    exit 0
+fi
+selected_browser=$(echo -e $(echo -e "Firefox\nLynx" | fzf))
+
+if [[ "$selected_browser" = "Firefox" ]]; then
+    exec firefox $1
+else
+    exec lynx $1
+fi
+

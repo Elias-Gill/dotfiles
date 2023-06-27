@@ -1,0 +1,20 @@
+#! /usr/bin/bash
+term_tittle="main-terminal"
+exists=$(sh ~/.config/i3/i3get.sh -c "main-terminal")
+
+# solo abrir una nueva terminal si es que no existe ya abierta con el mismo nombre
+if [[ $exists == "" ]]; then
+	# revisar si la sesion ya existe
+	if [[ $(tmux ls -F\#S) ]]; then
+		alacritty --hold --title $term_tittle -e tmux a
+	else
+		alacritty --hold --title $term_tittle -e tmux new-session -s main-session -c ~
+	fi
+else
+	what_to_do=$(echo -e "go back\nnew term" | dmenu)
+	if [[ "$what_to_do" = "new term" ]]; then
+		alacritty --hold --title another_session -e tmux a -t main-session
+	else
+		i3-msg "[title=$term_tittle] focus"
+	fi
+fi

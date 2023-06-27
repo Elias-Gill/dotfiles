@@ -1,0 +1,136 @@
+  # TERM
+  env:
+    TERM: xterm-256color
+
+  window:
+    opacity: 0.94
+    padding:
+      x: 4
+      y: 0
+    dynamic_padding: false
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: false
+
+   #Window class (Linux/BSD only):
+  class:
+     #Application instance name
+    instance: Alacritty
+     #General application class
+    general: Alacritty
+
+
+#scrolling:
+  history: 500
+  # Scrolling distance multiplier.
+  multiplier: 4
+
+#Font configuration
+  font:
+    #Normal (roman) font face
+    normal:
+      family: Noto Font Emoji
+      family: FiraCode Nerd Font
+      style: regular
+
+    #Bold font face
+    bold:
+      family: Caskaydia Cove Nerd Font
+      style: Bold 
+
+    #Italic font face
+    italic:
+      family: Caskaydia Cove Nerd Font
+      style: Italic 
+
+    #Bold italic font face
+    bold_italic:
+      family: Source Code Pro
+      style: Bold Italic
+
+    size: 11.9
+
+    offset:
+      x: 0
+      y: 4
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
+
+# If `true`, bold text is drawn using the bright color variants.
+  draw_bold_text_with_bright_colors: true
+  search:
+    matches:
+      foreground: '#000000'
+      background: '#ffffff'
+
+      focused_match:
+        foreground: '#000000'
+        background: '#f0c674'
+          
+
+  Bell:
+  #   - Ease
+  #   - EaseOut
+  #   - EaseOutSine
+  #   - EaseOutQuad
+  #   - EaseOutCubic
+  #   - EaseOutQuart
+  #   - EaseOutQuint
+  #   - EaseOutExpo
+  #   - EaseOutCirc
+  #   - Linear
+    animation: EaseOutExpo
+
+    duration: 20
+    color: '#eeeeee'
+#   command:
+#     program: notify-send
+#     args: ["Hello, World!"]
+
+#selection:
+  save_to_clipboard: true
+
+#cursor:
+  style:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: On
+
+
+# Live config reload (changes require restart)
+  live_config_reload: true
+
+# Shell
+# shell:
+#  program: /bin/bash
+#  args:
+#    - --login
+
+# Startup directory
+#working_directory: None
+
+# Send ESC (\x1b) before characters when alt is pressed.
+#alt_send_esc: true
+
+# Offer IPC using `alacritty msg` (unix only)
+#ipc_socket: true
+
+  import:
+    - ~/.config/alacritty/keys.yml
+      # colorschemes
+    - ~/.config/alacritty/colors/colorscheme.yml
+    # - ~/.config/alacritty/colors/catppuccin.yml
+    # - ~/.config/alacritty/colors/grubvox.yml
+    # - ~/.config/alacritty/colors/challenger.yml
+    # - ~/.config/alacritty/colors/tokyo.yml
+
+  # Highlight window truedamage information.
+  highlight_damage: true

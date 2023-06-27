@@ -1,0 +1,145 @@
+[global]
+    transparency = 0
+    frame_width = 1
+    separator_height = 4
+    font = Noto Sans 10.5
+    markup = full
+    format = "<span foreground='#eeeeee'>%s</span> %p\n%b"
+    corner_radius = 3
+
+    # --- TEMA OLD ---
+    # separator_color = #ffffff
+    # frame_color = "#282a36"
+    # --- Dracula -- 
+    # separator_color= frame
+    # frame_color = "#788388"
+    # --- Catppucin -- 
+    frame_color = "#8AADF4"
+    frame_color = "#555555"
+    separator_color = "#ff000000"
+
+    # ---------- OTRAS COSAS ----------------
+    # Sort messages by urgency.
+    sort = yes
+    # Show how many messages are currently hidden (because of geometry).
+    indicate_hidden = yes
+    # geometry = "0x4-40+40"
+
+    # "left", "center" and "right".
+    alignment = left
+    show_age_threshold = 60
+    
+    word_wrap = no
+    ignore_newline = no
+    progress_bar = true
+    shrink = no
+    
+    idle_threshold = 60 
+    monitor = 0
+    follow = keyboard # or mouse
+    
+    # Should a notification popped up from history be sticky or timeout
+    sticky_history = yes
+    history_length = 20
+    
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
+    
+    # This adds empty space above and under the text.
+    line_height = 0
+    padding = 8
+    horizontal_padding = 10
+    
+    # This is mainly for error detection
+    # bounce_freq = 5
+    # startup_notification = false
+    
+    # dmenu path.
+    dmenu = /usr/bin/dmenu -p dunst:
+    # Browser for opening urls in context menu.
+    browser = /usr/bin/firefox
+    # Context menu keybind.
+    mouse_right_click = context
+    enable_posix_regex = true
+
+    # icons
+    icon_position = left # left/right/off
+    icon_path = /usr/share/icons/Papirus/16x16/status/:/usr/share/icons/Papirus/16x16/devices/:/usr/share/icons/Papirus/16x16/apps/:/usr/share/icons/Papirus/16x16/actions/
+    max_icon_size = 64
+
+    # -------- [shortcuts] ---------
+    # Close notification.
+    close = mod1+space
+    close_all = ctrl+mod1+space
+    history = ctrl+mod4+h 
+    # Context menu.
+    context = ctrl+mod1+c
+
+[experimental]
+    # Calculate the dpi to use on a per-monitor basis.
+    per_monitor_dpi = true
+
+[urgency_low]
+    timeout = 6
+
+    # --- Dracula ---
+    background = "#282a36"
+    foreground = "#6272a4"
+    # --- TEMA OLD ---
+    # background = "#343434"
+    # foreground = "#ffffff"
+    # --- Catppucin ---
+    # background = "#24273A"
+    # foreground = "#CAD3F5"
+
+[urgency_normal]
+    timeout = 10
+    # new_icon = /path/to/icon
+
+    # --- Dracula ---
+    background = "#282a36"
+    # foreground = "#bd93f9"
+    # --- TEMA OLD ---
+    # background = "#343434"
+    # foreground = "#ffffff"
+    frame_color = "#075d97#"
+    # --- Catppucin ---
+    # background = "#24273A"
+    foreground = "#F5A97F"
+
+[urgency_critical]
+    timeout = 35
+    new_icon = /usr/share/icons/Papirus/16x16/apps/bell.svg
+    script = /home/elias/.config/dunst/scripts/critical
+
+    # --- Dracula ---
+    # background = "#ff5555"
+    foreground = "#f8f8f2"
+    frame_color = "#ff5555"
+    # --- TEMA OLD ---
+    # frame_color = "#FF1F6F"
+    # foreground = "#ffffff"
+    # --- Catppucin ---
+    background = "#24273A"
+    foreground = "#CAD3F5"
+    # frame_color = "#F5A97F"
+
+# -------- APPS SPECIFIC -------
+[pomo_start]
+    appname = pomo_start
+    script = /home/elias/.config/dunst/scripts/pomo_start
+
+[pomo_stop]
+    appname = pomo_stop
+    script = /home/elias/.config/dunst/scripts/pomo_stop
+
+[firefox]
+    appname = firefox
+    new_icon = /usr/share/icons/Papirus/16x16/apps/firefox-default.svg
+    # script = /home/elias/.config/dunst/scripts/pomo_start
+
+# [normal_notifications]
+#     appname = "^[^h]*(p(?!omo_start)[^h]*)*$"
+#     script = /home/elias/.config/dunst/scripts/normal
+
+# vim: ft=cfg

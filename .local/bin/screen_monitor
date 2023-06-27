@@ -1,0 +1,39 @@
+#! /bin/bash
+# Mini script para determinar que modo de monitor usar y cambiar automaticamente cuando la entrada
+# hdmi se conecta o desconecta... INFO: rarisimo bash lgmt ajajaj
+
+# la primera llamada debe de ser con el contrario de hdmi conectado
+# para poder triggear el script de screen layout en el inicio
+hdmi_conectado="true"
+hdmi=$(xrandr | grep HDMI-1 | grep disconnected)
+if [[ -z $hdmi ]]; then
+    hdmi_conectado="false"
+fi
+
+# correr en el fondo
+while [[ true ]]; do
+    # auxiliar para determinar el cambio del hdmi
+	mode_aux=$hdmi_conectado
+
+	# Ver si el hdmi ESTA conectado
+	hdmi=$(cat /sys/class/drm/*HDMI*/status)
+	if [[ "$hdmi" = "connected" ]]; then
+		hdmi_conectado="true"
+    else 
+		hdmi_conectado="false"
+	fi
+
+	# Si el modo se cambio, entonces...
+	if [ "$mode_aux" != "$hdmi_conectado" ]; then
+		if [[ "$hdmi_conectado" = "true" ]]; then # si el hdmi esta conectado
+			~/.config/screenlayout/redragon.sh
+            echo hdmi conectado
+			echo monitor Redragon
+		else # si el hdmi se desconecta
+			~/.config/screenlayout/single.sh
+            echo hdmi desconectado
+			echo monitor simple
+		fi
+	fi
+	sleep 3
+done

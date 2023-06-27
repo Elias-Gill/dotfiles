@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+if [ -z "$*" ]; then
+	# armar query
+	read -p "Enter Query: " query
+	if [[ -z $query ]]; then
+		exit 0
+	fi
+
+	# parseo
+	s=$(echo $query | sed 's/ /+/g')
+	url="https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$s"
+	# correr
+	exec lynx $url
+else
+	s=$(echo $* | sed 's/ /+/g')
+	url="https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$s"
+	exec lynx $url
+fi

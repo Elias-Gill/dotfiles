@@ -1,0 +1,11 @@
+{
+  "accentColor": "",
+  "enabledCssSnippets": [
+    "headings-indent",
+    "headings-indent2",
+    "print",
+    "print_dark"
+  ],
+  "cssTheme": "Things",
+  "baseFontSize": 17
+}

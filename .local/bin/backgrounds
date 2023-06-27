@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo rm -r /usr/share/backgrounds/fondos
+sudo cp -r $HOME/Imágenes/fondos /usr/share/backgrounds/

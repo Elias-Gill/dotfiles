@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+file=$1
+filename=$(basename -- "$file")
+extension="${filename##*.}"
+images="png jpg_ jpeg webp" # extensiones de formato imagen
+
+if [[ "$extension" == "pdf" ]]; then
+    pdftotext "$@" -
+elif [[ "$images" =~ "$extension" ]]; then
+    # identify -format "%f \n%wx%h\n%b\n" "$file"
+    ascii-image-converter "$file" -C -d 100,60
+else
+    bat --color=always -p "$file"
+fi

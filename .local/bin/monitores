@@ -1,0 +1,4 @@
+#!/bin/bash 
+read selection <<< $(ls ~/.config/screenlayout/ | dmenu -l 20)
+~/.config/screenlayout/$selection
+exit

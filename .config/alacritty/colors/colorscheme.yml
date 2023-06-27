@@ -1,0 +1,33 @@
+  # Personal colorscheme
+  colors: 
+    primary:
+      background: '#212121'
+      # background: '#1c2128'
+      foreground: '#ffffff'
+        
+   #Normal colors
+    normal:
+      black:   '#1d1f21'
+      red:     '#DA4438'
+      yellow:  '#35CE44'
+      green:   '#FF8602'
+      blue:    '#1FD2F6'
+      magenta: '#F61e6c'
+      cyan:    '#41EACD'
+      white:   '#ffffff'
+
+     #Bright colors
+    bright:
+      black:   '#666666'
+      red:     '#DA4438'
+      green:   '#35CE44'
+      yellow:  '#F6AB1F'
+      blue:    '#6bb6da'
+      magenta: '#F61F7D'
+      cyan:    '#41EACD'
+      white:   '#ffffff'
+
+    cursor:
+      text: '#000000'
+      cursor: '#cccccc'
+

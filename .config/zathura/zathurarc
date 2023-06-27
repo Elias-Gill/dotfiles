@@ -1,0 +1,22 @@
+set scroll-step 120
+set incremental-search
+set page-padding 4
+set selection-clipboard clipboard
+
+unmap =
+map = zoom in
+map 0 zoom
+
+unmap d
+map d navigate next
+
+unmap u
+map u navigate previous
+
+unmap e
+map e toggle_page_mode
+
+unmap <C-r>
+unmap r
+map r recolor
+map <C-r> rotate

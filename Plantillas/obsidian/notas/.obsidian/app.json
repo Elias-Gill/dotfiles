@@ -1,0 +1,17 @@
+{
+  "livePreview": true,
+  "showLineNumber": false,
+  "spellcheck": true,
+  "vimMode": true,
+  "defaultViewMode": "preview",
+  "showFrontmatter": true,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Legal",
+    "landscape": false,
+    "margin": "2",
+    "downscalePercent": 85
+  },
+  "promptDelete": false,
+  "alwaysUpdateLinks": true
+}

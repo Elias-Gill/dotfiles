@@ -1,0 +1,11 @@
+{
+  "style": "bullet",
+  "min_depth": 1,
+  "max_depth": 5,
+  "externalStyle": "None",
+  "supportAllMatchers": false,
+  "allow_inconsistent_headings": false,
+  "title": "# Contents",
+  "delimiter": "-",
+  "varied_style": false
+}
