@@ -31,9 +31,16 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git fzf)
 source $ZSH/oh-my-zsh.sh
 
-# TODO: agregar el script de recuperacion
-source ~/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# TODO: anadir al script de recuperacion
+# estos dos por alguna razon ya no estan incluidos en oh-my-zsh
+syntax="$HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+suggestions="$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -f "$syntax" ]]; then
+    source $syntax
+fi
+if [[ -f "$suggestions" ]]; then
+    source $suggestions
+fi
 
 # -- Go config -- 
 export PATH=$PATH:/usr/local/go/bin

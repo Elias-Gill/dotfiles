@@ -23,12 +23,17 @@ export LESS=-Ri
 export MANPAGER='less -s -i'           # -M more verbose, +Gg display page percentage
 
 # rust cargo
-source "$HOME/.cargo/env"
+if [[ -d "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
+# env variables 
+if [[ -d "$HOME/.config/secrets" ]]; then
+    source "$HOME/.config/secrets"
+fi
 
 # go path
 export PATH=$PATH:/usr/local/go/bin
-
-source "$HOME/.config/secrets"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
