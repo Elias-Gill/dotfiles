@@ -391,6 +391,7 @@ firmas
 formaliza
 funciones
 funcional
+ft
 capa
 contiene
 ctrica
@@ -850,6 +851,7 @@ multiplicaciones
 mucha
 mando
 metodos
+markdown
 Datos
 Duplex
 Digitales
@@ -1408,6 +1410,7 @@ visualizar
 ver
 vuelven
 varios
+vim
 Varia
 Var
 Vi
