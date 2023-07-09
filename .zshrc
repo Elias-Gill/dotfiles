@@ -1,3 +1,4 @@
+source $HOME/.profile
 # zmodload zsh/zprof
 # colorscritp
 FILE=$HOME/.local/bin/colorscript2
