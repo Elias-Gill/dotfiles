@@ -78,6 +78,7 @@ alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
 alias \?="lsearch"
+alias git\ log='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

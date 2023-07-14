@@ -1,0 +1,7 @@
+#! /bin/bash
+action=0 # disable por defecto
+# activar si el dispositivo esta desactivado
+if [[ ! -z $(xinput list ELAN\ Touchscreen | grep disabled) ]]; then
+    action=1
+fi
+exec xinput set-prop ELAN\ Touchscreen "Device Enabled" $action

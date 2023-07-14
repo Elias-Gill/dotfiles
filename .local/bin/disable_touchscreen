@@ -1,2 +1,0 @@
-#! /bin/bash
-exec xinput set-prop ELAN\ Touchscreen "Device Enabled" 0
