@@ -1,0 +1,314 @@
+######################
+## General Settings ##
+######################
+
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+set $mod1 Mod1
+
+# default layout
+default_border pixel 1
+default_floating_border pixel 1
+
+font xft:Fira-Code 11
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+# focus_follows_mouse no
+
+###################################
+## sound/brightness/special-keys ##
+###################################
+
+bindsym $mod+bracketright exec "amixer sset Master playback 5%+"; exec notify-send -i audio-player  "Volumen Up"
+bindsym $mod+bracketleft exec "amixer sset Master playback 5%-"; exec notify-send -i audio-player "Volumen Down"
+
+# screenshots
+bindsym Print exec --no-startup-id i3-scrot
+bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -w
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+##############################
+###  Startup Applications  ###
+##############################
+
+#  Screen and keyboard on startup  
+exec --no-startup-id "sudo tlp start"
+# exec --no-startup-id "teclado 0"
+
+# exec cups service only before start
+exec --no-startup-id sudo systemctl start cups.service
+
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id blueman-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id clipit
+exec --no-startup-id nm-applet
+
+exec --no-startup-id pulseaudio
+exec --no-startup-id pa-applet
+# exec --no-startup-id volumeicon
+# exec --no-startup-id paplay ~/.config/dunst/sounds/startup.wav
+
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+# exec --no-startup-id start_conky_maia
+# exec --no-startup-id pamac-tray
+
+#####################
+###  Keybyndings  ###
+#####################
+
+### Movement Keybyndings ###
+# reload the configuration file
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+c reload
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start program launcher
+bindsym $mod+d exec --no-startup-id rofi -show run -theme ~/.config/rofi/global/rofi.rasi 
+
+# toggel between us and spanish layout
+bindsym $mod+Tab exec "teclado"
+
+# Hide borders
+hide_edge_borders none
+
+# change borders
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+# change focus
+bindsym $mod1+h focus left
+bindsym $mod1+j focus down
+bindsym $mod1+k focus up
+bindsym $mod1+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod1+Left focus left
+bindsym $mod1+Down focus down
+bindsym $mod1+Up focus up
+bindsym $mod1+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left 40px
+bindsym $mod+Shift+j move down 40px
+bindsym $mod+Shift+k move up 40px
+bindsym $mod+Shift+l move right 40px
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left 40px
+bindsym $mod+Shift+Down move down 40px
+bindsym $mod+Shift+Up move up 40px
+bindsym $mod+Shift+Right move right 40px
+
+# navigate workspaces next / previous
+bindsym $mod+l workspace next
+bindsym $mod+h workspace prev
+
+# workspace next with arrows
+bindsym $mod+Right workspace next
+bindsym $mod+Left workspace prev
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# split orientation
+bindsym $mod+q split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout tabbed
+bindsym $mod+w layout stacked
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#### OTHER byndings ####
+
+# start a terminal
+#bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty --title "float_alacritty"
+
+bindsym $mod+F3 exec pcmanfm
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+# bindsym $mod+F3 exec ranger
+
+##########################
+###  Workspace config  ###
+##########################
+
+# Workspace names
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws10 10
+
+### set workspace to specific monitor ###
+#workspace $ws1 output primary
+#workspace $ws2 output primary
+#workspace $ws3 output primary
+#workspace $ws4 output primary
+#workspace $ws5 output primary
+#workspace $ws6 output primary
+#workspace $ws7 output primary
+#workspace $ws8 output eDP-1
+#workspace $ws9 output eDP-1
+#workspace $ws10 output eDP-1
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws10
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# Open applications on specific workspaces
+assign [class="firefox"] $ws1
+assign [class="google-chrome-stable"] $ws1
+assign [title="main-terminal"] $ws2
+assign [class="obsidian"] $ws4
+for_window [class="obsidian"] border pixel 1
+assign [class="LibreOffice"] $ws6
+for_window [class="^Spotify"] move --no-auto-back-and-forth to workspace $ws3
+# assign [class="Xournalpp"] $ws5
+# assign [class="openboard"] $ws5
+
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Sxiv"] floating enable border pixel 1
+for_window [class="Gcolor3"] floating enable border pixel 1
+for_window [class="arandr"] floating enable border pixel 1
+for_window [class="Pcmanfm"] floating enable border pixel 1
+for_window [class="Nautilus"] floating enable border pixel 1
+for_window [title="Tlp-UI"] floating enable border pixel 1
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="fpakman"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border pixel 1
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
+for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
+
+for_window [title="float_alacritty"] floating enable border pixel 1
+for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
+for_window [title="Walldo in go"] floating enable sticky enable border pixel 1; exec "~/.config/scripts/update_lock_bg.sh --walldo"
+for_window [title="Pentablet"] floating enable border pixel 1
+for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
+
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border pixel 1
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border pixel 1
+for_window [class="Simple-scan"] floating enable border pixel 1
+for_window [class="(?i)System-config-printer.py"] floating enable border pixel 1
+for_window [class="Timeset-gui"] floating enable border pixel 1
+for_window [class="(?i)virtualbox"] floating enable border pixel 1
+
+#############################
+###     System configs    ###
+#############################
+
+# hide/unhide i3status bar
+bindsym $mod+m bar mode toggle
+
+# Theme colors
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #556064 #0074CE #ffffff #ffffff
+  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  client.background       #2B2C2B
+
+#############################
+### settings for i3-gaps: ###
+#############################
+
+# Set inner/outer gaps
+gaps inner 5
+gaps outer 1
+
+smart_gaps on
+smart_borders on
+
+input type:keyboard {
+    repeat_delay 290
+    repeat_rate 32
+    xkb_options {
+        ctrl:swap_rwin_rctl
+        altwin:alt_super_win
+        altwin:ctrl_rwin
+        }
+}
+
+# bindsym $mod+Shift+s workspace $ws10, exec --no-startup-id systemctl suspend
+# bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
+# bindsym l workspace $ws10, exec --no-startup-id swaymsg lock, mode "default"
+# bindsym r exec --no-startup-id i3exit reboot, mode "default"
+# bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+bar swaybar_command waybar
+# exec --no-startup-id swaybg -m fill -i $(grep -oP "'\K[^']+(?=')" <<< $(cat ~/.fehbg))
