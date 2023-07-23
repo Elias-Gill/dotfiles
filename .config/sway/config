@@ -20,8 +20,16 @@ floating_modifier $mod
 ## sound/brightness/special-keys ##
 ###################################
 
+# sound control for 60% keyboard
 bindsym $mod+bracketright exec "amixer sset Master playback 5%+"; exec notify-send -i audio-player  "Volumen Up"
 bindsym $mod+bracketleft exec "amixer sset Master playback 5%-"; exec notify-send -i audio-player "Volumen Down"
+
+# Increase volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+# Decrease volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+# Mute audio
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # screenshots
 bindsym Print exec --no-startup-id i3-scrot
@@ -29,8 +37,8 @@ bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -w
 bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "brightnessctl set 5%+"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 
 ##############################
 ###  Startup Applications  ###
@@ -45,16 +53,16 @@ exec --no-startup-id sudo systemctl start cups.service
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id blueman-applet
-exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
 exec --no-startup-id nm-applet
+exec --no-startup-id dunst
+# exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id pulseaudio
 exec --no-startup-id pa-applet
+
 # exec --no-startup-id volumeicon
 # exec --no-startup-id paplay ~/.config/dunst/sounds/startup.wav
-
-# exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id pamac-tray
 
@@ -71,7 +79,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run -theme ~/.config/rofi/global/rofi.rasi 
+bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+z exec --no-startup-id morc_menu
+# bindsym $mod+d exec --no-startup-id rofi -show run -theme ~/.config/rofi/themes2/rounded-gray-dark.rasi
 
 # toggel between us and spanish layout
 bindsym $mod+Tab exec "teclado"
@@ -138,7 +148,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # toggle sticky
-bindsym $mod+Shift+s sticky toggle
+bindsym $mod+Shift+t sticky toggle
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -297,18 +307,19 @@ smart_borders on
 input type:keyboard {
     repeat_delay 290
     repeat_rate 32
-    xkb_options {
-        ctrl:swap_rwin_rctl
-        altwin:alt_super_win
-        altwin:ctrl_rwin
-        }
+    xkb_options "altwin:swap_alt_win"
 }
 
-# bindsym $mod+Shift+s workspace $ws10, exec --no-startup-id systemctl suspend
-# bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
+input type:touchpad {
+# Enable tapping
+    tap enabled
+}
+
+bindsym $mod+Shift+s workspace $ws10, exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
 # bindsym l workspace $ws10, exec --no-startup-id swaymsg lock, mode "default"
 # bindsym r exec --no-startup-id i3exit reboot, mode "default"
 # bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
 bar swaybar_command waybar
-# exec --no-startup-id swaybg -m fill -i $(grep -oP "'\K[^']+(?=')" <<< $(cat ~/.fehbg))
+exec --no-startup-id swaybg -m fill -i $(grep -oP "'\K[^']+(?=')" <<< $(cat /home/elias/.fehbg))
