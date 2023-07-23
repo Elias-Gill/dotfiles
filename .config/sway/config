@@ -322,4 +322,5 @@ bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
 # bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
 bar swaybar_command waybar
-exec --no-startup-id swaybg -m fill -i $(grep -oP "'\K[^']+(?=')" <<< $(cat /home/elias/.fehbg))
+# wallpaper
+exec --no-startup-id swaybg -m fill -i $(cat /home/elias/.local/share/bg)
