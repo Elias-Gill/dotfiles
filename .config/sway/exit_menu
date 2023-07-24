@@ -1,0 +1,6 @@
+#! /bin/sh
+dmenu
+systemctl suspend
+swaymsg exit
+swaymsg reboot
+swaymsg shutdown

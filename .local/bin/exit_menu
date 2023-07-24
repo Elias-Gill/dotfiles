@@ -1,0 +1,12 @@
+#! /bin/sh
+read selection <<< $(cat ~/.config/sway/options | dmenu -l 20)
+echo 
+if [[ "$selection" = "exit" ]]; then
+    swaymsg exit
+elif [[ "$selection" = "suspend" ]]; then
+    systemctl suspend
+elif [[ "$selection" = "reboot" ]]; then
+    swaymsg reboot
+elif [[ "$selection" = "shutdown" ]]; then
+    swaymsg shutdown
+fi

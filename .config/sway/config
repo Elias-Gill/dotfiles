@@ -262,8 +262,7 @@ for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
 for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 
 for_window [title="float_alacritty"] floating enable border pixel 1
-for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
-for_window [title="Walldo in go"] floating enable sticky enable border pixel 1; exec "~/.config/scripts/update_lock_bg.sh --walldo"
+for_window [class="Walldo*"] floating enable sticky enable border pixel 1
 for_window [title="Pentablet"] floating enable border pixel 1
 for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
 
@@ -322,5 +321,9 @@ bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
 # bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
 bar swaybar_command waybar
+
 # wallpaper
 exec --no-startup-id swaybg -m fill -i $(cat /home/elias/.local/share/bg)
+
+# Set shut down, restart and locking features
+bindsym $mod+backslash exec exit_menu
