@@ -8,5 +8,5 @@ elif [[ "$selection" = "suspend" ]]; then
 elif [[ "$selection" = "reboot" ]]; then
     swaymsg reboot
 elif [[ "$selection" = "shutdown" ]]; then
-    swaymsg shutdown
+    shutdown now
 fi

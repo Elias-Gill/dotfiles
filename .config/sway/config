@@ -306,7 +306,7 @@ smart_borders on
 input type:keyboard {
     repeat_delay 290
     repeat_rate 32
-    xkb_options "altwin:swap_alt_win"
+    xkb_file "$HOME/.local/share/kb_map.xkb"
 }
 
 input type:touchpad {
@@ -314,16 +314,15 @@ input type:touchpad {
     tap enabled
 }
 
-bindsym $mod+Shift+s workspace $ws10, exec --no-startup-id systemctl suspend
-bindsym $mod+Shift+e exec --no-startup-id swaymsg exit
+# Set shut down, restart and locking features
+bindsym $mod+backslash exec exit_menu
+
 # bindsym l workspace $ws10, exec --no-startup-id swaymsg lock, mode "default"
 # bindsym r exec --no-startup-id i3exit reboot, mode "default"
 # bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
 bar swaybar_command waybar
-
 # wallpaper
 exec --no-startup-id swaybg -m fill -i $(cat /home/elias/.local/share/bg)
-
-# Set shut down, restart and locking features
-bindsym $mod+backslash exec exit_menu
+# auto displays
+exec --no-startup-id kanshi
