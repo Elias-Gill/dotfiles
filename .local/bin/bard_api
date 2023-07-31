@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+s=$(echo $*)
+exec bard-cli "$s" -c ~/.config/bardcli.yaml | glow -p

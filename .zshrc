@@ -59,7 +59,8 @@ ZSH_AUTOSUGGEST_STRATEGY="history"
 # autocompletition plugin
 ENABLE_CORRECTION="false"
 
-# alias 
+# ---- alias ----
+# better replace for ls
 FILE=/usr/bin/exa
 if [[ -f "$FILE" ]]; then
     alias ls="exa"
@@ -69,16 +70,23 @@ else
     alias la="ls -A"
     alias ll="ls -lA"
 fi
+
+# zoxide for autojumps
 FILE=/usr/bin/zoxide
 if [[ -f "$FILE" ]]; then
     alias cd="z"
 fi
+
+# usefull apps alias
 alias cl="clear"
 alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
+alias git_log='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+
+# internet searches on cli
 alias \?="lsearch"
-alias git\ log='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+alias \?\?="bard_api"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
