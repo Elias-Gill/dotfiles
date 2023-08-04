@@ -45,7 +45,6 @@ bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 ##############################
 
 #  Screen and keyboard on startup  
-exec --no-startup-id "sudo tlp start"
 # exec --no-startup-id "teclado 0"
 
 # exec cups service only before start
@@ -72,8 +71,8 @@ exec --no-startup-id pa-applet
 
 ### Movement Keybyndings ###
 # reload the configuration file
-bindsym $mod+Shift+r reload
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload; exec killall kanshi; exec kanshi
+bindsym $mod+Shift+c reload; exec killall kanshi; exec kanshi
 
 # kill focused window
 bindsym $mod+Shift+q kill
