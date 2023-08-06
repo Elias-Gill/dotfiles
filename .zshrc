@@ -1,46 +1,31 @@
 # zmodload zsh/zprof
-# colorscritp
-FILE=$HOME/.local/bin/colorscript2
-if [[ -f "$FILE" ]]; then
-    colorscript2
-fi
-
-# p10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # "trick" to speed up compinit
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
-  compinit
+    compinit
 done
 compinit -C
 
+# case insensitive completition
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# p10k instant prompt (has to be on top)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# plugin manager
+source $HOME/.local/share/zplug/init.zsh
+# -- plugins list --- 
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-autosuggestions", defer:2
+zplug "plugins/fzf", from:oh-my-zsh
+# --- end --- 
+zplug load
+
+# support for zoxide cd
 eval "$(zoxide init zsh)"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-zstyle ':omz:update' mode disabled # update automatically without asking
-DISABLE_AUTO_UPDATE="true"
-
-# Plugins
-plugins=(git fzf)
-source $ZSH/oh-my-zsh.sh
-
-# TODO: anadir al script de recuperacion
-# estos dos por alguna razon ya no estan incluidos en oh-my-zsh
-syntax="$HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-suggestions="$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-if [[ -f "$syntax" ]]; then
-    source $syntax
-fi
-if [[ -f "$suggestions" ]]; then
-    source $suggestions
-fi
 
 # -- Go config -- 
 export PATH=$PATH:/usr/local/go/bin
