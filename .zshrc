@@ -9,6 +9,7 @@ compinit -C
 # case insensitive completition and menu
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu select
+bindkey -e
 
 # p10k instant prompt (has to be on top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
