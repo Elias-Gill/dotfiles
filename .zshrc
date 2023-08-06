@@ -6,8 +6,9 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-# case insensitive completition
+# case insensitive completition and menu
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
 
 # p10k instant prompt (has to be on top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -15,7 +16,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # plugin manager
+export ZPLUG_HOME="$HOME/.local/share/zplug_home"
 source $HOME/.local/share/zplug/init.zsh
+
 # -- plugins list --- 
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -39,7 +42,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # sugestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
-ZSH_AUTOSUGGEST_STRATEGY="history"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # autocompletition plugin
 ENABLE_CORRECTION="false"
