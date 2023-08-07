@@ -36,3 +36,13 @@ class fzf_select(Command):
                 self.fm.cd(fzf_file)
             else:
                 self.fm.select_file(fzf_file)
+
+# -------- CUSTOM IMAGE PREVIEW -----------
+from ranger.ext.img_display import ImageDisplayer, register_image_displayer
+@register_image_displayer("chafa")
+class MyImageDisplayer(ImageDisplayer):
+    def draw(self, path, start_x, start_y, width, height):
+        import subprocess
+        import os.path
+        command="f'chafa {path} --size={width}x{height}'"
+        self.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)

@@ -52,11 +52,10 @@ if [ "$preview_images" = "True" ]; then
         # Image previews for SVG files, disabled by default.
         image/svg+xml)
            convert "$path" "$cached" && exit 6 || exit 1;;
-        # Image previews for image files. w3mimgdisplay will be called for all
-        # image files (unless overriden as above), but might fail for
-        # unsupported types.
         image/*)
-            exit 7;;
+            # ascii-image-converter "$path" -d "$width","$height" && exit 0 || exit 1;;
+           # chafa --symbols all "$path" -s "$width"x"$height" && exit 0 || exit 1;;
+           exit 7;;
         # Image preview for video, disabled by default.:
         video/*)
             ffmpegthumbnailer -i "$path" -o "$cached" -s 0 && exit 6 || exit 1;;

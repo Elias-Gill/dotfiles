@@ -34,7 +34,7 @@ zplug load
 # --- configurations ---
 # sugestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # autocompletition plugin
 ENABLE_CORRECTION="false"
@@ -81,6 +81,13 @@ alias git_log='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%
 # internet searches on cli
 alias \?="lsearch"
 alias \?\?="bard_api"
+
+# better cd experience
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+alias -g ..='cd ..'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -205,6 +212,12 @@ bindkey '\C-x\C-e' edit-command-line
 # file rename magick
 bindkey "^[m" copy-prev-shell-word
 
+# backward delete style
+WORDCHARS=' *?_-.[]~=&;!#$%^(){}<>/'
+autoload -Uz select-word-style
+select-word-style normal
+zstyle ':zle:*' word-style unspecified
+
 #--- BETTER GREP EXPERIENCE ---
 __GREP_CACHE_FILE="$ZSH_CACHE_DIR"/grep-alias
 __GREP_ALIAS_CACHES=("$__GREP_CACHE_FILE"(Nm-1))
@@ -235,3 +248,45 @@ else
     unfunction grep-flags-available
 fi
 unset __GREP_CACHE_FILE __GREP_ALIAS_CACHES
+
+# -- better history support ---
+## History wrapper
+function omz_history {
+    local clear list
+    zparseopts -E c=clear l=list
+
+    if [[ -n "$clear" ]]; then
+        # if -c provided, clobber the history file
+        echo -n >| "$HISTFILE"
+        fc -p "$HISTFILE"
+        echo >&2 History file deleted.
+    elif [[ -n "$list" ]]; then
+        # if -l provided, run as if calling `fc' directly
+        builtin fc "$@"
+    else
+        # unless a number is provided, show all history events (starting from 1)
+        [[ ${@[-1]-} = *[0-9]* ]] && builtin fc -l "$@" || builtin fc -l "$@" 1
+    fi
+}
+
+# Timestamp format
+case ${HIST_STAMPS-} in
+    "mm/dd/yyyy") alias history='omz_history -f' ;;
+    "dd.mm.yyyy") alias history='omz_history -E' ;;
+    "yyyy-mm-dd") alias history='omz_history -i' ;;
+    "") alias history='omz_history' ;;
+    *) alias history="omz_history -t '$HIST_STAMPS'" ;;
+esac
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data

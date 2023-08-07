@@ -1,0 +1,292 @@
+# Basic Settings
+set previewer ~/.config/lf/preview
+set preview true
+set hidden false
+set drawbox false
+set icons true
+set ignorecase true
+
+# Custom Functions
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+        *) xdg-open "$f" & ;;
+    esac
+}}
+
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+cmd setwallpaper %cp "$f" ~/.config/wall.png && xwallpaper --zoom "$f"
+
+cmd fzf_jump ${{
+  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd broot_jump ${{
+  f=$(mktemp)
+  res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
+  rm -f "$f"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd open_config  ${{
+  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
+}}
+
+cmd dragon %dragon-drag-and-drop -a -x $fx
+cmd dragon-stay %dragon-drag-and-drop -a $fx
+cmd dragon-individual %dragon-drag-and-drop $fx
+cmd cpdragon %cpdragon
+cmd mvdragon %mvdragon
+cmd dlfile %dlfile
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+# Trash cli bindings
+cmd trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    # extract the substring from start of string up to delimiter.
+    # this is the first "element" of the string.
+    file=${files%%;*}
+
+    trash-put "$(basename "$file")"
+    # if there's only one element left, set `files` to an empty string.
+    # this causes us to exit this `while` loop.
+    # else, we delete the first "element" of the string from files, and move onto the next.
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+
+cmd clear_trash %trash-empty
+
+cmd restore_trash ${{
+  trash-restore
+}}
+
+cmd stripspace %stripspace "$f"
+
+# Bindings
+# Remove some defaults
+map Q quit!
+map q quit
+
+# find
+map <C-p> fzf_select
+
+map R reload_cwd
+map <C-r> reset
+map <C-c> abort
+map <esc> change_mode normal
+
+map i $~/.config/lf/preview "$f" | less -R
+map ? help
+map W display_log
+map w taskview_open
+map S shell $SHELL
+
+map O chain draw_possible_programs; cmd open_with 
+map cd cmd cd%space
+
+# Change the line mode
+map Mf linemode filename
+map Mm linemode mtime
+map Mp linemode permissions
+map Mt linemode metatitle
+
+map D move down=0.5 pages=True
+map U move up=0.5 pages=True
+
+# Jumping around
+map <C-o> history_go -1
+map L history_go 1
+map ] move_parent 1
+map [ move_parent -1
+
+map gM cd /mnt
+map g? cd /usr/share/doc/ranger
+map gt cd $HOME/.local/share/Trash/
+
+# External Programs
+map E  edit
+map yp shell -d echo -n %d/%f | xsel -i -p -b
+map yd shell -f echo -n %f | xsel -i; xsel -o | xsel -i -b
+
+# zip files
+map zn shell zip -r comprimido.zip %s
+map zu shell unzip %s
+
+#map cw console rename%space
+map r rename_append
+map a cmd touch 
+map A cmd mkdir
+
+# copy
+map yy copy
+map uy uncut
+map ya copy mode=add
+map yr copy mode=remove
+map yt copy mode=toggle
+
+# paste
+map pp paste
+map po paste overwrite=True
+map pa paste append=True
+map pO paste overwrite=True append=True
+map pl paste_symlink relative=false
+map pL paste_symlink relative=True
+map phl paste_hardlink
+map pht paste_hardlinked_subtree
+map pr paste_as_root
+
+# delete, trash and cut
+map dd cut
+map ud uncut
+map dt shell -s trash-put %s
+map dD cmd delete
+map te shell -s trash-empty -f
+
+# drag and drop
+map dg shell dragon -a -x %p
+map gs get_cumulative_size
+
+# Searching
+map / cmd search%space
+map n search_next
+map N search_next forward=false
+
+# Tabs
+map <C-n> tab_new $HOME
+map <TAB> tab_move 1
+map <S-TAB> tab_move -1
+map uq tab_restore
+map <c-1> tab_open 1
+map <c-2> tab_open 2
+map <c-3> tab_open 3
+map <c-4> tab_open 4
+
+# Sorting
+map ob chain set sort=basename; set reverse false
+map on chain set sort=natural; set reverse false
+map om chain set sort=mtime; set reverse false
+map ot chain set sort=type; set reverse false
+map os chain set sort=size; set reverse false
+map or set reverse!
+#
+# # Settings
+# map zc set collapse_preview!
+# map zd set sort_directories_first!
+map <backspace> set hidden!
+map <backspace2> set hidden!
+# map <C-h> set show_hidden!
+# map zI set flushinput!
+# map zi set preview_images!
+# map zm set mouse_enabled!
+# map zp set preview_files!
+# map zP set preview_directories!
+# map zs set sort_case_insensitive!
+# map zu set autoupdate_cumulative_size!
+# map zv set use_preview_script!
+# map zf console filter%space
+
+# Bookmarks
+map `<any> enter_bookmark %any
+map '<any> enter_bookmark %any
+map m<any> set_bookmark %any
+map um<any> unset_bookmark %any
+
+map m<bg> draw_bookmarks
+
+# ===================================================================
+# == Define keys for the console
+# ===================================================================
+# Note: Unmapped keys are passed directly to the console.
+
+# Basic
+cmap <tab> eval fm.ui.console.tab()
+cmap <s-tab> eval fm.ui.console.tab(-1)
+cmap <ESC> eval fm.ui.console.close()
+cmap <CR> eval fm.ui.console.execute()
+cmap <C-l> redraw_window
+
+# Move around
+cmap <up> eval fm.ui.console.history_move(-1)
+cmap <down> eval fm.ui.console.history_move(1)
+cmap <left> eval fm.ui.console.move(left=1)
+cmap <right> eval fm.ui.console.move(right=1)
+cmap <home> eval fm.ui.console.move(right=0, absolute=True)
+cmap <end> eval fm.ui.console.move(right=-1, absolute=True)
+cmap <a-left> eval fm.ui.console.move_word(left=1)
+cmap <a-right> eval fm.ui.console.move_word(right=1)
+
+# Line Editing
+cmap <backspace> eval fm.ui.console.delete(-1)
+cmap <delete> eval fm.ui.console.delete(0)
+cmap <C-w> eval fm.ui.console.delete_word()
+cmap <A-d> eval fm.ui.console.delete_word(backward=false)
+cmap <C-k> eval fm.ui.console.delete_rest(1)
+cmap <C-u> eval fm.ui.console.delete_rest(-1)
+cmap <C-y> eval fm.ui.console.paste()
+
+# Note: There are multiple ways to express backspaces.  <backspace> (code 263)
+# and <backspace2> (code 127).  To be sure, use both.
+
+# This special expression allows typing in numerals:
+cmap <allow_quantifiers> false
