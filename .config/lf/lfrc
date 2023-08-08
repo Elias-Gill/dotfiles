@@ -90,7 +90,7 @@ cmd unarchive ${{
   esac
 }}
 
-cmd zip %zip -r "$f" "$f"
+cmd zip %zip -r comprimido.zip "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
@@ -140,7 +140,6 @@ map i $~/.config/lf/preview "$f" | less -R
 map ? help
 map W display_log
 map w taskview_open
-map S shell $SHELL
 
 map O chain draw_possible_programs; cmd open_with 
 map cd cmd cd%space
@@ -151,14 +150,9 @@ map Mm linemode mtime
 map Mp linemode permissions
 map Mt linemode metatitle
 
-map D move down=0.5 pages=True
-map U move up=0.5 pages=True
-
 # Jumping around
 map <C-o> history_go -1
 map L history_go 1
-map ] move_parent 1
-map [ move_parent -1
 
 map gM cd /mnt
 map g? cd /usr/share/doc/ranger
@@ -166,15 +160,15 @@ map gt cd $HOME/.local/share/Trash/
 
 # External Programs
 map E  edit
-map yp shell -d echo -n %d/%f | xsel -i -p -b
-map yd shell -f echo -n %f | xsel -i; xsel -o | xsel -i -b
+map yp cmd -d echo -n %d/%f | xsel -i -p -b
+map yd cmd -f echo -n %f | xsel -i; xsel -o | xsel -i -b
 
 # zip files
-map zn shell zip -r comprimido.zip %s
-map zu shell unzip %s
+map zu unarchive
+map zn zip
 
 #map cw console rename%space
-map r rename_append
+map r rename
 map a cmd touch 
 map A cmd mkdir
 
@@ -196,15 +190,15 @@ map phl paste_hardlink
 map pht paste_hardlinked_subtree
 map pr paste_as_root
 
-# delete, trash and cut
+# delete, and cut
 map dd cut
 map ud uncut
-map dt shell -s trash-put %s
-map dD cmd delete
-map te shell -s trash-empty -f
+
+# trash
+map t trash
 
 # drag and drop
-map dg shell dragon -a -x %p
+map dg cmd dragon -a -x %p
 map gs get_cumulative_size
 
 # Searching
@@ -265,16 +259,6 @@ cmap <s-tab> eval fm.ui.console.tab(-1)
 cmap <ESC> eval fm.ui.console.close()
 cmap <CR> eval fm.ui.console.execute()
 cmap <C-l> redraw_window
-
-# Move around
-cmap <up> eval fm.ui.console.history_move(-1)
-cmap <down> eval fm.ui.console.history_move(1)
-cmap <left> eval fm.ui.console.move(left=1)
-cmap <right> eval fm.ui.console.move(right=1)
-cmap <home> eval fm.ui.console.move(right=0, absolute=True)
-cmap <end> eval fm.ui.console.move(right=-1, absolute=True)
-cmap <a-left> eval fm.ui.console.move_word(left=1)
-cmap <a-right> eval fm.ui.console.move_word(right=1)
 
 # Line Editing
 cmap <backspace> eval fm.ui.console.delete(-1)
