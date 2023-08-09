@@ -7,8 +7,12 @@ images="png jpg_ jpeg webp" # extensiones de formato imagen
 if [[ "$extension" == "pdf" ]]; then
     pdftotext "$@" -
 elif [[ "$images" =~ "$extension" ]]; then
-    # identify -format "%f \n%wx%h\n%b\n" "$file"
-    ascii-image-converter "$file" -C -d 100,60
+    chafa "$file"
 else
-    bat --color=always -p "$file"
+    bat=/usr/bin/bat
+    if [[ -f "$bat" ]]; then
+        bat --color=always -p "$file"
+    else
+        cat $file
+    fi
 fi

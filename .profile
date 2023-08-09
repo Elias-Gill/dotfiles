@@ -46,8 +46,12 @@ export VISUAL='nvim'
 # bat for pager and preview
 FILE=/usr/bin/bat
 if [[ -f "$FILE" ]]; then
-    export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers {}"'
     export MANPAGER='sh -c "col -b | bat -l man -p"'
+fi
+
+# preview script for fzf
+if [[ -f "$HOME/.config/scripts/preview" ]]; then
+    export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
 fi
 
 # config for FZF
