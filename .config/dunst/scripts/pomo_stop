@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-paplay "/home/elias/.config/dunst/sounds/Windows Logoff Sound.wav"
+paplay "$HOME/.config/dunst/sounds/sci-fi/mixkit-sci-fi-reject-notification-896.wav"

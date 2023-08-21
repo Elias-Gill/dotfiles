@@ -22,20 +22,23 @@ export LESS_TERMCAP_ue=$'\e[0m'     # reset underline
 export GROFF_NO_SGR=1
 export LESS="-Rsi"
 
-# rust cargo
-if [[ -d "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
-fi
-
-# env variables 
-if [[ -d "$HOME/.config/secrets" ]]; then
+# --- personal env vars --- 
+if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"
 fi
 
-# go path
-export PATH=$PATH:/usr/local/go/bin
+# --- env and bin config for prog.languages --- 
+# rust cargo
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
 
-# Preferred editor for local and remote sessions
+# go path
+if [[ -f "/usr/local/go/bin" ]]; then
+    export PATH=$PATH:/usr/local/go/bin
+fi
+
+# --- Preferred editor for local and remote sessions --- 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -43,18 +46,13 @@ else
 fi
 export VISUAL='nvim'
 
-# bat for pager and preview
+# bat for manpager and preview
 FILE=/usr/bin/bat
 if [[ -f "$FILE" ]]; then
     export MANPAGER='sh -c "col -b | bat -l man -p"'
 fi
 
-# preview script for fzf
-if [[ -f "$HOME/.config/scripts/preview" ]]; then
-    export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
-fi
-
-# config for FZF
+# --- config for FZF --- 
 FILE=/usr/bin/rg
 if [[ -f "$FILE" ]]; then
     export FZF_DEFAULT_COMMAND="rg --files -g '!.git' -g '!go/' -g '!*.class' -g '!VirtualBox*' -g '!Escritorio*' -g '!node_modules*'"
@@ -65,3 +63,7 @@ if [[ -f "$FILE" ]]; then
     export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
 fi
 
+# preview script for fzf
+if [[ -f "$HOME/.config/scripts/preview" ]]; then
+    export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
+fi

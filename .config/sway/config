@@ -165,7 +165,7 @@ bindsym $mod+Shift+Return exec alacritty --title "float_alacritty"
 
 bindsym $mod+F3 exec pcmanfm
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Shift+d exec killall dunst; exec dunst & ; exec notify-send -a startup 'restart dunst'
 # bindsym $mod+F3 exec ranger
 
 ##########################
@@ -325,3 +325,10 @@ bar swaybar_command waybar
 exec --no-startup-id swaybg -m fill -i $(cat /home/elias/.local/share/bg)
 # auto displays
 exec --no-startup-id kanshi
+
+# cambiar largo
+bindsym $mod1+Shift+Left resize shrink width 5 px or 5 ppt
+bindsym $mod1+Shift+Right resize grow width 5 px or 5 ppt
+# cambiar alto
+bindsym $mod1+Shift+Up resize grow height 5 px or 5 ppt
+bindsym $mod1+Shift+Down resize shrink height 5 px or 5 ppt

@@ -133,6 +133,10 @@
     appname = pomo_stop
     script = /home/elias/.config/dunst/scripts/pomo_stop
 
+[startup]
+    appname = startup
+    script = /home/elias/.config/dunst/scripts/startup
+
 [firefox]
     appname = firefox
     new_icon = /usr/share/icons/Papirus/16x16/apps/firefox-default.svg

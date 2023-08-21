@@ -52,6 +52,8 @@ export GOROOT=/usr/local/go
 # local
 export GOPATH=$HOME/.local/share/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
+export MAVEN_HOME=$HOME/.m2/
+export PATH=$HOME/.m2/bin/:$PATH
 
 # ---- alias ----
 # better replace for ls
@@ -213,7 +215,7 @@ bindkey '\C-x\C-e' edit-command-line
 bindkey "^[m" copy-prev-shell-word
 
 # backward delete style
-WORDCHARS=' *?_-.[]~=&;"!#$%^(){}<>/'
+WORDCHARS=' *?_:,+@`-.[]~=&;"!#$%^(){}<>/'
 autoload -Uz select-word-style
 select-word-style normal
 zstyle ':zle:*' word-style unspecified

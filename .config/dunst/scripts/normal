@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-paplay "/home/elias/.config/dunst/sounds/normal.wav"
+paplay "$HOME/.config/dunst/sounds/kde/pop.wav"
