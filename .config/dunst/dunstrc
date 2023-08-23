@@ -140,10 +140,10 @@
 [firefox]
     appname = firefox
     new_icon = /usr/share/icons/Papirus/16x16/apps/firefox-default.svg
-    # script = /home/elias/.config/dunst/scripts/pomo_start
+    script = /home/elias/.config/dunst/scripts/normal
 
-# [normal_notifications]
-#     appname = "^[^h]*(p(?!omo_start)[^h]*)*$"
-#     script = /home/elias/.config/dunst/scripts/normal
+[normal_notifications]
+    category = normal
+    script = /home/elias/.config/dunst/scripts/normal
 
 # vim: ft=cfg

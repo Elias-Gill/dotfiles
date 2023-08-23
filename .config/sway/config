@@ -330,3 +330,10 @@ bindsym $mod1+Shift+Right resize grow width 5 px or 5 ppt
 # cambiar alto
 bindsym $mod1+Shift+Up resize grow height 5 px or 5 ppt
 bindsym $mod1+Shift+Down resize shrink height 5 px or 5 ppt
+
+# cambiar largo (vim)
+bindsym $mod1+Shift+h resize shrink width 5 px or 5 ppt
+bindsym $mod1+Shift+l resize grow width 5 px or 5 ppt
+# cambiar alto (vim)
+bindsym $mod1+Shift+k resize grow height 5 px or 5 ppt
+bindsym $mod1+Shift+j resize shrink height 5 px or 5 ppt
