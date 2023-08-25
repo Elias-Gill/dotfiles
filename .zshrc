@@ -63,8 +63,8 @@ if [[ -f "$FILE" ]]; then
     alias la="exa --all"
     alias ll="exa --long --all"
 else
-    alias la="ls -A"
-    alias ll="ls -lA"
+    alias la="ls -A --color=always"
+    alias ll="ls -lA --color=always"
 fi
 
 # zoxide for autojumps
