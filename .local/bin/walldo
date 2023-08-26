@@ -1,6 +1,5 @@
 #! /bin/sh
 $HOME/.local/share/go/bin/walldo-in-go
 
-echo "holaa"
 # update the image path inside the file i use to auto run wallpaper
 echo "/$(ps aux | grep swaybg | awk -F'swaybg' '{print $2}' | grep / | sed 's/^[^\/]*\///')" >"$HOME/.local/share/bg"
