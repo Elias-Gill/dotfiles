@@ -6,7 +6,7 @@ cd ~
 sudo pacman -Syu --noconfirm firefox neovim yay yadm git tlp zathura libreoffice \
 alacritty zsh tmux go python python-pip python-pynvim zoxide bat lynx nodejs tree-sitter zathura-pdf-mupdf \
 ripgrep fd tealdeer trash-cli peco swaybg sway swayidle swayimg waybar ranger chafa git-delta grim slurp npm \
-kanshi wl-clipboard dmenu fzf
+kanshi wl-clipboard dmenu fzf noto-fonts-emoji ttf-firacode-nerd ttf-cascadia-code-nerd
 
 # config files
 yadm clone https://github.com/elias-gill/dotfiles
