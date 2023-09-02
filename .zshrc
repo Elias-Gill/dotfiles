@@ -21,7 +21,7 @@ fi
 #  --------------
 # plugin manager
 export ZPLUG_HOME="$HOME/.local/share/zplug_home"
-source $HOME/.local/share/zplug/init.zsh
+source "$ZPLUG_HOME/init.zsh"
 
 # --- plugins list --- 
 zplug "romkatv/powerlevel10k", as:theme, depth:1
@@ -40,7 +40,11 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 ENABLE_CORRECTION="false"
 
 # support for zoxide cd
-eval "$(zoxide init zsh)"
+FILE=/usr/bin/zoxide
+if [[ -f "$FILE" ]]; then
+    alias cd="z"
+    eval "$(zoxide init zsh)"
+fi
 
 #  --------------------
 # | USER CONFIGURATION |
@@ -65,12 +69,6 @@ if [[ -f "$FILE" ]]; then
 else
     alias la="ls -A --color=always"
     alias ll="ls -lA --color=always"
-fi
-
-# zoxide for autojumps
-FILE=/usr/bin/zoxide
-if [[ -f "$FILE" ]]; then
-    alias cd="z"
 fi
 
 # usefull apps alias
