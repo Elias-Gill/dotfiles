@@ -28,6 +28,7 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "plugins/fzf", from:oh-my-zsh
+zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 # --- end --- 
 zplug load
 

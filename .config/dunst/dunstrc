@@ -5,7 +5,7 @@
     font = Noto Sans 10.5
     markup = full
     format = "<span foreground='#eeeeee'>%s</span> %p\n%b"
-    corner_radius = 3
+    corner_radius = 6
 
     # --- TEMA OLD ---
     # separator_color = #ffffff
@@ -126,11 +126,11 @@
 
 # -------- APPS SPECIFIC -------
 [pomo_start]
-    appname = pomo_start
+    summary = ".*Pomodoro.*resuming.*"
     script = /home/elias/.config/dunst/scripts/pomo_start
 
 [pomo_stop]
-    appname = pomo_stop
+    summary = ".*Pomodoro.*paused.*"
     script = /home/elias/.config/dunst/scripts/pomo_stop
 
 [startup]
@@ -140,10 +140,6 @@
 [firefox]
     appname = firefox
     new_icon = /usr/share/icons/Papirus/16x16/apps/firefox-default.svg
-    script = /home/elias/.config/dunst/scripts/normal
-
-[normal_notifications]
-    category = normal
     script = /home/elias/.config/dunst/scripts/normal
 
 # vim: ft=cfg

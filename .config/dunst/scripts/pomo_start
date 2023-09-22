@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-paplay "$HOME/.config/dunst/sounds/sci-fi/mixkit-water-sci-fi-bleep-902.wav"
+paplay "$HOME/.config/dunst/sounds/sci-fi/mixkit-sci-fi-confirmation-914.wav"
