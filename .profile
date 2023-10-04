@@ -70,9 +70,4 @@ if [[ -f "$HOME/.config/scripts/preview" ]]; then
 fi
 
 export LINGO_20_HOME="/home/elias/.cache/yay/lingo/src/usr/share/lingo"
-
-export PATH="/home/elias/.cache/yay/lingo/src/usr/share/lingo:$PATH"
-
-export PATH="/home/elias/.cache/yay/lingo/src/usr/share/lingo:$PATH"
-
 export PATH="/home/elias/.cache/yay/lingo/src/usr/share/lingo:$PATH"
