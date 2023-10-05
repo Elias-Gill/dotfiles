@@ -4,11 +4,13 @@
 if [[ $1 == 0 ]]; then
     setxkbmap -layout us
 else
-    what_to_do=$(echo -e "english\nspanish" | dmenu)
-    if [[ "$what_to_do" = "spanish" ]]; then
-        setxkbmap -layout es
-    else
+    current=`setxkbmap -query | grep layout | grep us`
+    if [[ -z "$current" ]]; then
         setxkbmap -layout us
+        notify-send "Layout USA"
+    else
+        setxkbmap -layout es
+        notify-send "Layout Spanish"
     fi
 fi
 
