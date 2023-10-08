@@ -4,28 +4,32 @@ if [ -f "~/.config/git_saver.txt" ]; then
     exit 1
 fi
 
-# expandir el nombre del archivo
+# expandir el nombre del archivo de configuracion
 config_file=$(eval "echo ~/.config/git_saver.txt")
 
 # iniciar el agente ssh
 eval `ssh-agent -s`
 
 # listar las keys ssh disponibles
-eleccion=`ls ~/.ssh | grep id | grep -v "pub" | fzf`
+claves=`ls ~/.ssh | grep id | grep -v "pub"`
 
 # seleccionar una de las keys ssh
-# Verificar que sea valido
+if [ ${#claves[@]} -gt 0 ]; then 
+    eleccion=`echo -e "$claves" | fzf`
+elif [ ${#claves[@]} -eq 1 ]; then 
+    eleccion=$claves
+else
+    echo "No se encontraron claves ssh en el dispositivo... "
+fi
+
+# Verificar si la clave ya está registrada
 if [ -n "$eleccion" ]; then
-    # Verificar si la clave ya está registrada
     if ssh-add -l | grep "$eleccion" > /dev/null; then
         echo "La clave ya está registrada con ssh-add"
     else
         # Registrar la clave con ssh-add
         echo ssh-add $(find ~/.ssh -name "*$eleccion" -type f)
     fi
-else 
-    echo "Opcion invalida"
-    exit 1
 fi
 
 # Loop through each line in the config file
