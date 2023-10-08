@@ -15,10 +15,10 @@ claves=`ls ~/.ssh | grep id | grep -v "pub"`
 numero_claves=$(echo "$claves" | wc -w)
 
 # seleccionar una de las keys ssh
-if [ $numero_claves -gt 0 ]; then 
-    eleccion=`echo -e "$claves" | fzf`
-elif [ $numero_claves -eq 1 ]; then 
+if [ $numero_claves -eq 1 ]; then 
     eleccion=$claves
+elif [ $numero_claves -gt 1 ]; then 
+    eleccion=`echo -e "$claves" | fzf`
 else
     echo "No se encontraron claves ssh en el dispositivo... "
 fi
