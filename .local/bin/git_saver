@@ -23,7 +23,7 @@ else
 fi
 
 # Verificar si la clave ya está registrada
-if [ -n "$eleccion" ]; then
+if [ -z "$eleccion" ]; then
     if ssh-add -l | grep "$eleccion" > /dev/null; then
         echo "La clave ya está registrada con ssh-add"
     else
