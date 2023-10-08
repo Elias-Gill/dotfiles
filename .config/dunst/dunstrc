@@ -106,6 +106,7 @@
     # --- Catppucin ---
     # background = "#24273A"
     foreground = "#F5A97F"
+    script = /home/elias/.config/dunst/scripts/normal
 
 [urgency_critical]
     timeout = 35
@@ -127,19 +128,17 @@
 # -------- APPS SPECIFIC -------
 [pomo_start]
     summary = ".*Pomodoro.*resuming.*"
-    script = /home/elias/.config/dunst/scripts/pomo_start
 
 [pomo_stop]
     summary = ".*Pomodoro.*paused.*"
-    script = /home/elias/.config/dunst/scripts/pomo_stop
 
 [startup]
     appname = startup
-    script = /home/elias/.config/dunst/scripts/startup
+    # script = /home/elias/.config/dunst/scripts/startup
 
 [firefox]
     appname = firefox
     new_icon = /usr/share/icons/Papirus/16x16/apps/firefox-default.svg
-    script = /home/elias/.config/dunst/scripts/normal
+    # script = /home/elias/.config/dunst/scripts/normal
 
 # vim: ft=cfg

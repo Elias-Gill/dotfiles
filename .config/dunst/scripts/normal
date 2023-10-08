@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-paplay "$HOME/.config/dunst/sounds/sci-fi/mixkit-sci-fi-click-900.wav"
+paplay "$HOME/.config/dunst/sounds/kde/pop.wav"
