@@ -77,7 +77,14 @@ alias cl="clear"
 alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
-alias git_log='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+alias ranger="yazi"
+
+# git aliases
+alias gl='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+alias gc='git commit'
+alias gs='git status'
+alias gpl='git pull'
+alias gps='git push'
 
 # internet searches on cli
 alias \?="lsearch"
