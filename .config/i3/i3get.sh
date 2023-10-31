@@ -1,39 +1,4 @@
 #!/bin/sh
-
-# i3get
-#
-# search for windows in i3 tree, return desired information
-# if no arguments are passed. con_id of acitve window is returned.
-# ctrl+c, ctrl+v by budRich 2017
-# bash to sh by: nimaje
-# 
-# Options:
-# a             currently active window (default)
-# c CLASS       search for windows with the given class
-# i INSTANCE    search for windows with the given instance
-# t TITLE       search for windows with title.
-# n CON_ID      search for windows with the given con_id
-# d CON_ID      search for windows with the given window id
-# m CON_MARK      search for windows with the given mark
-# y             synch on. If this option is included, script will wait till
-#               target window exist.
-# 
-# r [tcidnmw]   desired return.
-#                 t: title
-#                 c: class
-#                 i: instance
-#                 d: Window ID
-#                 n: Con_Id (default)
-#                 m: mark
-#                 w: workspace
-#                 a: is active
-#                 f: floating state
-#
-# Examples:
-# search for window with instance name sublime_text. Request
-# workspace, title and floating state.
-# i3get -i sublime_text -r wtf
-
 while getopts :c:i:t:n:d:r:m:ay option
 do
   case "${option}" in
