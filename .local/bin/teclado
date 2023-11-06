@@ -4,16 +4,15 @@
 if [[ $1 == 0 ]]; then
     setxkbmap -layout us
 else
-    current=`setxkbmap -query | grep layout | grep us`
-    if [[ -z "$current" ]]; then
-        setxkbmap -layout us
-        notify-send "Layout USA"
-    else
-        setxkbmap -layout es
-        notify-send "Layout Spanish"
-    fi
+    eleccion=$(echo -e "us\nes" | dmenu)
+    setxkbmap -layout "$eleccion"
 fi
 
+# duplicador porque siempre me da problemas este plaga
 xset r rate 280 36
+xset r rate 280 36
+
+xmodmap -e "remove mod1 = Alt_R"
+xmodmap -e "add mod4 = Alt_R"
 xmodmap -e "remove mod1 = Alt_R"
 xmodmap -e "add mod4 = Alt_R"

@@ -67,7 +67,7 @@ keymap = [
     { on = [ "z" ],         exec = "jump zoxide",            desc = "Jump to a directory using zoxide" },
     { on = [ "<C-p>" ],     exec = "jump fzf",               desc = "Jump to a directory, or reveal a file using fzf" },
     { on = [ "n", "z" ],    exec = 'shell --confirm "exec zip -r comprimido.zip $(basename $@)"',               desc = "Make a new zip with selection" },
-    { on = [ "n", "u" ],    exec = 'shell --confirm "exec unzip -o $@"',               desc = "Make a new zip with selection" },
+    { on = [ "n", "u" ],    exec = 'shell --confirm "exec unzip -o $@"',               desc = "Unzip file to current folder" },
 
     # Copy
     { on = [ "c", "c" ], exec = "copy path",             desc = "Copy the absolute path" },

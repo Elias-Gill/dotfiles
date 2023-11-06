@@ -141,3 +141,5 @@ export LINGO_20_HOME="/home/elias/.cache/yay/lingo/src/usr/share/lingo"
 export PATH="/home/elias/.cache/yay/lingo/src/usr/share/lingo:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval "$(starship init bash)"

@@ -1,4 +1,5 @@
 # zmodload zsh/zprof
+
 # "trick" to speed up compinit
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
