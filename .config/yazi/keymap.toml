@@ -2,9 +2,10 @@
 
 keymap = [
     { on = [ "<Esc>" ], exec = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
-    { on = [ "q" ],     exec = "quit",               desc = "Exit the process" },
+    { on = [ "q" ],     exec = "close",               desc = "Exit the process" },
     { on = [ "Q" ],     exec = "quit --no-cwd-file", desc = "Exit the process without writing cwd-file" },
-    { on = [ "<C-q>" ], exec = "close",              desc = "Close the current tab, or quit if it is last tab" },
+    { on = [ "<C-q>" ], exec = "quit",              desc = "Close the current tab, or quit if it is last tab" },
+{ on = [ "<C-c>" ], exec = "quit",              desc = "Close the current tab, or quit if it is last tab" },
     { on = [ "<C-z>" ], exec = "suspend",            desc = "Suspend the process" },
 
     # Navigation
@@ -66,8 +67,8 @@ keymap = [
     { on = [ "<C-s>" ],     exec = "search none",            desc = "Cancel the ongoing search" },
     { on = [ "z" ],         exec = "jump zoxide",            desc = "Jump to a directory using zoxide" },
     { on = [ "<C-p>" ],     exec = "jump fzf",               desc = "Jump to a directory, or reveal a file using fzf" },
-    { on = [ "n", "z" ],    exec = 'shell --confirm "exec zip -r comprimido.zip $(basename $@)"',               desc = "Make a new zip with selection" },
-    { on = [ "n", "u" ],    exec = 'shell --confirm "exec unzip -o $@"',               desc = "Unzip file to current folder" },
+    { on = [ "Z", "z" ],    exec = 'shell --confirm "exec zip -r comprimido.zip $(basename $@)"',               desc = "Make a new zip with selection" },
+    { on = [ "Z", "u" ],    exec = 'shell --confirm "exec unzip -o $@"',               desc = "Unzip file to current folder" },
 
     # Copy
     { on = [ "c", "c" ], exec = "copy path",             desc = "Copy the absolute path" },
