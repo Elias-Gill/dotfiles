@@ -1,9 +1,12 @@
 #! /usr/bin/bash
 term_tittle="main-terminal"
-exists=$(sh ~/.config/i3/i3get.sh -t "main-terminal")
+
+# ver si alacritty y firefox estan abiertos
+alacritty=$(sh ~/.config/i3/i3get.sh -t "main-terminal")
+firefox=$(ps ax | grep firefox | grep -v grep)
 
 # solo abrir una nueva terminal si es que no existe ya abierta con el mismo nombre
-if [[ $exists == "" ]]; then
+if [[ $alacritty == "" ]]; then
 	# revisar si la sesion ya existe
 	if [[ $(tmux ls -F\#S) ]]; then
 		alacritty --hold --title $term_tittle -e tmux a
@@ -12,4 +15,9 @@ if [[ $exists == "" ]]; then
 	fi
 else
 	i3-msg "[title=$term_tittle] focus"
+fi
+
+# abrir firefox
+if [[ $firefox == "" ]]; then
+    firefox
 fi

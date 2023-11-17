@@ -140,7 +140,7 @@ fi
 
 # imprimir los repositorios que fueron ignorados
 echo -e "\n${DIVISOR}-------------------------${NOCOLOR}"
-echo -e "${ERROR}Ignorados${NOCOLOR}"
+echo -e "${ERROR}Ignorados${NOCOLOR}\n"
 for repo in $ignorados; do
 	echo $repo
 done

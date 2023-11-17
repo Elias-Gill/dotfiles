@@ -30,6 +30,7 @@
     #Normal (roman) font face
     normal:
       family: Noto Font Emoji
+      # family: FiraCode Nerd Font
       family: FiraCode Nerd Font
       style: regular
 
