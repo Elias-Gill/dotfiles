@@ -19,5 +19,5 @@ fi
 
 # abrir firefox
 if [[ $firefox == "" ]]; then
-    firefox
+    firefox &
 fi
