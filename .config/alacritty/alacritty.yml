@@ -3,7 +3,7 @@
     TERM: xterm-256color
 
   window:
-    opacity: 1
+    opacity: 0.95
     padding:
       x: 4
       y: 0
@@ -49,7 +49,7 @@
       family: Source Code Pro
       style: Bold Italic
 
-    size: 11.5
+    size: 11
 
     offset:
       x: 0
@@ -128,7 +128,10 @@
     - ~/.config/alacritty/keys.yml
       # colorschemes
     - ~/.config/alacritty/colors/colorscheme.yml
+    # - ~/.config/alacritty/colors/summer.yml
     # - ~/.config/alacritty/colors/catppuccin.yml
+    # - ~/.config/alacritty/colors/ayu-mirage.yml
+    # - ~/.config/alacritty/colors/papercolor.yml
     # - ~/.config/alacritty/colors/grubvox.yml
     # - ~/.config/alacritty/colors/challenger.yml
     # - ~/.config/alacritty/colors/tokyo.yml

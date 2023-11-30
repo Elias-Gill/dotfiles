@@ -66,8 +66,8 @@ export PATH=$HOME/.m2/bin/:$PATH
 FILE=/usr/bin/eza
 if [[ -f "$FILE" ]]; then
     alias ls="eza"
+    alias la="eza --all"
     alias ll="eza --icons=always --long"
-    alias la="eza --icons=always --all"
     alias lld="eza --icons=always --long --all"
 else
     alias la="ls -A --color=always"
@@ -84,7 +84,7 @@ alias ranger="yazi"
 # git aliases
 alias g='git'
 alias gA='git add -A'
-alias gl='git log --graph --decorate --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+alias gl='git log --graph --decorate --date=relative --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
 alias gc='git commit'
 alias gs='git status'
 alias gpl='git pull'

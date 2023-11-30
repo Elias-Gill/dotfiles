@@ -16,8 +16,3 @@ if [[ $alacritty == "" ]]; then
 else
 	i3-msg "[title=$term_tittle] focus"
 fi
-
-# abrir firefox
-if [[ $firefox == "" ]]; then
-    firefox &
-fi
