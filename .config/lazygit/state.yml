@@ -1,8 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
+- /home/elias/Documentos/rust_projects/tauri-app/
+- /home/elias/Documentos/rust_projects/tauri-app
 - /home/elias/Documentos/go_projects/walldo-in-go/
 - /home/elias
-- /home/elias/facultad
 - /home/elias/.config/nvim
 startuppopupversion: 5
 customcommandshistory: []
