@@ -29,7 +29,6 @@
   font:
     #Normal (roman) font face
     normal:
-      family: Noto Font Emoji
       family: FiraCode Nerd Font
       style: regular
 
@@ -127,13 +126,7 @@
     - ~/.config/alacritty/keys.yml
       # colorschemes
     - ~/.config/alacritty/colors/colorscheme.yml
-    # - ~/.config/alacritty/colors/summer.yml
-    # - ~/.config/alacritty/colors/catppuccin.yml
-    # - ~/.config/alacritty/colors/ayu-mirage.yml
-    # - ~/.config/alacritty/colors/papercolor.yml
-    # - ~/.config/alacritty/colors/grubvox.yml
-    # - ~/.config/alacritty/colors/challenger.yml
-    # - ~/.config/alacritty/colors/tokyo.yml
+    # - ~/.config/alacritty/themes/tomorrow_night.toml
 
   # Highlight window truedamage information.
   highlight_damage: true
