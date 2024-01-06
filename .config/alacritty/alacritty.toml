@@ -1,4 +1,8 @@
-import = ["/home/elias/.config/alacritty/keys.toml", "/home/elias/.config/alacritty/themes/colorscheme.toml"]
+import = [
+    "/home/elias/.config/alacritty/keys.toml", 
+    # "/home/elias/.config/alacritty/themes/thelovelace.toml"
+    "/home/elias/.config/alacritty/themes/colorscheme.toml"
+]
 live_config_reload = true
 
 [colors]
