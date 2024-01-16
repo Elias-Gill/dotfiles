@@ -1,4 +1,7 @@
 # zmodload zsh/zprof
+if [[ -f "$HOME/.config/secrets" ]]; then
+    source "$HOME/.config/secrets"
+fi
 
 # "trick" to speed up compinit
 autoload -Uz compinit
