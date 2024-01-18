@@ -2,7 +2,7 @@
 
 selection=$(tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse)
 
-if [[ -z $selected ]]; then
+if [[ -z $selection ]]; then
     exit 0
 fi
 
