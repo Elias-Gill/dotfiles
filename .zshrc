@@ -3,6 +3,12 @@ if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"
 fi
 
+function open () {
+    selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
+    xdg-open "$selection" &
+    disown
+}
+
 # "trick" to speed up compinit
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
