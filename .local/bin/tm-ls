@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-selected_name=$(echo -e "$(tmux list-sessions | cut -d : -f 1 | fzf --layout=reverse --preview='tm-tree {}')")
+selected_name=$(echo -e "$(tmux list-sessions | cut -d : -f 1 | fzf --no-sort --layout=reverse --preview='tm-tree -t {}')")
 if [[ -z $selected_name ]]; then
 	exit 0
 fi
