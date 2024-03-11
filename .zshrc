@@ -9,6 +9,12 @@ function open () {
     disown
 }
 
+function open-here () {
+    selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
+    xdg-open "$selection" &
+    disown
+}
+
 # "trick" to speed up compinit
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
@@ -160,6 +166,7 @@ if [[ -n "${terminfo[kcuu1]}" ]]; then
     bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
     bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
 fi
+
 # Start typing + [Down-Arrow] - fuzzy find history backward
 if [[ -n "${terminfo[kcud1]}" ]]; then
     autoload -U down-line-or-beginning-search
@@ -168,19 +175,6 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
     bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
     bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
     bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
-
-# [Home] - Go to beginning of line
-if [[ -n "${terminfo[khome]}" ]]; then
-    bindkey -M emacs "${terminfo[khome]}" beginning-of-line
-    bindkey -M viins "${terminfo[khome]}" beginning-of-line
-    bindkey -M vicmd "${terminfo[khome]}" beginning-of-line
-fi
-# [End] - Go to end of line
-if [[ -n "${terminfo[kend]}" ]]; then
-    bindkey -M emacs "${terminfo[kend]}"  end-of-line
-    bindkey -M viins "${terminfo[kend]}"  end-of-line
-    bindkey -M vicmd "${terminfo[kend]}"  end-of-line
 fi
 
 # [Shift-Tab] - move through the completion menu backwards
@@ -194,25 +188,6 @@ fi
 bindkey -M emacs '^?' backward-delete-char
 bindkey -M viins '^?' backward-delete-char
 bindkey -M vicmd '^?' backward-delete-char
-# [Delete] - delete forward
-if [[ -n "${terminfo[kdch1]}" ]]; then
-    bindkey -M emacs "${terminfo[kdch1]}" delete-char
-    bindkey -M viins "${terminfo[kdch1]}" delete-char
-    bindkey -M vicmd "${terminfo[kdch1]}" delete-char
-else
-    bindkey -M emacs "^[[3~" delete-char
-    bindkey -M viins "^[[3~" delete-char
-    bindkey -M vicmd "^[[3~" delete-char
-
-    bindkey -M emacs "^[3;5~" delete-char
-    bindkey -M viins "^[3;5~" delete-char
-    bindkey -M vicmd "^[3;5~" delete-char
-fi
-
-# [Ctrl-Delete] - delete whole forward-word
-bindkey -M emacs '^[[3;5~' kill-word
-bindkey -M viins '^[[3;5~' kill-word
-bindkey -M vicmd '^[[3;5~' kill-word
 
 # [Ctrl-RightArrow] - move forward one word
 bindkey -M emacs '^[[1;5C' forward-word
@@ -222,11 +197,6 @@ bindkey -M vicmd '^[[1;5C' forward-word
 bindkey -M emacs '^[[1;5D' backward-word
 bindkey -M viins '^[[1;5D' backward-word
 bindkey -M vicmd '^[[1;5D' backward-word
-
-bindkey '\ew' kill-region                       
-bindkey -s '\el' 'ls\n'                         
-bindkey '^r' history-incremental-search-backward
-bindkey ' ' magic-space                         
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
@@ -318,8 +288,6 @@ setopt share_history          # share command history data
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
 setopt long_list_jobs       # show long list format job notifications
 setopt interactivecomments  # recognize comments
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pnpm
 export PNPM_HOME="/home/elias/.local/share/pnpm"

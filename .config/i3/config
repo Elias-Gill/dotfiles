@@ -24,8 +24,8 @@ floating_modifier $mod
 ## sound/brightness/special-keys ##
 ###################################
 
-bindsym $mod+bracketright exec "amixer sset Master playback 5%+"; exec notify-send -i audio-player  "Volumen Up"
-bindsym $mod+bracketleft exec "amixer sset Master playback 5%-"; exec notify-send -i audio-player "Volumen Down"
+bindsym $mod+bracketright exec "amixer sset Master playback 5%+";
+bindsym $mod+bracketleft exec "amixer sset Master playback 5%-";
 
 # screenshots
 bindsym Print exec --no-startup-id i3-scrot

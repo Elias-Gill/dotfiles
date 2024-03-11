@@ -106,7 +106,6 @@
     # --- Catppucin ---
     # background = "#24273A"
     foreground = "#F5A97F"
-    script = /home/elias/.config/dunst/scripts/normal
 
 [urgency_critical]
     timeout = 35
