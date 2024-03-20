@@ -1,2 +1,0 @@
-#!/bin/bash
-rg --files ~/Imágenes/fondos -g '*.jpg' -g '*.jpeg' -g '*.png' | sxiv -ti

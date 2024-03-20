@@ -6,6 +6,6 @@
     "print",
     "print_dark"
   ],
-  "cssTheme": "Things",
+  "cssTheme": "Material Gruvbox",
   "baseFontSize": 17
 }
