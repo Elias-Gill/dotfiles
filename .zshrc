@@ -1,24 +1,4 @@
 # zmodload zsh/zprof
-source ~/.profile
-
-if [[ -f "$HOME/.config/secrets" ]]; then
-    source "$HOME/.config/secrets"
-fi
-
-FILE=/usr/bin/fd
-if [[ -f "$FILE" ]]; then
-    function open-global () {
-        selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
-        xdg-open "$selection" &
-        disown
-    }
-
-    function open () {
-        selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
-        xdg-open "$selection" &
-        disown
-    }
-fi
 
 # "trick" to speed up compinit
 autoload -Uz compinit
@@ -27,37 +7,40 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-# case insensitive completition and menu
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' menu select
-bindkey -e
-
 # p10k instant prompt (has to be on top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #  --------------
 # | USER PLUGINS |
 #  --------------
 # plugin manager
 export ZPLUG_HOME="$HOME/.local/share/zplug_home"
-source "$ZPLUG_HOME/init.zsh"
+if [[ -d $ZPLUG_HOME ]] then; 
+    source "$ZPLUG_HOME/init.zsh" 
 
-# --- plugins list --- 
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug "plugins/fzf", from:oh-my-zsh
+    # --- plugins list --- 
+    zplug "romkatv/powerlevel10k", as:theme, depth:1
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
+    zplug "zsh-users/zsh-autosuggestions", defer:2
+    zplug "plugins/fzf", from:oh-my-zsh
 
-# autoswitch enviroments
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
-zplug "alexdesousa/hab"
+    # autoswitch enviroments
+    zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
+    zplug "alexdesousa/hab"
 
-# --- end --- 
-zplug load
+    # --- end --- 
+    zplug load
+else
+    echo "zplug not installed"
+    echo "run git clone https://github.com/zplug/zplug \$ZPLUG_HOME"
+fi
 
-# --- configurations ---
+# --- Plugins configurations ---
 # sugestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
@@ -66,29 +49,33 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 ENABLE_CORRECTION="false"
 
 # support for zoxide cd
-FILE=/usr/bin/zoxide
-if [[ -f "$FILE" ]]; then
+if [[ -f "/usr/bin/zoxide" ]]; then
     alias cd="z"
     eval "$(zoxide init zsh)"
 fi
 
-#  --------------------
-# | USER CONFIGURATION |
-#  --------------------
+#  -----------------------
+# |  Alias and utilities  |
+#  -----------------------
 
-# -- Go config -- 
-export PATH=$PATH:/usr/local/go/bin
-export GOROOT=/usr/local/go 
-# local
-export GOPATH=$HOME/.local/share/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
-export MAVEN_HOME=$HOME/.m2/
-export PATH=$HOME/.m2/bin/:$PATH
-
-# ---- alias ----
-# better replace for ls
-FILE=/usr/bin/eza
+# utilities for openning files
+FILE=/usr/bin/fd
 if [[ -f "$FILE" ]]; then
+    function open-global () {
+    selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
+    xdg-open "$selection" &
+    disown
+}
+
+function open () {
+    selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
+    xdg-open "$selection" &
+    disown
+}
+fi
+
+# better replace for ls
+if [[ -f "/usr/bin/eza" ]]; then
     alias ls="eza"
     alias la="eza --all"
     alias ll="eza --icons=always --long"
@@ -98,12 +85,16 @@ else
     alias ll="ls -lA --color=always"
 fi
 
+# file explorer
+if [[ -f "/usr/bin/yazi" ]]; then
+    alias ranger="yazi"
+fi
+
 # usefull apps alias
 alias cl="clear"
 alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
-alias ranger="yazi"
 
 # git aliases
 alias g='git'
@@ -118,20 +109,22 @@ alias gps='git push'
 alias \?="lsearch"
 alias \?\?="bard_api"
 
+#  -----------------------------
+# |   keybinds from oh-my-zsh   |
+# | WARN: do not touch anything |
+#  -----------------------------
+
+# case insensitive completition and menu
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
+bindkey -e
+
 # better cd experience
 setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
 alias -g ..='cd ..'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-#  -----------------------------
-# | keybinds from oh-my-zsh     |
-# | WARN: do not touch anything |
-#  -----------------------------
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
@@ -145,9 +138,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
-
-# Use emacs key bindings
-bindkey -e
 
 # [PageUp] - Up a line of history
 if [[ -n "${terminfo[kpp]}" ]]; then

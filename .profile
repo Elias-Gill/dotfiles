@@ -22,49 +22,46 @@ export LESS_TERMCAP_ue=$'\e[0m'     # reset underline
 export GROFF_NO_SGR=1
 export LESS="-Rsi"
 
-# --- personal env vars --- 
+# --- personal env vars ---
 if [[ -f "$HOME/.config/secrets" ]]; then
-    source "$HOME/.config/secrets"
+	source "$HOME/.config/secrets"
 fi
 
-# --- env and bin config for prog.languages --- 
+# --- env and bin config for prog.languages ---
 # rust cargo
 if [[ -f "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
+	source "$HOME/.cargo/env"
 fi
 
 # go path
-if [[ -f "/usr/local/go/bin" ]]; then
-    export PATH=$PATH:/usr/local/go/bin
+if [[ -d "/usr/local/go/bin" ]]; then
+	export PATH=$PATH:/usr/local/go/bin
 fi
 
-# --- Preferred editor for local and remote sessions --- 
-export EDITOR="nvim"
-export VISUAL="nvim"
-
+# --- Preferred editor for local and remote sessions ---
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR="vim"
-  export VISUAL="vim"
+	export EDITOR="vim"
+	export VISUAL="vim"
+else
+	export EDITOR="nvim"
+	export VISUAL="nvim"
 fi
 
 # -- bat for manpager and preview --
-FILE=/usr/bin/bat
-if [[ -f "$FILE" ]]; then
-    export MANPAGER='sh -c "col -b | bat -l man -p"'
+if [[ -f "/usr/bin/bat" ]]; then
+	export MANPAGER='sh -c "col -b | bat -l man -p"'
 fi
 
-# --- config for FZF --- 
-FILE=/usr/bin/rg
-if [[ -f "$FILE" ]]; then
-    export FZF_DEFAULT_COMMAND="rg --files -g '!.git' -g '!go/' -g '!*.class' -g '!VirtualBox*' -g '!Escritorio*' -g '!node_modules*'"
+# --- config for FZF ---
+if [[ -f "/usr/bin/rg" ]]; then
+	export FZF_DEFAULT_COMMAND="rg --files -g '!.git' -g '!go/' -g '!*.class' -g '!VirtualBox*' -g '!Escritorio*' -g '!node_modules*'"
 fi
 
-FILE=/usr/bin/fd
-if [[ -f "$FILE" ]]; then
-    export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
+if [[ -f "/usr/bin/fd" ]]; then
+	export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
 fi
 
 # preview script for fzf
 if [[ -f "$HOME/.config/scripts/preview" ]]; then
-    export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
+	export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
 fi
