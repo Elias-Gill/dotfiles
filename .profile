@@ -2,15 +2,14 @@ export XDG_CONFIG_HOME="$HOME/.config/"
 export XGD_CONFIG_HOME="$HOME/.config/"
 export PATH="$HOME/.local/bin:$PATH"
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export EDITOR=/usr/bin/nvim
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # browser
 export BROWSER="/usr/bin/firefox","/usr/bin/lynx"
 
 # lynx config
-export LYNX_CFG=$HOME/.config/lynx/lynx.cfg
-export LYNX_LSS=$HOME/.config/lynx/lynx.lss
+export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
+export LYNX_LSS="$HOME/.config/lynx/lynx.lss"
 
 # 'less' colors display
 export LESS_TERMCAP_mb=$'\e[1;31m'  # begin bold
@@ -40,14 +39,15 @@ if [[ -f "/usr/local/go/bin" ]]; then
 fi
 
 # --- Preferred editor for local and remote sessions --- 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-export VISUAL='nvim'
+export EDITOR="nvim"
+export VISUAL="nvim"
 
-# bat for manpager and preview
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR="vim"
+  export VISUAL="vim"
+fi
+
+# -- bat for manpager and preview --
 FILE=/usr/bin/bat
 if [[ -f "$FILE" ]]; then
     export MANPAGER='sh -c "col -b | bat -l man -p"'
@@ -68,6 +68,3 @@ fi
 if [[ -f "$HOME/.config/scripts/preview" ]]; then
     export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
 fi
-
-export LINGO_20_HOME="/home/elias/.cache/yay/lingo/src/usr/share/lingo"
-export PATH="/home/elias/.cache/yay/lingo/src/usr/share/lingo:$PATH"

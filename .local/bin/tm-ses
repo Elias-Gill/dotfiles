@@ -2,7 +2,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd --type d -a ~ --full-path ~/Documentos ~/facultad --maxdepth 3 | fzf --preview "ls {}")
+    selected=$(fd --type d -a ~ --full-path ~/Documentos ~/facultad ~/Proyectos --maxdepth 3 | fzf --preview "ls {}")
 fi
 
 if [[ -z $selected ]]; then

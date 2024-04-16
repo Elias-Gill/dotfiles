@@ -1,19 +1,24 @@
 # zmodload zsh/zprof
+source ~/.profile
+
 if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"
 fi
 
-function open () {
-    selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
-    xdg-open "$selection" &
-    disown
-}
+FILE=/usr/bin/fd
+if [[ -f "$FILE" ]]; then
+    function open-global () {
+        selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
+        xdg-open "$selection" &
+        disown
+    }
 
-function open-here () {
-    selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
-    xdg-open "$selection" &
-    disown
-}
+    function open () {
+        selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
+        xdg-open "$selection" &
+        disown
+    }
+fi
 
 # "trick" to speed up compinit
 autoload -Uz compinit
@@ -123,22 +128,22 @@ alias -g ..='cd ..'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#  -------------------------
-# | keybinds from oh-my-zsh |
-#  -------------------------
-#  WARN: do not touch anything
+#  -----------------------------
+# | keybinds from oh-my-zsh     |
+# | WARN: do not touch anything |
+#  -----------------------------
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     function zle-line-init() {
-    echoti smkx
-}
-function zle-line-finish() {
-echoti rmkx
-}
-zle -N zle-line-init
-zle -N zle-line-finish
+        echoti smkx
+    }
+    function zle-line-finish() {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
 fi
 
 # Use emacs key bindings
@@ -197,11 +202,6 @@ bindkey -M vicmd '^[[1;5C' forward-word
 bindkey -M emacs '^[[1;5D' backward-word
 bindkey -M viins '^[[1;5D' backward-word
 bindkey -M vicmd '^[[1;5D' backward-word
-
-# Edit the current command line in $EDITOR
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
 
 # file rename magick
 bindkey "^[m" copy-prev-shell-word
@@ -288,13 +288,5 @@ setopt share_history          # share command history data
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
 setopt long_list_jobs       # show long list format job notifications
 setopt interactivecomments  # recognize comments
-
-# pnpm
-export PNPM_HOME="/home/elias/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # zprof

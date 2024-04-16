@@ -3,6 +3,9 @@ set incremental-search
 set page-padding 4
 set selection-clipboard clipboard
 
+set recolor-darkcolor "#eeeeee"
+set recolor-lightcolor "#212121"
+
 unmap =
 map = zoom in
 map 0 zoom
