@@ -59,19 +59,18 @@ fi
 #  -----------------------
 
 # utilities for openning files
-FILE=/usr/bin/fd
-if [[ -f "$FILE" ]]; then
+if [[ -f "/usr/bin/fd" ]]; then
     function open-global () {
-    selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
-    xdg-open "$selection" &
-    disown
-}
+        selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
+        xdg-open "$selection" 2> /dev/null &
+        disown
+    }
 
-function open () {
-    selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
-    xdg-open "$selection" &
-    disown
-}
+    function open () {
+        selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
+        xdg-open "$selection" 2> /dev/null &
+        disown
+    }
 fi
 
 # better replace for ls

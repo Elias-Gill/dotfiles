@@ -1,14 +1,12 @@
 skip_global_compinit=1
 
+source ~/.profile
+
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
 
-if [[ -d "/usr/lib/ocaml" ]]; then
-    eval $(opam env)
-fi
-
-source ~/.profile
+[[ ! -r /home/elias/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"

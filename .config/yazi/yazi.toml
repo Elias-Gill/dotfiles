@@ -15,11 +15,15 @@ cache_dir  = "~/.cache/yazi/"
 
 [opener]
 folder = [
-    { exec = 'open -R "$@"', display_name = "Reveal in Finder" },
-    { exec = '$EDITOR "$@"' },
+    { exec = 'pcmanfm "$@"', block = true, display_name = "Pcmanfm" },
+    { exec = '$EDITOR "$1"', block = true, display_name = "Editor" },
+    { exec = 'zip comprimido.zip "$@"', display_name = "Compress" },
+    { exec = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
+    { exec = 'tm-ses "$1"', block = true, display_name = "Tmux session" },
 ]
 archive = [
     { exec = 'unzip "$1"', display_name = "Extract here" },
+    { exec = '7z x "$1"', display_name = "Extract with 7z" },
 ]
 text = [
     { exec = '$EDITOR "$@"', block = true },
@@ -37,8 +41,10 @@ audio = [
     { exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
 ]
 fallback = [
-    { exec = 'xdg-open "$@"', display_name = "Open" },
-    { exec = 'open -R "$@"', display_name = "Reveal in Finder" },
+    { exec = 'xdg-open "$@"', display_name = "Xdg-Open" },
+    { exec = '$EDITOR "$@"', block = true, display_name = "Editor" },
+    { exec = '7z comprimido.zip "$@"', display_name = "Zip" },
+    { exec = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
 ]
 
 [open]
