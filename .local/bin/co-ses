@@ -11,7 +11,7 @@ if [[ $alacritty == "" ]]; then
 	if [[ $(tmux ls -F\#S) ]]; then
 		alacritty --hold --title $term_tittle -e tmux a
 	else
-		alacritty --hold --title $term_tittle -e tmux new-session -s main-session -c ~
+		alacritty --hold --title $term_tittle -e tmux new-session -s main -c ~
 	fi
 else
 	i3-msg "[title=$term_tittle] focus"

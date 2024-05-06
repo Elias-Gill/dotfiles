@@ -49,12 +49,12 @@ exec --no-startup-id ~/.local/bin/screen_monitor
 exec --no-startup-id sudo systemctl start cups.service
 
 exec --no-startup-id clipit
-exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id mate-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id picom -b --config=/home/elias/picom/picom.conf
 
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
