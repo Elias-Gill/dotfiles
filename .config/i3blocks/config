@@ -1,0 +1,33 @@
+full_text=|
+color=#666666
+align=center
+separator=false
+separator_block_width=7
+
+# cpu usage
+[cpu]
+command=$HOME/.config/i3blocks/scripts/cpu
+interval=3
+
+[separator]
+
+# RAM usage
+[memmory]
+command=$HOME/.config/i3blocks/scripts/memory
+interval=3
+
+[separator]
+
+# Battery level
+[Battery]
+command=$HOME/.config/i3blocks/scripts/battery
+markup=pango
+interval=30
+
+[separator]
+
+# Update time every 5 seconds
+[time]
+color=#ffffff
+command=date "+%H:%M   %d/%m/%y"
+interval=5
