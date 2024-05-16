@@ -63,5 +63,5 @@ fi
 
 # preview script for fzf
 if [[ -f "$HOME/.config/scripts/preview" ]]; then
-	export FZF_DEFAULT_OPTS='--preview "$HOME/.config/scripts/preview {}"'
+	export FZF_DEFAULT_OPTS='--bind "ctrl-/:change-preview-window(down|)" --preview "$HOME/.config/scripts/preview {}"'
 fi

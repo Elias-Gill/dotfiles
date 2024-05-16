@@ -1,6 +1,11 @@
 #! /usr/bin/bash
 current_session=$(tmux display-message -p '#S')
-selected_name=$(echo -e "$(tmux list-sessions | cut -d : -f 1 | grep -v $current_session | fzf --no-sort --layout=reverse --preview='tm-tree -t {}')")
+selected_name=$(
+	echo -e "$(
+		tmux list-sessions | cut -d : -f 1 | grep -v $current_session |
+			fzf --bind "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v $current_session)" --no-sort --layout=reverse --preview='tm-tree -t {}'
+	)"
+)
 
 if [[ -z $selected_name ]]; then
 	exit 0

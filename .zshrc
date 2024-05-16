@@ -61,13 +61,13 @@ fi
 # utilities for openning files
 if [[ -f "/usr/bin/fd" ]]; then
     function open-global () {
-        selection=$(FZF_DEFAULT_COMMAND="fd . $HOME" fzf)
+        selection=$(FZF_DEFAULT_COMMAND="fd --type=file . $HOME" fzf)
         xdg-open "$selection" 2> /dev/null &
         disown
     }
 
     function open () {
-        selection=$(FZF_DEFAULT_COMMAND="fd" fzf)
+        selection=$(FZF_DEFAULT_COMMAND="fd --type=file" fzf)
         xdg-open "$selection" 2> /dev/null &
         disown
     }
