@@ -1,7 +1,0 @@
-#! /bin/bash
-action=0 # disable por defecto
-# activar si el dispositivo esta desactivado
-if [[ ! -z $(xinput list SynPS/2\ Synaptics\ TouchPad | grep disabled) ]]; then
-    action=1
-fi
-exec xinput set-prop SynPS/2\ Synaptics\ TouchPad "Device Enabled" $action
