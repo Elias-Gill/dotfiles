@@ -1,7 +1,10 @@
 import = [
     "/home/elias/.config/alacritty/keys.toml", 
     # "/home/elias/.config/alacritty/themes/thelovelace.toml"
-    "/home/elias/.config/alacritty/themes/colorscheme.toml"
+    # "/home/elias/.config/alacritty/themes/taerminal.toml"
+    # "/home/elias/.config/alacritty/themes/colorscheme.toml"
+    # "/home/elias/.config/alacritty/themes/neovim.toml"
+    "/home/elias/.config/alacritty/themes/gruvbox_material.toml"
 ]
 live_config_reload = true
 

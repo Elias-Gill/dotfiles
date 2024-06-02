@@ -5,6 +5,8 @@
 [colors.primary]
 background = '#1a1b26'
 foreground = '#a9b1d6'
+dim_foreground = "#C4C6CD"
+bright_foreground = "#E0E2EA"
 
 # Normal colors
 [colors.normal]
