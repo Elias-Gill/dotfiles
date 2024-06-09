@@ -1,14 +1,18 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/elias/Proyectos/go_projects/interpreter/
-- /home/elias/Documentos/backend/
-- /home/elias/.config/nvim
-- /home/elias/Documentos/backend
-- /home/elias/facultad
-- /home/elias/Proyectos/go_projects/walldo-in-go
-- /home/elias/.config/tmux
-- /home/elias
+    - /home/elias/facultad
+    - /home/elias/Proyectos/go_projects/interpreter/
+    - /home/elias/.config/nvim
+    - /home/elias/Proyectos/go_projects/walldo-in-go
+    - /home/elias/.config/tmux
+    - /home/elias
 startuppopupversion: 5
+lastversion: 0.42.0
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

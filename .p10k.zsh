@@ -774,7 +774,7 @@
   # Show brief version.
   typeset -g POWERLEVEL9K_JAVA_VERSION_FULL=false
   # Custom icon.
-  # typeset -g POWERLEVEL9K_JAVA_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_JAVA_VERSION_VISUAL_IDENTIFIER_EXPANSION=' java:'
 
   ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
   # Package color.

@@ -123,7 +123,7 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
-alias -g ..='cd ..'
+alias ..='cd ..'
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
