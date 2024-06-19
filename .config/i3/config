@@ -31,6 +31,7 @@ bindsym $mod+bracketleft exec "amixer sset Master playback 5%-";
 bindsym Print exec --no-startup-id i3-scrot
 bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -w
 bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Ctrl+Shift+Print --release exec --no-startup-id maim -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i
 
 # Screen brightness controls
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"

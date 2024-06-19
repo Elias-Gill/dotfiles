@@ -1,11 +1,10 @@
+# -- options --
 set scroll-step 120
 set incremental-search
 set page-padding 4
 set selection-clipboard clipboard
 
-set recolor-darkcolor "#eeeeee"
-set recolor-lightcolor "#212121"
-
+# -- mappings --
 unmap =
 map = zoom in
 map 0 zoom
@@ -23,3 +22,44 @@ unmap <C-r>
 unmap r
 map r recolor
 map <C-r> rotate
+
+# -- THEMEs --
+
+# set recolor-darkcolor "#eeeeee"
+# set recolor-lightcolor "#212121"
+
+# -- borrar si no me gusta ---
+set completion-bg		          "#313244"
+set completion-fg		          "#CDD6F4"
+set completion-highlight-bg	  "#575268"
+set completion-highlight-fg	  "#CDD6F4"
+set completion-group-bg		    "#313244"
+set completion-group-fg		    "#89B4FA"
+
+set statusbar-fg		          "#CDD6F4"
+set statusbar-bg		          "#313244"
+
+set notification-bg		        "#313244"
+set notification-fg		        "#CDD6F4"
+set notification-error-bg	    "#313244"
+set notification-error-fg	    "#F38BA8"
+set notification-warning-bg	  "#313244"
+set notification-warning-fg	  "#FAE3B0"
+
+set inputbar-fg			          "#CDD6F4"
+set inputbar-bg 		          "#313244"
+
+set recolor-lightcolor		    "#1E1E2E"
+set recolor-darkcolor		      "#CDD6F4"
+
+set index-fg			            "#CDD6F4"
+set index-bg			            "#1E1E2E"
+set index-active-fg		        "#CDD6F4"
+set index-active-bg		        "#313244"
+
+set render-loading-bg		      "#1E1E2E"
+set render-loading-fg		      "#CDD6F4"
+
+set highlight-color		        "#575268"
+set highlight-fg              "#F5C2E7"
+set highlight-active-color	  "#F5C2E7"

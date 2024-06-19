@@ -3,7 +3,7 @@ echo
 # programas escenciales
 sudo pacman -Syu --no-confirm firefox neovim yay yadm git tlp zathura libreoffice \
 alacritty zsh tmux go python pip python-pynvim zoxide bat lynx nodejs tree-sitter zathura-pdf-mupdf \
-ripgrep fd tealdeer trash
+ripgrep fd tealdeer trash maim
 
 # shell
 sudo chsh /usr/bin/zsh

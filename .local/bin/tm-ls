@@ -3,7 +3,7 @@ current_session=$(tmux display-message -p '#S')
 selected_name=$(
 	echo -e "$(
 		tmux list-sessions | cut -d : -f 1 | grep -v $current_session |
-			fzf --bind "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v $current_session)" --no-sort --layout=reverse --preview='tm-tree {}' --preview-window=68% 
+			fzf --bind "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v $current_session)" --no-sort --layout=reverse --preview='tm-tree {}' --preview-window=65% 
 	)"
 )
 

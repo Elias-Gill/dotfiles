@@ -22,8 +22,8 @@ folder = [
     { exec = 'tm-ses "$1"', block = true, display_name = "Tmux session" },
 ]
 archive = [
-    { exec = 'unzip "$1"', display_name = "Extract here" },
-    { exec = '7z x "$1"', display_name = "Extract with 7z" },
+    { exec = 'unzip "$@"', display_name = "Extract here" },
+    { exec = '7z x "$@"', display_name = "Extract with 7z" },
     { exec = 'xdg-open "$@"' },
 ]
 text = [

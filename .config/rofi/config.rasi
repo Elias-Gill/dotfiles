@@ -1,10 +1,10 @@
-/** Basic config file **/
+@import "~/.config/rofi/master_config.rasi" 
 
+/* ---- Configuration ---- */
 configuration {
-  show-icons: true;
-  icon-theme: "Papirus";
-  display-drun: "";
-  display-window: "﩯 ";
-  display-combi: "  ";
+	font: "MonoLisa static Regular 12";
 }
-@theme "themes/nord.rasi"
+
+element-text {
+    font:	"MonoLisa static Regular 14";
+}
