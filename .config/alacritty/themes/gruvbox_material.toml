@@ -9,7 +9,8 @@ cursor = "#dfbf8e"
 text = "#000000"
 
 [colors.normal]
-black   = '#665c54'
+# black   = '#665c54'
+black   = '#222222'
 red     = '#ea6962'
 green   = '#a9b665'
 yellow  = '#e78a4e'

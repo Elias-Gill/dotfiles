@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-selected=$(echo -e "man\ntldr\ncht.sh" | fzf)
+selected=$(echo -e "man\ntldr\nlynx\ncht.sh" | fzf)
 if [[ -z $selected ]]; then
 	exit 0
 fi
@@ -11,6 +11,9 @@ if [[ "$selected" == "tldr" ]]; then
 # normal man pages
 elif [[ "$selected" == "man" ]]; then
 	man $(apropos -M /usr/share/man . | awk '{print $1}' | fzf --preview "man {1}")
+
+elif [[ "$selected" == "lynx" ]]; then
+    lsearch
 
 # cht.sh web
 else

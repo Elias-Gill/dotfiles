@@ -106,7 +106,6 @@ alias gps='git push'
 
 # internet searches on cli
 alias \?="lsearch"
-alias \?\?="bard_api"
 
 #  -----------------------------
 # |   keybinds from oh-my-zsh   |
