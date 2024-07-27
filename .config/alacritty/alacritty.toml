@@ -21,14 +21,15 @@ size = 11
 [font.bold]
 family = "Caskaydia Cove Nerd Font"
 
+[font.normal]
+family = "FiraCode Nerd Font"
+# family = "0xProto Nerd Font"
+
 [font.bold_italic]
 family = "Caskaydia Cove Nerd Font"
 
 [font.italic]
 family = "Caskaydia Cove Nerd Font"
-
-[font.normal]
-family = "FiraCode Nerd Font"
 
 [font.offset]
 x = 0
