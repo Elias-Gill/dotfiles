@@ -41,6 +41,9 @@ else
 fi
 
 # --- Plugins configurations ---
+# mkvenv (autoswitch virtualenv)
+AUTOSWITCH_VIRTUAL_ENV_DIR="~/.local/share/virtualenvs"
+
 # sugestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
