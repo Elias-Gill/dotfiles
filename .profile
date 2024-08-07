@@ -24,44 +24,44 @@ export LESS="-Rsi"
 
 # --- personal env vars ---
 if [[ -f "$HOME/.config/secrets" ]]; then
-	source "$HOME/.config/secrets"
+    source "$HOME/.config/secrets"
 fi
 
 # --- env and bin config for prog.languages ---
 # rust cargo
 if [[ -f "$HOME/.cargo/env" ]]; then
-	source "$HOME/.cargo/env"
+    source "$HOME/.cargo/env"
 fi
 
 # go path
 if [[ -d "/usr/local/go/bin" ]]; then
-	export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:/usr/local/go/bin
 fi
 
 # --- Preferred editor for local and remote sessions ---
 if [[ -n $SSH_CONNECTION ]]; then
-	export EDITOR="vim"
-	export VISUAL="vim"
+    export EDITOR="vim"
+    export VISUAL="vim"
 else
-	export EDITOR="nvim"
-	export VISUAL="nvim"
+    export EDITOR="nvim"
+    export VISUAL="nvim"
 fi
 
 # -- bat for manpager and preview --
 if [[ -f "/usr/bin/bat" ]]; then
-	export MANPAGER='sh -c "col -b | bat -l man -p"'
+    export MANPAGER='sh -c "col -b | bat -l man -p"'
 fi
 
 # --- config for FZF ---
 if [[ -f "/usr/bin/rg" ]]; then
-	export FZF_DEFAULT_COMMAND="rg --files -g '!.git' -g '!go/' -g '!*.class' -g '!VirtualBox*' -g '!Escritorio*' -g '!node_modules*'"
+    export FZF_CTRL_T_COMMAND='fd --type f --maxdepth 5 -E go -E node_modules -E Escritorio -E '*.class' -E 'VirtualBox' '
 fi
 
 if [[ -f "/usr/bin/fd" ]]; then
-	export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
+    export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
 fi
 
 # preview script for fzf
 if [[ -f "$HOME/.config/scripts/preview" ]]; then
-	export FZF_DEFAULT_OPTS='--bind "ctrl-/:change-preview-window(down|)" --preview "$HOME/.config/scripts/preview {}"'
+    export FZF_DEFAULT_OPTS='--bind "ctrl-/:change-preview-window(down|)" --preview "$HOME/.config/scripts/preview {}"'
 fi

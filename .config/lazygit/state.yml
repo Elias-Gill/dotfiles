@@ -1,11 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/Proyectos/python_projects/django-template
     - /home/elias/Documentos/grupo10/backend_node/
     - /home/elias
-    - /home/elias/facultad
     - /home/elias/Proyectos/go_projects/interpreter/
     - /home/elias/.config/nvim
-    - /home/elias/Proyectos/go_projects/walldo-in-go
     - /home/elias/.config/tmux
 startuppopupversion: 5
 lastversion: 0.42.0

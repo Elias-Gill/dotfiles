@@ -25,8 +25,8 @@ map <C-r> rotate
 
 # -- THEMEs --
 
-# set recolor-darkcolor "#eeeeee"
-# set recolor-lightcolor "#212121"
+set recolor-darkcolor "#F5F5F5"
+set recolor-lightcolor "#2E2B2C"
 
 # -- oldworld ---
 set default-fg                "#c9c7cd"
@@ -52,8 +52,8 @@ set notification-warning-fg	  "#f5a191"
 set inputbar-fg			          "#c9c7cd"
 set inputbar-bg 		          "#1b1b1c"
 
-set recolor-lightcolor		    "#161617"
-set recolor-darkcolor		      "#c9c7cd"
+# set recolor-lightcolor		    "#161617"
+# set recolor-darkcolor		      "#c9c7cd"
 
 set index-fg			            "#c9c7cd"
 set index-bg			            "#161617"
