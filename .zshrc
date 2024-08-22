@@ -42,7 +42,7 @@ fi
 
 # --- Plugins configurations ---
 # mkvenv (autoswitch virtualenv)
-AUTOSWITCH_VIRTUAL_ENV_DIR="~/.local/share/virtualenvs"
+# AUTOSWITCH_VIRTUAL_ENV_DIR="~/.local/share/virtualenvs"
 
 # sugestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
@@ -65,14 +65,23 @@ fi
 if [[ -f "/usr/bin/fd" ]]; then
     function open-global () {
         selection=$(FZF_DEFAULT_COMMAND="fd --type=file . $HOME" fzf)
-        xdg-open "$selection" 2> /dev/null &
-        disown
+        if [[ -n "$selection" ]]; then
+            xdg-open "$selection" 2> /dev/null &
+            disown
+        fi
     }
 
     function open () {
-        selection=$(FZF_DEFAULT_COMMAND="fd --type=file" fzf)
-        xdg-open "$selection" 2> /dev/null &
-        disown
+        if [[ -n "$1" ]]; then
+            xdg-open "$1" 2> /dev/null &
+            disown
+        else
+            selection=$(FZF_DEFAULT_COMMAND="fd --type=file" fzf)
+            if [[ -n "$selection" ]]; then
+                xdg-open "$selection" 2> /dev/null &
+                disown
+            fi
+        fi
     }
 fi
 
@@ -106,6 +115,14 @@ alias gc='git commit'
 alias gs='git status'
 alias gpl='git pull'
 alias gps='git push'
+
+# funcion para cambiar entre git working trees
+function gw() { 
+    local dir=$(git worktree list | grep -v "(bare)" | awk -F " " "{print \$1}" | fzf); 
+    if [ -n "$dir" ]; then 
+        cd "$dir"; 
+    fi; 
+}
 
 # internet searches on cli
 alias \?="lsearch"

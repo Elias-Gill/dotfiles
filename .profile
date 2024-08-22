@@ -29,8 +29,8 @@ fi
 
 # --- env and bin config for prog.languages ---
 # rust cargo
-if [[ -f "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
+if [[ -d "$HOME/.cargo" ]]; then
+    export PATH="$PATH:$HOME/.cargo/bin/"
 fi
 
 # go path
