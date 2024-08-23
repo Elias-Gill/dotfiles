@@ -110,7 +110,7 @@ alias v="nvim"
 # git aliases
 alias g='git'
 alias gA='git add -A'
-alias gl='git log --graph --decorate --date=relative --pretty=format:"\"%Cgreen%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\""'
+alias gl='git lg'
 alias gc='git commit'
 alias gs='git status'
 alias gpl='git pull'
