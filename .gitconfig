@@ -4,7 +4,7 @@
 [credential]
 	helper = store
 [alias]
-	lg = log --graph --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an]\"
+    lg = log --graph --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\"
     url = config --get remote.origin.url
 # pager config
 [core]
