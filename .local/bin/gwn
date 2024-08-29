@@ -1,0 +1,12 @@
+#!/bin/bash
+branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf)
+if [[ -z $branch ]]; then
+    echo "Proporcione una rama"
+    exit 1
+fi
+
+wd=$(basename $(git rev-parse --show-toplevel))
+final_dir=$(echo ~/.local/gw/"$wd/$branch")
+# echo $final_dir
+
+git worktree add $final_dir $branch
