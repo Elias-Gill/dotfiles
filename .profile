@@ -52,11 +52,6 @@ if [[ -f "/usr/bin/bat" ]]; then
     export MANPAGER='sh -c "col -b | bat -l man -p"'
 fi
 
-# --- config for FZF ---
-if [[ -f "/usr/bin/rg" ]]; then
-    export FZF_CTRL_T_COMMAND='fd --type f --maxdepth 5 -E go -E node_modules -E Escritorio -E '*.class' -E 'VirtualBox' '
-fi
-
 if [[ -f "/usr/bin/fd" ]]; then
     export FZF_CTRL_T_COMMAND='fd --type d --maxdepth 5 -E go -E node_modules -E Escritorio'
 fi

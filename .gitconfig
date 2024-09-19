@@ -1,12 +1,33 @@
+# --- utils --- 
+[init]
+    defaultBranch = master
+[fetch]
+    prune = true
+[rebase]
+    autosquash = true
+[push]
+    autoSetupRemote = true
+    default = current
+[pull]
+    rebase = true
 [user]
 	email = eliasgill42@gmail.com
 	name = Elias Gill
 [credential]
 	helper = store
+
+# --- custom aliases --- 
 [alias]
-    lg = log --graph --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\"
+    lg = log --graph --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\"
+    rf = reflog --max-count=30
+    compare = "!f() { git log --left-right --oneline $1..HEAD $2; }; f"
+    rcompare = "!f() { git log --left-right --oneline HEAD..$1 $2; }; f"
+    ccompare = "!f() { git log --left-right --oneline $1...HEAD $2; }; f"
     url = config --get remote.origin.url
-# pager config
+    wip = "!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip--\""
+    unwip = "!git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"\\--wip--\" && git reset HEAD~1"
+
+# --- git diff pager --- 
 [core]
     pager = delta
 [interactive]
@@ -14,7 +35,9 @@
 [merge]
     conflictstyle = diff3
 [diff]
-    colorMoved = default
+    colorMoved = zebra
+
+# --- colors config ---
 [pretty]
 
 [delta "mellow-barbet"]
