@@ -215,9 +215,9 @@ bindkey -M vicmd '^[[1;5D' backward-word
 bindkey "^[m" copy-prev-shell-word
 
 # backward delete style
-WORDCHARS='*?_:,+@`-.[]~=&;"!#$%^(){}<>/'
+WORDCHARS=' *?_:,+@`-.[]~=&;"!#$%^(){}<>/'
 autoload -Uz select-word-style
-select-word-style shell
+select-word-style normal
 zstyle ':zle:*' word-style unspecified
 
 #--- BETTER GREP EXPERIENCE ---

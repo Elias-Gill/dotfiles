@@ -16,5 +16,5 @@ else
     image=`fgrep "/home/elias/" ~/.config/nitrogen/bg-saved.cfg | sed "s/file=//"`
 fi
 
-betterlockscreen -u $image
+betterlockscreen -u $image --dim 40
 # echo $image
