@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+
+# Fetch all branches and prune deleted branches from origin
+git fetch --all --prune
+
+# Get a list of local and remote branches
+local_branches=$(git branch --format '%(refname:short)')
+remote_branches=$(git branch -r --format '%(refname:short)')
+
+# Get a list of branches currently checked out in any working tree
+branches_in_use=$(git worktree list | awk '{print $1}' | xargs basename --multiple)
+
+# Filter the branches to delete
+branches_to_delete=()
+for branch in $local_branches; do
+    # Check if the branch has a counterpart in origin or is currently in use
+    if ! echo "$remote_branches" | grep -q "origin/$branch" && ! echo "$branches_in_use" | grep -q "$branch"; then
+        branches_to_delete+=("$branch")
+    fi
+done
+
+if [ ${#branches_to_delete[@]} -eq 0 ]; then
+    echo "No local-only branches found."
+else
+    echo "The following local branches do not have a counterpart in origin:"
+    printf "%s\n" "${branches_to_delete[@]}"
+
+    read -p $'\033[93mWarning: Some of these branches may contain work-in-progress.\n\033[0mAre you sure you want to delete them? (y/n): ' -n 1 -r confirm
+
+    if [[ $confirm =~ ^[Yy]$ ]]; then
+        echo # New line
+        echo "Deleting branches..."
+        for branch in "${branches_to_delete[@]}"; do
+            git branch -D "$branch"
+        done
+        echo "Branches deleted successfully."
+    else
+        echo "Operation cancelled."
+    fi
+fi
