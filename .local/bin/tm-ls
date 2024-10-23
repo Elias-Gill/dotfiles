@@ -16,7 +16,8 @@ selected_name=$(
             --no-sort --layout=reverse --preview='tm-tree {}' --preview-window=65%
 )
 
-# Change to the selected session only if a selection is made
-if [[ -n $selected_name ]]; then
-    tmux switch-client -t "$selected_name"
+# Cambiar solo si se realiza una seleccion
+if [[ -z $selected_name ]]; then
+    exit 0
 fi
+tmux switch-client -t "$selected_name"
