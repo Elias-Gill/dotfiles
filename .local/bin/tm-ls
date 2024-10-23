@@ -10,14 +10,13 @@ current_session=$(tmux display-message -p '#S')
 #   refresca automaticamente
 # 5. Devuelve el nombre de la sesión seleccionada por el usuario.
 selected_name=$(
-    tmux list-sessions | cut -d : -f 1 | grep -v $current_session | awk -v session="$current_session" '1; END { print session }' |
+    tmux list-sessions | cut -d : -f 1 | grep -v -x "$current_session" | awk -v session="$current_session" '1; END { print session }' |
         fzf --bind \
-            "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v \"$current_session\" | awk -v session=\"$current_session\" '1; END { print session }')" \
+            "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v -x \"$current_session\" | awk -v session=\"$current_session\" '1; END { print session }')" \
             --no-sort --layout=reverse --preview='tm-tree {}' --preview-window=65%
 )
 
-# Cambiar solo si se realiza una seleccion
-if [[ -z $selected_name ]]; then
-    exit 0
+# Change to the selected session only if a selection is made
+if [[ -n $selected_name ]]; then
+    tmux switch-client -t "$selected_name"
 fi
-tmux switch-client -t "$selected_name"
