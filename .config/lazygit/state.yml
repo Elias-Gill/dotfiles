@@ -1,12 +1,13 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/elias/Proyectos/python_projects/is2/proyecto/
+    - /home/elias/Proyectos/zig_projects/fluid_simulations/
     - /home/elias/Proyectos/python_projects/is2/proyecto
+    - /home/elias/Proyectos/python_projects/is2/proyecto/
+    - /home/elias/.config/tmux
+    - /home/elias
     - /home/elias/.config/nvim
     - /home/elias/Proyectos/python_projects/is2/wiki
-    - /home/elias
     - /home/elias/Proyectos/go_projects/interpreter/
-    - /home/elias/.config/tmux
 startuppopupversion: 5
 lastversion: 0.44.0
 customcommandshistory: []

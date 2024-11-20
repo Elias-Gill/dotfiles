@@ -1,7 +1,7 @@
 {
 	"layer": "top",
     "width": 1728,
-    "margin-top": 10,
+    "margin-top": 2,
     "margn-bottom": 0,
 
 	"modules-left": ["cpu","memory","temperature"],

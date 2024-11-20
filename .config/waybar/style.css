@@ -2,8 +2,8 @@
     border: none;
     border-radius: 10px;
     font-family: "MonoLisa static";
-    font-size: 15px;
-    min-height: 10px;
+    font-size: 8px;
+    min-height: 8px;
 }
 
 window#waybar {
