@@ -21,9 +21,9 @@
     lg = log --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\"
     rf = reflog --max-count=30
     list = for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/
-    compare = "!f() { git log --left-right --oneline HEAD..$1 $2; }; f"
-    lcompare = "!f() { git log --oneline $1..HEAD $2; }; f"
-    ccompare = "!f() { git log --left-right --oneline HEAD...$1 $2; }; f"
+    compare = "!f() { git log --left-right --oneline HEAD...$1 $2; }; f" # compare all commit differences
+    lcompare = "!f() { git log --oneline $1..HEAD $2; }; f" # get unique commits from the left side
+    rcompare = "!f() { git log --oneline $2..HEAD $1; }; f" # get unique commits from the right side
     url = config --get remote.origin.url
     aliases = config --get-regexp ^alias
 

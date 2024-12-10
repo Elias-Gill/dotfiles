@@ -83,6 +83,20 @@ if [[ -f "/usr/bin/fd" ]]; then
             fi
         fi
     }
+
+    # Include .gitignore files
+    function opena () {
+        if [[ -n "$1" ]]; then
+            xdg-open "$1" 2> /dev/null &
+            disown
+        else
+            selection=$(FZF_DEFAULT_COMMAND="fd --type=file --no-ignore-vcs" fzf)
+            if [[ -n "$selection" ]]; then
+                xdg-open "$selection" 2> /dev/null &
+                disown
+            fi
+        fi
+    }
 fi
 
 # better replace for ls
