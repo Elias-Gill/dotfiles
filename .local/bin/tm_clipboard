@@ -1,3 +1,3 @@
 #!/bin/bash
 
-list_clipit | sed "s/^b'\(.*\)'$/\1/" | sed 's/\n$//' | fzf | xsel --clipboard
+list_clipit | sed "s/^b'\(.*\)'$/\1/" | sed 's/\n$//' | fzf --preview-window="hidden" | xsel --clipboard

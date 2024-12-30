@@ -103,8 +103,8 @@ fi
 if [[ -f "/usr/bin/eza" ]]; then
     alias ls="eza"
     alias la="eza --all"
-    alias ll="eza --icons=always --long"
-    alias lld="eza --icons=always --long --all"
+    alias ll="eza --icons=always --long --group-directories-first"
+    alias lla="eza --icons=always --long --all --group-directories-first"
 else
     alias la="ls -A --color=always"
     alias ll="ls -lA --color=always"

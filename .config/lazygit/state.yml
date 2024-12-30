@@ -1,5 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/Proyectos/java_proyects/chat
+    - /home/elias/Proyectos/go_projects/yt_player/
     - /home/elias/Proyectos/zig_projects/fluid_simulations/
     - /home/elias/Proyectos/python_projects/is2/proyecto
     - /home/elias/Proyectos/python_projects/is2/proyecto/
@@ -9,7 +11,7 @@ recentrepos:
     - /home/elias/Proyectos/python_projects/is2/wiki
     - /home/elias/Proyectos/go_projects/interpreter/
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: 0.44.1
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false

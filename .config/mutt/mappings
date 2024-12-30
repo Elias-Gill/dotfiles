@@ -1,4 +1,0 @@
-# vim: filetype=muttrc
-
-bind index,pager \Cp sidebar-prev
-bind index,pager \Cn sidebar-next

@@ -1,3 +1,4 @@
+[general]
 import = [
     "/home/elias/.config/alacritty/keys.toml", 
     # "/home/elias/.config/alacritty/themes/thelovelace.toml"
