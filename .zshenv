@@ -1,7 +1,9 @@
-skip_global_compinit=1
-
 source ~/.profile
 
+# rust cargo
+if [[ -d "$HOME/.cargo" ]]; then
+    export PATH="$PATH:$HOME/.cargo/bin/"
+fi
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
@@ -18,6 +20,10 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/.local/share/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
 
-# maven config
+# -- Flutter path -- 
+export PATH="$HOME/.local/share/flutter/bin:$PATH"
+export CHROME_EXECUTABLE="/usr/bin/brave"
+
+# Maven config
 export MAVEN_HOME=$HOME/.local/share/m2/
 export PATH=$MAVEN_HOME/bin/:$PATH

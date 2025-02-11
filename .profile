@@ -22,22 +22,6 @@ export LESS_TERMCAP_ue=$'\e[0m'     # reset underline
 export GROFF_NO_SGR=1
 export LESS="-Rsi"
 
-# --- personal env vars ---
-if [[ -f "$HOME/.config/secrets" ]]; then
-    source "$HOME/.config/secrets"
-fi
-
-# --- env and bin config for prog.languages ---
-# rust cargo
-if [[ -d "$HOME/.cargo" ]]; then
-    export PATH="$PATH:$HOME/.cargo/bin/"
-fi
-
-# go path
-if [[ -d "/usr/local/go/bin" ]]; then
-    export PATH=$PATH:/usr/local/go/bin
-fi
-
 # --- Preferred editor for local and remote sessions ---
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR="vim"

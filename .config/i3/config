@@ -167,8 +167,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Return exec co-ses
 bindsym $mod+Shift+Return exec alacritty --title "float_alacritty"
 
-bindsym $mod+F3 exec pcmanfm
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F3 exec thunar
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 # bindsym $mod+F3 exec ranger
 
@@ -238,7 +237,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open applications on specific workspaces
 assign [class="firefox"] $ws1
-assign [class="google-chrome-stable"] $ws1
+assign [class="google-chrome-stable"] $ws3
 assign [title="main-terminal"] $ws2
 assign [class="obsidian"] $ws4
 for_window [class="obsidian"] border pixel 1
@@ -253,6 +252,7 @@ for_window [class="Sxiv"] floating enable border pixel 1
 for_window [class="Gcolor3"] floating enable border pixel 1
 for_window [class="arandr"] floating enable border pixel 1
 for_window [class="Pcmanfm"] floating enable border pixel 1
+for_window [class="Thunar"] floating enable border pixel 1
 for_window [class="Nautilus"] floating enable border pixel 1
 for_window [title="Tlp-UI"] floating enable border pixel 1
 for_window [class="Clipgrab"] floating enable

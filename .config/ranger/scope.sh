@@ -78,6 +78,8 @@ case "$extension" in
         try 7z -p l "$path" && { dump | trim; exit 0; } || exit 1;;
     # PDF documents:
     pdf)
+        # Try displaying images or text preview
+        try pdftoppm -jpeg -singlefile "$path" "${cached//.jpg}" && exit 6 || \
         try pdftotext -l 10 -nopgbrk -q "$path" - && \
             { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # BitTorrent Files
