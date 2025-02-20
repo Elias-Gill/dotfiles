@@ -15,39 +15,39 @@ cache_dir  = "~/.cache/yazi/"
 
 [opener]
 folder = [
-    { exec = 'pcmanfm "$@"', block = true, display_name = "Pcmanfm" },
-    { exec = '$EDITOR "$1"', block = true, display_name = "Editor" },
-    { exec = 'zip comprimido.zip "$@"', display_name = "Compress" },
-    { exec = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
-    { exec = 'tm-ses "$1"', block = true, display_name = "Tmux session" },
+    { run = 'pcmanfm "$@"', block = true, display_name = "Pcmanfm" },
+    { run = '$EDITOR "$1"', block = true, display_name = "Editor" },
+    { run = 'zip comprimido.zip "$@"', display_name = "Compress" },
+    { run = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
+    { run = 'tm-ses "$1"', block = true, display_name = "Tmux session" },
 ]
 archive = [
-    { exec = 'unzip "$@"', display_name = "Extract here" },
-    { exec = '7z x "$@"', display_name = "Extract with 7z" },
-    { exec = 'xdg-open "$@"' },
+    { run = 'unzip "$@"', display_name = "Extract here" },
+    { run = '7z x "$@"', display_name = "Extract with 7z" },
+    { run = 'xdg-open "$@"' },
 ]
 text = [
-    { exec = '$EDITOR "$@"', block = true },
-    { exec = 'xdg-open "$@"', display_name = "Xdg-Open" },
+    { run = '$EDITOR "$@"', block = true },
+    { run = 'xdg-open "$@"', display_name = "Xdg-Open" },
 ]
 image = [
-    { exec = 'xdg-open "$@"', display_name = "Open" },
-    { exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show EXIF" },
-    { exec = 'gimp "$@"', display_name = "Gimp" },
+    { run = 'xdg-open "$@"', display_name = "Open" },
+    { run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show EXIF" },
+    { run = 'gimp "$@"', display_name = "Gimp" },
 ]
 video = [
-    { exec = 'xdg-open "$@"' },
-    { exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
+    { run = 'xdg-open "$@"' },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
 ]
 audio = [
-    { exec = 'xdg-open "$@"' },
-    { exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
+    { run = 'xdg-open "$@"' },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
 ]
 fallback = [
-    { exec = 'xdg-open "$@"', display_name = "Xdg-Open" },
-    { exec = '$EDITOR "$@"', block = true, display_name = "Editor" },
-    { exec = '7z comprimido.zip "$@"', display_name = "Zip" },
-    { exec = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
+    { run = 'xdg-open "$@"', display_name = "Xdg-Open" },
+    { run = '$EDITOR "$@"', block = true, display_name = "Editor" },
+    { run = '7z comprimido.zip "$@"', display_name = "Zip" },
+    { run = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
 ]
 
 [open]

@@ -1,0 +1,156 @@
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.cache/cli_config"
+USER_LIST="$HOME/.cache/user_materias"
+
+load_config() {
+    if [ -f "$CONFIG_FILE" ]; then
+        CSV_FILE=$(cat "$CONFIG_FILE")
+    else
+        CSV_FILE=""
+    fi
+}
+
+save_config() {
+    echo "$CSV_FILE" > "$CONFIG_FILE"
+}
+
+show_schedule() {
+    # Encabezado
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+    printf "| %-35s | %-23s | %-23s | %-23s | %-23s | %-23s | %-23s |\n" "Materia" "lunes" "martes" "miercoles" "jueves" "viernes" "sabado"
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+    while IFS= read -r line; do
+        nombre=$(echo "$line" | awk -F, '{print substr($3, 1, 33)}')
+
+        # Extraer horarios y aulas
+        lunes=$(echo "$line" | awk -F, '{print $36}')
+        lunes_aula=$(echo "$line" | awk -F, '{print $35}')
+
+        martes=$(echo "$line" | awk -F, '{print $38}')
+        martes_aula=$(echo "$line" | awk -F, '{print $37}')
+
+        miercoles=$(echo "$line" | awk -F, '{print $40}')
+        miercoles_aula=$(echo "$line" | awk -F, '{print $39}')
+
+        jueves=$(echo "$line" | awk -F, '{print $42}')
+        jueves_aula=$(echo "$line" | awk -F, '{print $41}')
+
+        viernes=$(echo "$line" | awk -F, '{print $44}')
+        viernes_aula=$(echo "$line" | awk -F, '{print $43}')
+
+        sabado=$(echo "$line" | awk -F, '{print $46}')
+        sabado_aula=$(echo "$line" | awk -F, '{print $45}')
+
+        # Formatear salida
+        printf "| %-35s | %-23s | %-23s | %-23s | %-23s | %-23s | %-23s |\n" \
+            "$nombre" \
+            "$([ -n "$lunes" ] && echo "$lunes $lunes_aula" || echo "")" \
+            "$([ -n "$martes" ] && echo "$martes $martes_aula" || echo "")" \
+            "$([ -n "$miercoles" ] && echo "$miercoles $miercoles_aula" || echo "")" \
+            "$([ -n "$jueves" ] && echo "$jueves $jueves_aula" || echo "")" \
+            "$([ -n "$viernes" ] && echo "$viernes $viernes_aula" || echo "")" \
+            "$([ -n "$sabado" ] && echo "$sabado $sabado_aula" || echo "")"
+    done < "$USER_LIST"
+
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+}
+
+add_materia() {
+    if [ -z "$CSV_FILE" ]; then
+        echo "No CSV file loaded. Use --csv to specify one."
+        exit 1
+    fi
+    
+    # Usar comillas dobles para preservar el formato CSV
+    selected=$(cat "$CSV_FILE" | awk -F, '{print $1" "$3" "$10" "$12 $13" "$14}' | fzf --no-sort)
+    
+    if [ -n "$selected" ]; then
+        # Extraer el item usando comillas dobles
+        item=$(echo "$selected" | awk -F ' ' '{print $1}')
+        name=$(echo "$selected" | awk -F ' ' '{print $2}')
+        
+        # Leer la línea completa usando comillas dobles
+        line=$(bat "$CSV_FILE" | grep "$name" | grep "$item")
+        
+        # Añadir la línea al archivo de usuario
+        echo "$line" >> "$USER_LIST"
+        echo "Added: $line"
+    fi
+}
+
+delete_materia() {
+    if [ -f "$USER_LIST" ]; then
+        selected=$(cat "$USER_LIST" | fzf)
+        if [ -n "$selected" ]; then
+            grep -v "$selected" "$USER_LIST" > temp && mv temp "$USER_LIST"
+            echo "Deleted: $selected"
+        fi
+    else
+        echo "No materias to delete."
+    fi
+}
+
+# TODO: hacer que descargue el excel y transforme a csv, despues que elimine las lineas innecesarias de los csv
+sync_excel() {
+    # Obtener las URLs de los horarios de exámenes desde la página web
+    urls=$(curl "https://www.pol.una.py/academico/horarios-de-clases-y-examenes/" --silent | htmlq --attribute href a | grep xls | grep -i exame)
+
+    latest_url=""
+    latest_date="00000000"
+
+    # Iterar sobre cada URL
+    while read -r url; do
+        # Extraer la fecha del final de la URL usando regex (en formato ddmmyyyy)
+        if [[ $url =~ ([0-9]{2})([0-9]{2})([0-9]{4})\.xlsx$ ]]; then
+            # Extraer la fecha y convertirla a formato yyyymmdd para la comparación
+            day="${BASH_REMATCH[1]}"
+            month="${BASH_REMATCH[2]}"
+            year="${BASH_REMATCH[3]}"
+            file_date="${year}${month}${day}" # convertir a yyyymmdd para comparación
+
+            # Comparar fechas (como strings, funciona porque son YYYYMMDD)
+            if [[ $file_date -gt $latest_date ]]; then
+                latest_date=$file_date
+                latest_url=$url
+            fi
+        fi
+    done <<<"$urls"
+
+    # Imprimir la última versión encontrada
+    echo "$latest_url"
+}
+
+load_config
+
+case "$1" in
+    --csv)
+        if [ -z "$2" ]; then
+            echo "Please provide a CSV file."
+            exit 1
+        fi
+        CSV_FILE="$2"
+        save_config
+        ;;
+    --add)
+        add_materia
+        ;;
+    --delete)
+        delete_materia
+        ;;
+    --clean)
+        rm "$USER_LIST"
+        ;;
+    --sync)
+        sync_excel
+        ;;
+    *)
+        if [ -z "$1" ]; then
+            show_schedule
+        else
+            echo "Invalid option."
+            exit 1
+        fi
+        ;;
+esac
