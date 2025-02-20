@@ -17,44 +17,40 @@ save_config() {
 
 show_schedule() {
     # Encabezado
-    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-    printf "| %-35s | %-23s | %-23s | %-23s | %-23s | %-23s | %-23s |\n" "Materia" "lunes" "martes" "miercoles" "jueves" "viernes" "sabado"
-    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------------------------"
+    printf "| %-35s | %-20s | %-20s | %-20s | %-20s | %-20s |\n" "Materia" "lunes" "martes" "miercoles" "jueves" "viernes"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------------------------"
 
     while IFS= read -r line; do
-        nombre=$(echo "$line" | awk -F, '{print substr($3, 1, 33)}')
+        nombre=$(echo "$line" | awk -F, '{print substr($3, 1, 33)}' | sed 's/"//g')
 
         # Extraer horarios y aulas
-        lunes=$(echo "$line" | awk -F, '{print $36}')
-        lunes_aula=$(echo "$line" | awk -F, '{print $35}')
+        lunes=$(echo "$line" | awk -F, '{print $36}' | sed 's/"//g')
+        lunes_aula=$(echo "$line" | awk -F, '{print $35}' | sed 's/Lab /L/; s/"//g')
 
-        martes=$(echo "$line" | awk -F, '{print $38}')
-        martes_aula=$(echo "$line" | awk -F, '{print $37}')
+        martes=$(echo "$line" | awk -F, '{print $38}' | sed 's/"//g')
+        martes_aula=$(echo "$line" | awk -F, '{print $37}' | sed 's/Lab /L/; s/"//g')
 
-        miercoles=$(echo "$line" | awk -F, '{print $40}')
-        miercoles_aula=$(echo "$line" | awk -F, '{print $39}')
+        miercoles=$(echo "$line" | awk -F, '{print $40}' | sed 's/"//g')
+        miercoles_aula=$(echo "$line" | awk -F, '{print $39}' | sed 's/Lab /L/; s/"//g')
 
-        jueves=$(echo "$line" | awk -F, '{print $42}')
-        jueves_aula=$(echo "$line" | awk -F, '{print $41}')
+        jueves=$(echo "$line" | awk -F, '{print $42}' | sed 's/"//g')
+        jueves_aula=$(echo "$line" | awk -F, '{print $41}' | sed 's/Lab /L/; s/"//g')
 
-        viernes=$(echo "$line" | awk -F, '{print $44}')
-        viernes_aula=$(echo "$line" | awk -F, '{print $43}')
-
-        sabado=$(echo "$line" | awk -F, '{print $46}')
-        sabado_aula=$(echo "$line" | awk -F, '{print $45}')
+        viernes=$(echo "$line" | awk -F, '{print $44}' | sed 's/"//g')
+        viernes_aula=$(echo "$line" | awk -F, '{print $43}' | sed 's/Lab /L/; s/"//g')
 
         # Formatear salida
-        printf "| %-35s | %-23s | %-23s | %-23s | %-23s | %-23s | %-23s |\n" \
+        printf "| %-35s | %-20s | %-20s | %-20s | %-20s | %-20s |\n" \
             "$nombre" \
             "$([ -n "$lunes" ] && echo "$lunes $lunes_aula" || echo "")" \
             "$([ -n "$martes" ] && echo "$martes $martes_aula" || echo "")" \
             "$([ -n "$miercoles" ] && echo "$miercoles $miercoles_aula" || echo "")" \
             "$([ -n "$jueves" ] && echo "$jueves $jueves_aula" || echo "")" \
-            "$([ -n "$viernes" ] && echo "$viernes $viernes_aula" || echo "")" \
-            "$([ -n "$sabado" ] && echo "$sabado $sabado_aula" || echo "")"
+            "$([ -n "$viernes" ] && echo "$viernes $viernes_aula" || echo "")"
     done < "$USER_LIST"
 
-    echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------------------------"
 }
 
 add_materia() {
