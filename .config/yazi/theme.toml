@@ -2,8 +2,8 @@
 # dark = "gruvbox-dark"
 # light = "gruvbox-dark"
 
-[preview]
-hovered       = { underline = false, bg = "#484D66"}
+[manager]
+preview_hovered = { underline = false, bg = "#484D66"}
 
 [status]
 # separator_open = "\ue0be"
