@@ -2,7 +2,11 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd --type d -a ~ --full-path ~/Documentos ~/facultad ~/Proyectos --maxdepth 3 --exclude node_modules | fzf --scheme=history --preview "tree -L 1 --dirsfirst -C {}" --preview-window=32%)
+    proyectos=$(fd --type d -a ~ --full-path ~/Proyectos --maxdepth 2 --exclude node_modules)
+    facultad=$(fd --type d -a ~ --full-path ~/facultad --maxdepth 1 --exclude node_modules)
+    documentos=$(fd --type d -a ~ --full-path ~/Documentos --maxdepth 3 --exclude node_modules)
+
+    selected=$(printf "%s\n%s\n%s" "$proyectos" "$facultad" "$documentos" | fzf --scheme=history --preview "tree -L 1 --dirsfirst -C {}" --preview-window=32%)
 fi
 
 if [[ -z $selected ]]; then

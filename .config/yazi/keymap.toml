@@ -34,15 +34,15 @@ keymap = [
     { on = [ "<Left>" ],  run = "leave",    desc = "Go back to the parent directory" },
     { on = [ "<Right>" ], run = "enter",    desc = "Enter the child directory" },
 
-    { on = [ "g", "g" ], run = "arrow -99999999", desc = "Move cursor to the top" },
-    { on = [ "G" ],      run = "arrow 99999999",  desc = "Move cursor to the bottom" },
+    { on = [ "g", "g" ], run = "arrow top", desc = "Move cursor to the top" },
+    { on = [ "G" ],      run = "arrow bot",  desc = "Move cursor to the bottom" },
 
     # Selection
-    { on = [ "<Space>" ], run = [ "select --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
+    { on = [ "<Space>" ], run = [ "toggle --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
     { on = [ "v" ],       run = "visual_mode",                        desc = "Enter visual mode (selection mode)" },
     { on = [ "V" ],       run = "visual_mode --unset",                desc = "Enter visual mode (unset mode)" },
-    { on = [ "<C-a>" ],   run = "select_all --state=true",            desc = "Select all files" },
-    { on = [ "<C-r>" ],   run = "select_all --state=none",            desc = "Inverse selection of all files" },
+    { on = [ "<C-a>" ],   run = "toggle_all --state=true",            desc = "Select all files" },
+    { on = [ "<C-r>" ],   run = "toggle_all --state=none",            desc = "Inverse selection of all files" },
 
     # Operation
     { on = [ "o" ],         run = "open",                   desc = "Open the selected files" },
@@ -162,6 +162,9 @@ keymap = [
 [input]
 
 keymap = [
+{ on = "<Backspace>", run = "backspace",         desc = "Delete the character before the cursor" }, 
+
+{ on = "c-<Backspace>", run = "backspace",         desc = "Delete the character before the cursor" }, 
     { on = [ "<C-q>" ],       run = "close",          desc = "Cancel input" },
     { on = [ "<Enter>" ],     run = "close --submit", desc = "Submit the input" },
     { on = [ "<Esc>" ],       run = "escape",         desc = "Go back the normal mode, or cancel input" },

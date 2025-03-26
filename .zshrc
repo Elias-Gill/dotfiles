@@ -122,6 +122,11 @@ alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
 
+# facultad
+alias horario="cat ~/facultad/horarios/horario.md | glow"
+alias finales="cat ~/facultad/horarios/ex_finales.md | glow"
+alias parciales="cat ~/facultad/horarios/ex_parciales.md | glow"
+
 # git aliases
 alias g='git'
 alias gA='git add -A'

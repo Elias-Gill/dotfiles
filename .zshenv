@@ -27,3 +27,6 @@ export CHROME_EXECUTABLE="/usr/bin/brave"
 # Maven config
 export MAVEN_HOME=$HOME/.local/share/m2/
 export PATH=$MAVEN_HOME/bin/:$PATH
+
+# AnaConda config (BORRAR ESTA PORQUERIA)
+export PATH="$HOME/.local/share/anaconda3/bin:$PATH"

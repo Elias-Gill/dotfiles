@@ -237,6 +237,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open applications on specific workspaces
 assign [class="firefox"] $ws1
+assign [title="Zen Browser"] $ws1
 assign [class="google-chrome-stable"] $ws3
 assign [title="main-terminal"] $ws2
 assign [class="obsidian"] $ws4
