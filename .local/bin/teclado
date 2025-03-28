@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# hacer toggle del layout
-if [[ $1 == 0 ]]; then
-    setxkbmap -layout us
-else
-    eleccion=$(echo -e "us\nes" | dmenu)
-    setxkbmap -layout "$eleccion"
+flag=$1
+if [[ ! -z flag ]]; then
+    if setxkbmap -query | grep layout | grep --silent us; then
+        echo "switching to SPANISH"
+        notify-send "Keyboard Layout" "Switching to SPANISH  🇪🇸"
+        setxkbmap -layout es
+    else
+        echo "switching to ENGLISH"
+        notify-send "Keyboard Layout" "Switching to ENGLISH  🇺🇸"
+        setxkbmap -layout us
+    fi
 fi
-
-# duplicador porque siempre me da problemas este plaga
-xset r rate 280 36
-xset r rate 280 36
 
 xmodmap -e "remove mod1 = Alt_R"
 xmodmap -e "add mod4 = Alt_R"
+# two times because one time sometimes doesn't work
 xmodmap -e "remove mod1 = Alt_R"
 xmodmap -e "add mod4 = Alt_R"

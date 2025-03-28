@@ -88,6 +88,7 @@ bindsym $mod+z exec --no-startup-id morc_menu
 
 # toggel between us and spanish layout
 bindsym $mod+Tab exec "teclado"
+bindsym $mod1+space exec "teclado"
 
 # Hide borders
 hide_edge_borders none
@@ -267,7 +268,7 @@ for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 
 for_window [title="float_alacritty"] floating enable border pixel 1
 for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
-for_window [title="Walldo"] floating enable sticky enable border pixel 1; exec "~/.config/scripts/update_lock_bg.sh --walldo"
+for_window [class="Walldo"] floating enable sticky enable border pixel 1;
 for_window [title="Pentablet"] floating enable border pixel 1
 for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
 
