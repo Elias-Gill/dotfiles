@@ -43,7 +43,7 @@ bindsym Ctrl+Shift+Print --release exec --no-startup-id maim -s --format=png /de
 
 #  Screen and keyboard on startup  
 exec --no-startup-id "sudo tlp start"
-exec --no-startup-id "teclado 0"
+exec --no-startup-id "teclado --us"
 exec --no-startup-id ~/.local/bin/screen_monitor
 
 # exec cups service only before start

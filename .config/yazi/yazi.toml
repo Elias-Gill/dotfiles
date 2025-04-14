@@ -17,8 +17,8 @@ cache_dir  = "~/.cache/yazi/"
 folder = [
     { run = 'pcmanfm "$@"', block = true, display_name = "Pcmanfm" },
     { run = '$EDITOR "$1"', block = true, display_name = "Editor" },
-    { run = 'zip comprimido.zip "$@"', display_name = "Compress" },
-    { run = '7z comprimido.7z "$@"', display_name = "Compress with 7z" },
+    { run = 'zip -r comprimido.zip "$@"', display_name = "Compress" },
+    { run = '7z a comprimido.7z "$@"', display_name = "Compress with 7z" },
     { run = 'tm-ses "$1"', block = true, display_name = "Tmux session" },
 ]
 archive = [
