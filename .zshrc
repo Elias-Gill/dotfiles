@@ -122,6 +122,11 @@ alias ml="neomutt"
 alias tm="tmux"
 alias v="nvim"
 
+# alias only inside tmux
+if [[ ! -z $TMUX ]]; then 
+    alias cdt="cd `tmux display-message -p -F '#{session_path}'`"
+fi
+
 # facultad
 alias horario="cat ~/facultad/horarios/horario.md | glow"
 alias finales="cat ~/facultad/horarios/ex_finales.md | glow"
