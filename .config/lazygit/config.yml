@@ -1,6 +1,6 @@
 gui:
   # stuff relating to the UI
-  windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
+  screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
   scrollOffMargin: 2 # how many lines to keep before/after the cursor when it reaches the top/bottom of the view
@@ -28,10 +28,8 @@ gui:
       - '#ea83a5'
     searchingActiveBorderColor:
       - '#e6b99d'
-
   authorColors:
     '*': '#85b5ba'
-
   commitLength:
     show: true
   mouseEvents: true
@@ -59,21 +57,21 @@ git:
   merging:
     # only applicable to unix users
     manualCommit: false
-      # extra args passed to `git merge`, e.g. --no-ff
+    # extra args passed to `git merge`, e.g. --no-ff
     args: ''
     log:
       # one of date-order, author-date-order, topo-order or default.
       # topo-order makes it easier to read the git log graph, but commits may not
       # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
       order: 'topo-order'
-        # one of always, never, when-maximised
-        # this determines whether the git graph is rendered in the commits panel
+      # one of always, never, when-maximised
+      # this determines whether the git graph is rendered in the commits panel
       showGraph: 'when-maximised'
-        # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
+      # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
       showWholeGraph: false
       skipHookPrefix: WIP
-        # The main branches. We colour commits green if they belong to one of these branches,
-        # so that you can easily see which commits are unique to your branch (coloured in yellow)
+      # The main branches. We colour commits green if they belong to one of these branches,
+      # so that you can easily see which commits are unique to your branch (coloured in yellow)
       mainBranches: [master, main]
       autoFetch: true
       autoRefresh: true
@@ -99,7 +97,7 @@ git:
         method: prompt # can be: prompt | background | never
       days: 14 # how often an update is checked for
       confirmOnQuit: false
-        # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
+      # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
       quitOnTopLevelReturn: false
       disableStartupPopups: false
       notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip' | 'quit'

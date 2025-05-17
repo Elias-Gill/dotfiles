@@ -1,7 +1,3 @@
-# [flavor]
-# dark = "gruvbox-dark"
-# light = "gruvbox-dark"
-
 [manager]
 preview_hovered = { underline = false, bg = "#383838"}
 

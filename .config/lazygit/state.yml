@@ -1,10 +1,13 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/Proyectos/python_projects/tokenizador-tp-compiladores
+    - /home/elias/Proyectos/java_proyects/poliplanner
+    - /home/elias/Proyectos/java_proyects/poliplanner/
+    - /home/elias/Proyectos/zig_projects/fluid_simulations/
     - /home/elias/Proyectos/c_projects/image_manipulator/
     - /home/elias/Proyectos/c_projects/image_manipulator
     - /home/elias/Proyectos/java_proyects/chat
     - /home/elias/Proyectos/go_projects/yt_player/
-    - /home/elias/Proyectos/zig_projects/fluid_simulations/
     - /home/elias/Proyectos/python_projects/is2/proyecto
     - /home/elias/Proyectos/python_projects/is2/proyecto/
     - /home/elias/.config/tmux
@@ -13,7 +16,7 @@ recentrepos:
     - /home/elias/Proyectos/python_projects/is2/wiki
     - /home/elias/Proyectos/go_projects/interpreter/
 startuppopupversion: 5
-lastversion: 0.44.1
+lastversion: 0.49.0
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false

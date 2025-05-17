@@ -1,11 +1,11 @@
 [manager]
 
-keymap = [
+prepend_keymap = [
     { on = [ "<Esc>" ], run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
     { on = [ "q" ],     run = "close",               desc = "Exit the process" },
     { on = [ "Q" ],     run = "quit --no-cwd-file", desc = "Exit the process without writing cwd-file" },
     { on = [ "<C-q>" ], run = "quit",              desc = "Close the current tab, or quit if it is last tab" },
-{ on = [ "<C-c>" ], run = "quit",              desc = "Close the current tab, or quit if it is last tab" },
+    { on = [ "<C-c>" ], run = "quit",              desc = "Close the current tab, or quit if it is last tab" },
     { on = [ "<C-z>" ], run = "suspend",            desc = "Suspend the process" },
 
     # Navigation
@@ -55,13 +55,11 @@ keymap = [
     { on = [ "p", "f" ],    run = "paste --force",          desc = "Paste overwrite" },
     { on = [ "-" ],         run = "link",                   desc = "Symlink the absolute path of files" },
     { on = [ "_" ],         run = "link --relative",        desc = "Symlink the relative path of files" },
-    { on = [ "d", "D" ],    run = 'shell --confirm "dragon -a -x $@"',       desc = "Drag and drop support" },
     { on = [ "d", "t" ],    run = "remove --force",         desc = "Move the files to the trash" },
     { on = [ "D" ],         run = "remove --permanently",   desc = "Permanently delete the files" },
     { on = [ "a" ],         run = "create",                 desc = "Create a file or directory (ends with / for directories)" },
     { on = [ "r" ],         run = "rename",                 desc = "Rename a file or directory" },
-    { on = [ ";" ],         run = "shell",                  desc = "Run a shell command" },
-    { on = [ ":" ],         run = "shell --block",          desc = "Run a shell command (block the UI until the command finishes)" },
+    { on = [ ":" ],         run = "shell --block --interactive", desc = "Run a shell command (block the UI until the command finishes)" },
     { on = [ "i" ],         run = "hidden toggle",          desc = "Toggle the visibility of hidden files" },
     { on = [ "s" ],         run = "search fd",              desc = "Search files by name using fd" },
     { on = [ "S" ],         run = "search rg",              desc = "Search files by content using ripgrep" },
@@ -107,9 +105,6 @@ keymap = [
     { on = [ "{" ], run = "tab_swap -1", desc = "Swap the current tab with the previous tab" },
     { on = [ "}" ], run = "tab_swap 1",  desc = "Swap the current tab with the next tab" },
 
-    # Tasks
-    { on = [ "w" ], run = "tasks_show", desc = "Show the tasks manager" },
-
     # Goto
     { on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
     { on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
@@ -124,9 +119,11 @@ keymap = [
 [tasks]
 
 keymap = [
+    # Tasks
+    { on = [ "w" ], run = "show",  desc = "Open tasks manager" },
+
     { on = [ "<Esc>" ], run = "close", desc = "Hide the task manager" },
     { on = [ "<C-q>" ], run = "close", desc = "Hide the task manager" },
-    { on = [ "w" ],     run = "close", desc = "Hide the task manager" },
 
     { on = [ "k" ], run = "arrow -1", desc = "Move cursor up" },
     { on = [ "j" ], run = "arrow 1",  desc = "Move cursor down" },
@@ -162,9 +159,9 @@ keymap = [
 [input]
 
 keymap = [
-{ on = "<Backspace>", run = "backspace",         desc = "Delete the character before the cursor" }, 
+    { on = "<Backspace>", run = "backspace",   desc = "Delete the character before the cursor" }, 
+    { on = "<C-w>", run = "kill backward", desc = "Delete the word before the cursor" }, 
 
-{ on = "c-<Backspace>", run = "backspace",         desc = "Delete the character before the cursor" }, 
     { on = [ "<C-q>" ],       run = "close",          desc = "Cancel input" },
     { on = [ "<Enter>" ],     run = "close --submit", desc = "Submit the input" },
     { on = [ "<Esc>" ],       run = "escape",         desc = "Go back the normal mode, or cancel input" },

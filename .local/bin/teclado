@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Only change keyboard layout if no arguments are provided
 if [ $# -eq 0 ]; then
     if setxkbmap -query | grep layout | grep --silent us; then
