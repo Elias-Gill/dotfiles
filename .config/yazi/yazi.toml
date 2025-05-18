@@ -15,6 +15,7 @@ cache_dir  = "~/.cache/yazi/"
 
 [opener]
 folder = [
+    { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = 'tm-ses "$1"', block = true, desc = "Tmux session" },
 ]
 archive = [
@@ -22,20 +23,26 @@ archive = [
     { run = '7z x "$@"', desc = "Extract with 7z" },
 ]
 image = [
+    { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
     { run = 'gimp "$@"', desc = "Gimp" },
 ]
 video = [
+    { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
+text = [
+    { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
+]
 audio = [
+    { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 fallback = [
     # NOTE: mantener linea siempre arriba, asi siempre se usara "xdg-open" por defecto
     { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
-    { run = 'zip -r comprimido.zip "$@"', desc = "zip" },
+    { run = '7z a comprimido.zip "$@"', desc = "zip" },
     { run = '7z a comprimido.7z "$@"', desc = "7zip" },
     { run = 'dragon -a -x "$@"', desc = "Drag and drop" }
 ]
