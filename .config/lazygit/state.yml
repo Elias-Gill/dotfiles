@@ -1,6 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/elias/Descargas/django_cms
+    - /home/elias/Proyectos/python_projects/pdi_playground/pdi_2p
     - /home/elias/Proyectos/java_proyects/poliplanner
     - /home/elias/Proyectos/java_proyects/poliplanner/
     - /home/elias/Proyectos/zig_projects/fluid_simulations/
@@ -16,7 +16,7 @@ recentrepos:
     - /home/elias/Proyectos/python_projects/is2/wiki
     - /home/elias/Proyectos/go_projects/interpreter/
 startuppopupversion: 5
-lastversion: 0.49.0
+lastversion: 0.50.0
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false

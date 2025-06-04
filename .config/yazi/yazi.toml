@@ -52,6 +52,8 @@ rules = [
     { name = "*/", use = "folder" },
 
     { mime = "text/*", use = "text" },
+    { name = "*.md", use = "text" },
+    { name = "*.markdown", use = "text" },
     { mime = "image/*", use = "image" },
     { mime = "video/*", use = "video" },
     { mime = "audio/*", use = "audio" },

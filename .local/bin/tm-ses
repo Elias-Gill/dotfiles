@@ -1,34 +1,51 @@
 #!/usr/bin/env bash
+
+# Selección del directorio con fzf o argumento
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    proyectos=$(fd --type d -a ~ --full-path ~/Proyectos --maxdepth 2 --exclude node_modules)
-    facultad=$(fd --type d -a ~ --full-path ~/facultad --maxdepth 1 --exclude node_modules)
-    documentos=$(fd --type d -a ~ --full-path ~/Documentos --maxdepth 3 --exclude node_modules)
-
-    selected=$(printf "%s\n%s\n%s" "$proyectos" "$facultad" "$documentos" | fzf --scheme=history --preview "tree -L 1 --dirsfirst -C {}" --preview-window=32%)
+    selected=$(fd --type d -a ~ \
+        --full-path ~/Proyectos --maxdepth 2 \
+        --full-path ~/facultad --maxdepth 1 \
+        --full-path ~/Documentos --maxdepth 3 \
+        --exclude node_modules |
+        fzf --scheme=history --preview 'tree -L 1 --dirsfirst -C "{}"' --preview-window=32%)
 fi
 
-if [[ -z $selected ]]; then
-    exit 0
-fi
+[[ -z "$selected" ]] && exit 0
 
-# extract and create a unique name
+# Función para limpiar nombres (versión simplificada)
+clean_name() {
+    local name="$1"
+    # Solo reemplazamos espacios con guiones bajos y eliminamos caracteres problemáticos
+    echo "$name" | sed -E 's/[[:space:]]+/_/g; s/[^a-zA-Z0-9_-]//g'
+}
+
+# Extraer nombres
 base_name=$(basename "$selected")
-path_name=$(echo $selected | awk -F '/' '{ print "/"$(NF-2)"/" }')
-selected_name=$(echo $path_name$base_name | tr . _ | tr ' ' '_')
+parent_name=$(basename "$(dirname "$selected")")
 
-# Start tmux if not running
-tmux_running=$(pgrep tmux)
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+# Limpiar nombres (versión más conservadora)
+base_clean=$(clean_name "$base_name")
+parent_clean=$(clean_name "$parent_name")
+
+# Construir nombre de sesión (sin escapes excesivos)
+if [[ "$parent_clean" != "$(basename "$HOME")" ]]; then
+    selected_name="${base_clean} (${parent_clean})"
+else
+    selected_name="$base_clean"
+fi
+
+# Verificar nombre no vacío y limitar longitud
+selected_name=${selected_name:0:50} # tmux tiene límite de ~256 caracteres
+[[ -z "$selected_name" ]] && selected_name="unnamed_session"
+
+# Crear o conectar a la sesión tmux
+if [[ -z "$TMUX" ]] && [[ -z "$(pgrep tmux)" ]]; then
     tmux new-session -s "$selected_name" -c "$selected"
-    exit 0
+else
+    if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+        tmux new-session -ds "$selected_name" -c "$selected"
+    fi
+    tmux switch-client -t "$selected_name"
 fi
-
-# Create session if not exists
-if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
-fi
-
-# Switch session if session already exists
-tmux switch-client -t "$selected_name"

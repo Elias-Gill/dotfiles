@@ -267,7 +267,7 @@ for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
 for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 
 for_window [title="float_alacritty"] floating enable border pixel 1
-for_window [class="Nitrogen"] floating enable sticky enable border pixel 1; exec "sh ~/.config/scripts/update_lock_bg.sh"
+for_window [class="Nitrogen"] floating enable sticky enable border pixel 1;
 for_window [class="Walldo"] floating enable sticky enable border pixel 1;
 for_window [title="Pentablet"] floating enable border pixel 1
 for_window [title="Fuzzy"] floating enable sticky enable border pixel 1

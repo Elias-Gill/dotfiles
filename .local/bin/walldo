@@ -1,5 +1,5 @@
 #! /bin/sh
 /home/elias/.local/share/go/bin/walldo-in-go
 
-# update the image path inside the file i use to auto run wallpaper
-echo "/$(ps aux | grep swaybg | awk -F'swaybg' '{print $2}' | grep / | sed 's/^[^\/]*\///')" >"$HOME/.local/share/bg"
+image=`awk -F "'" '{print $2}' < ~/.fehbg | tr --delete '\n'`
+betterlockscreen -u "$image" --blur 0.6 --dim 50
