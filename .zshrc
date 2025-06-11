@@ -42,14 +42,16 @@ else
 fi
 
 # --- Plugins configurations ---
-# mkvenv (autoswitch virtualenv)
-# AUTOSWITCH_VIRTUAL_ENV_DIR="~/.local/share/virtualenvs"
-
-# sugestions plugin
+# Suggestions plugin
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 
-# autocompletition plugin
+# Disable fzf annoying keybinds
+bindkey -r '^T'   # borra Ctrl+T
+bindkey -r '^[c'  # borra Alt+C
+bindkey '^R' fzf-history-widget
+
+# Autocompletition plugin
 ENABLE_CORRECTION="false"
 
 # support for zoxide cd
