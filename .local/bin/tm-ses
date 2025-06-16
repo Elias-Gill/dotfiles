@@ -2,7 +2,7 @@
 
 # Selección del directorio con fzf o argumento
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    selected=$(realpath "$1")
 else
     selected=$(fd --type d -a ~ \
         --full-path ~/Proyectos --maxdepth 2 \
