@@ -46,11 +46,6 @@ fi
 ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 
-# Disable fzf annoying keybinds
-bindkey -r '^T'   # borra Ctrl+T
-bindkey -r '^[c'  # borra Alt+C
-bindkey '^R' fzf-history-widget
-
 # Autocompletition plugin
 ENABLE_CORRECTION="false"
 
@@ -323,5 +318,10 @@ setopt share_history          # share command history data
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
 setopt long_list_jobs       # show long list format job notifications
 setopt interactivecomments  # recognize comments
+
+# Disable fzf annoying keybinds
+bindkey -r '^T'   # borra Ctrl+T
+bindkey -r '^[c'  # borra Alt+C
+bindkey '^R' fzf-history-widget
 
 # zprof
