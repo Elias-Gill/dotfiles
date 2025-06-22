@@ -25,6 +25,19 @@
     lcompare = "!f() { git log --oneline $1..HEAD $2; }; f" # get unique commits from the left side
     rcompare = "!f() { git log --oneline $2..HEAD $1; }; f" # get unique commits from the right side
     url = config --get remote.origin.url
+   info = "!f() { \
+        branch=$(git rev-parse --abbrev-ref HEAD); \
+        commit_msg=$(git show --no-patch --pretty=format:%B \"$@\" | sed 's/^/\t%C(green)/'); \
+        git show \
+            --pretty=format:\"\
+Author: %C(bold blue)%an%C(reset) (%C(yellow)$branch%C(reset))%n\
+Date:   %C(cyan)%ad%C(reset)%n\
+Hash:   %C(green)%h%C(reset)%n\
+Message:%n$commit_msg%n%C(reset)\" \
+            --date=format-local:'%d/%m/%Y %H:%M' \
+            --stat \
+            --patch \"$@\"; \
+    }; f"
     aliases = config --get-regexp ^alias
 
     # mejor cuando seas mas sabio y mejor versado en git
