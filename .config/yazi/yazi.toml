@@ -24,7 +24,7 @@ archive = [
 ]
 image = [
     { run = 'xdg-open "$@"', desc = "Xdg-Open" },
-    { run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+    { run = '''exiv2 "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
     { run = 'gimp "$@"', desc = "Gimp" },
 ]
 video = [

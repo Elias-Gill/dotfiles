@@ -25,7 +25,7 @@
     lcompare = "!f() { git log --oneline $1..HEAD $2; }; f" # get unique commits from the left side
     rcompare = "!f() { git log --oneline $2..HEAD $1; }; f" # get unique commits from the right side
     url = config --get remote.origin.url
-   info = "!f() { \
+    info = "!f() { \
         branch=$(git rev-parse --abbrev-ref HEAD); \
         commit_msg=$(git show --no-patch --pretty=format:%B \"$@\" | sed 's/^/\t%C(green)/'); \
         git show \
