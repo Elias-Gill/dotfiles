@@ -130,12 +130,6 @@ alias finales="cat ~/facultad/horarios/ex_finales.md | glow"
 alias parciales="cat ~/facultad/horarios/ex_parciales.md | glow"
 
 # git aliases
-alias g='git'
-alias gA='git add -A'
-alias gl='git lg'
-alias gc='git commit'
-alias gs='git status'
-alias gpl='git pull'
 alias gps='git push'
 
 # funcion para cambiar entre git working trees
@@ -325,3 +319,7 @@ bindkey -r '^[c'  # borra Alt+C
 bindkey '^R' fzf-history-widget
 
 # zprof
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

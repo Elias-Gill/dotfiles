@@ -18,16 +18,16 @@
 
 # --- custom aliases --- 
 [alias]
-    lg = log --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\"
-    rf = reflog --max-count=30
-    list = for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/
-    compare = "!f() { git log --left-right --oneline HEAD...$1 $2; }; f" # compare all commit differences
-    lcompare = "!f() { git log --oneline $1..HEAD $2; }; f" # get unique commits from the left side
-    rcompare = "!f() { git log --oneline $2..HEAD $1; }; f" # get unique commits from the right side
-    url = config --get remote.origin.url
+    lg = "!git log --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\""
+    rf = "!git reflog --max-count=30"
+    list = "!git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/"
+    compare = "!git log --left-right --oneline HEAD...\"$1\" \"$2\""
+    lcompare = "!git log --oneline \"$1\"..HEAD \"$2\""
+    rcompare = "!git log --oneline \"$2\"..HEAD \"$1\""
+    url = "!git config --get remote.origin.url"
     info = "!f() { \
         branch=$(git rev-parse --abbrev-ref HEAD); \
-        commit_msg=$(git show --no-patch --pretty=format:%B \"$@\" | sed 's/^/\t%C(green)/'); \
+        commit_msg=$(git show --no-patch --pretty=format:%B \"$@\" | sed 's/^/    /'); \
         git show \
             --pretty=format:\"\
 Author: %C(bold blue)%an%C(reset) (%C(yellow)$branch%C(reset))%n\
@@ -38,7 +38,7 @@ Message:%n$commit_msg%n%C(reset)\" \
             --stat \
             --patch \"$@\"; \
     }; f"
-    aliases = config --get-regexp ^alias
+    aliases = "!git config --get-regexp ^alias"
 
     # mejor cuando seas mas sabio y mejor versado en git
     # wip = "!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip--\""

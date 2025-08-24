@@ -14,6 +14,11 @@ if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"
 fi
 
+if [[ -f "$HOME/esp/esp-idf/export.sh" ]]; then
+    export IDF_TOOLS_PATH="$HOME/.local/shared/idf_tools"
+    alias get_idf='source $HOME/esp/esp-idf/export.sh'
+fi
+
 # -- Go config -- 
 export PATH=$PATH:/usr/local/go/bin
 export GOROOT=/usr/local/go 

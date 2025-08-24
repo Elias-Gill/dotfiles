@@ -1,11 +1,11 @@
-[manager]
+[mgr]
 preview_hovered = { underline = false, bg = "#383838"}
 
 [status]
 # separator_open = "\ue0be"
 # separator_close = "\ue0b8"
-separator_open = " "
-separator_close = " "
+sep_left = {close="", open=""}
+sep_right = {close="", open=""}
 separator_style = { fg = "#3c3836", bg = "#3c3836" }
 
 # Progress
@@ -22,7 +22,6 @@ select_alt = { fg = "#dddddd", bg = "#555555", bold = true }
 
 unset_main = { fg = "#282828", bg = "#b8bb26", bold = true }
 unset_alt = { fg = "#dddddd", bg = "#555555", bold = true }
-
 
 [filetype]
 
@@ -75,3 +74,10 @@ prepend_dirs = [
   { name = "*", text = "", fg = "#b16286" },
   { name = "*/", text = "", fg = "#b16286" }
 ]
+
+[tabs]
+
+active = {bg = "#83a598", fg = "#3c3836"}
+inactive = {bg = "#3c3836"}
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
