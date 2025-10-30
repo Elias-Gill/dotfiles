@@ -1,0 +1,76 @@
+{
+  "modules-left": [
+    "ext/workspaces",
+    "custom/sep",
+    "dwl/window#layout"
+  ],
+  "modules-right": [
+    "custom/sep",
+    "battery",
+    "custom/sep",
+    "cpu",
+    "custom/sep",
+    "memory",
+    "custom/sep",
+    "clock",
+    "custom/sep",
+    "custom/clipboard",
+    "custom/sep",
+    "pulseaudio",
+    "custom/sep",
+    "tray"
+  ],
+
+  "clock": {
+    "format": "{:%Y-%m-%d %H:%M}",
+    "format-alt": "{:%Y-%m-%d %H:%M}"
+  },
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{used}Gb / {total}Gb",
+    "interval": 4
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 55,
+      "critical": 35
+    },
+    "format": "{capacity}% {icon}  {time}",
+    "format-plugged": "{capacity}% ",
+    "format-time": "{H}:{M}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "ext/workspaces": {
+    "format": "{icon}",
+    "ignore-hidden": false,
+    "on-click": "activate",
+    "sort-by-id": true
+  },
+  "dwl/tags": {
+    "num-tags": 6
+  },
+  "dwl/window#layout": {
+    "format": "[{layout}]"
+  },
+  "custom/sep": {
+    "format": "|",
+    "interval": 0
+  },
+  "custom/clipboard": {
+    "format": " history",
+    "tooltip": "Clipboard history",
+    "on-click": "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
+  },
+  "pulseaudio": {
+      "format": "{volume}% ",
+      "format-muted": "🔇",
+      "scroll-step": 2,
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+  }
+}

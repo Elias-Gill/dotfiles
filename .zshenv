@@ -33,13 +33,5 @@ export CHROME_EXECUTABLE="/usr/bin/brave"
 export MAVEN_HOME=$HOME/.local/share/m2/
 export PATH=$MAVEN_HOME/bin/:$PATH
 
-# -- Glassfish config -- 
-export PATH="$HOME/Descargas/glassfish7/bin:$PATH"
-
-# -- Android Studio config
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/opt/android-studio/bin
+# -- android config -- 
+export ANDROID_HOME=$HOME/Descargas/android/

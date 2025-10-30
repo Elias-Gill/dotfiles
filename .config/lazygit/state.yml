@@ -1,9 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/elias/Proyectos/c_projects/markdown_visualizer/
+    - /home/elias/Proyectos/java_proyects/poliplanner
     - /home/elias/Proyectos/c_projects/markdown_visualizer
     - /home/elias/Proyectos/go_projects/portfolio/
-    - /home/elias/Proyectos/java_proyects/poliplanner
     - /home/elias/Proyectos/java_proyects/poliplanner/
     - /home/elias/Proyectos/c_projects/image_manipulator/
     - /home/elias/Proyectos/c_projects/image_manipulator
@@ -14,7 +14,7 @@ recentrepos:
     - /home/elias/.config/nvim
     - /home/elias/Proyectos/go_projects/interpreter/
 startuppopupversion: 5
-didshowhunkstaginghint: false
-lastversion: 0.54.2
+didshowhunkstaginghint: true
+lastversion: 0.55.1
 customcommandshistory: []
 hidecommandlog: false
