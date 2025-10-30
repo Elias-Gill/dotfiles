@@ -22,8 +22,7 @@
   ],
 
   "clock": {
-    "format": "{:%Y-%m-%d %H:%M}",
-    "format-alt": "{:%Y-%m-%d %H:%M}"
+    "format": "{:%H:%Mhs %Y-%m-%d📅}"
   },
   "cpu": {
     "format": "CPU: {usage}%",

@@ -25,11 +25,11 @@ window#waybar {
     padding: 0 6px;
     color: @cyn;
     background: transparent;
-    border-bottom: 1px solid @bg;
+    /*border-bottom: 1px solid @bg;*/
 }
 #workspaces button.active {
     color: @cyn;
-    border-bottom: 1px solid @mag;
+    /*border-bottom: 1px solid @mag;*/
 }
 #workspaces button.hidden {
     color: @white;
@@ -56,7 +56,7 @@ button:hover {
 #disk,
 #network,
 #tray {
-    padding: 0 8px;
+    padding: 0 5px;
     color: @white;
 }
 
@@ -66,32 +66,47 @@ button:hover {
 
 #clock {
     color: @cyn;
-    border-bottom: 1px solid @cyn;
+    /*border-bottom: 1px solid @cyn;*/
 }
 
 #battery {
+    color: #ffffff;
+    /*border-bottom: 1px solid @blu;*/
+}
+
+/* Normal / good battery */
+#battery.good {
     color: @blu;
-    border-bottom: 1px solid @blu;
+}
+
+/* Warning battery */
+#battery.warning {
+    color: #ffae00;
+}
+
+/* Critical battery */
+#battery.critical {
+    color: #ff0000;
 }
 
 #disk {
     color: @ylw;
-    border-bottom: 1px solid @ylw;
+    /*border-bottom: 1px solid @ylw;*/
 }
 
 #memory {
     color: @mag;
-    border-bottom: 1px solid @mag;
+    /*border-bottom: 1px solid @mag;*/
 }
 
 #cpu {
     color: @grn;
-    border-bottom: 1px solid @grn;
+    /*border-bottom: 1px solid @grn;*/
 }
 
 #network {
     color: @red;
-    border-bottom: 1px solid @red;
+    /*border-bottom: 1px solid @red;*/
 }
 
 #network.disconnected {
