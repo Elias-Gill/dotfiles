@@ -26,21 +26,30 @@
   },
   "cpu": {
     "format": "CPU: {usage}%",
-    "tooltip": false
+    "tooltip": false,
+    "states": {
+        "warning": 60,
+        "critical": 85
+    }
   },
   "memory": {
     "format": "{used}Gb / {total}Gb",
-    "interval": 4
+    "interval": 4,
+    "states": {
+        "warning": 60,
+        "critical": 85
+    }
   },
   "battery": {
     "states": {
       "good": 95,
-      "warning": 55,
-      "critical": 35
+      "warning": 62,
+      "critical": 38
     },
-    "format": "{capacity}% {icon}  {time}",
-    "format-plugged": "{capacity}% ",
-    "format-time": "{H}:{M}",
+    "interval": 30,
+    "format": "{capacity}% {icon} ",
+    "format-charging": " {capacity}% {icon} ",
+    "format-plugged": " plugged",
     "format-icons": ["", "", "", "", ""]
   },
   "ext/workspaces": {
@@ -67,9 +76,9 @@
   "pulseaudio": {
       "format": "{volume}% ",
       "format-muted": "🔇",
-      "scroll-step": 2,
+      "scroll-step": 8,
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+      "on-scroll-up": "bash -c 'v=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po \"\\d+%\" | head -1 | tr -d \"%\"); [[ $v -lt 100 ]] && pactl set-sink-volume @DEFAULT_SINK@ +2%'",
       "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
   }
 }
