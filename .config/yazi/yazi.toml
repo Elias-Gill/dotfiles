@@ -23,6 +23,7 @@ archive = [
     { run = '7z x "$@"', desc = "Extract with 7z" },
 ]
 image = [
+    { run = 'bash /home/elias/.config/yazi/sxiv_open.bash "$1"', desc = "Open with sxiv" },
     { run = 'xdg-open "$@"', desc = "Xdg-Open" },
     { run = '''exiv2 "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
     { run = 'gimp "$@"', desc = "Gimp" },
@@ -54,6 +55,7 @@ rules = [
     { mime = "text/*", use = "text" },
     { name = "*.md", use = "text" },
     { name = "*.markdown", use = "text" },
+    { mime = "image/gif", use = "video" },
     { mime = "image/*", use = "image" },
     { mime = "video/*", use = "video" },
     { mime = "audio/*", use = "audio" },

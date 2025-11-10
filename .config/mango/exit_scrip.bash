@@ -7,12 +7,14 @@ chosen=$(echo -e "$options" | rofi -dmenu -i -p "Power Menu")
 
 case "$chosen" in
     *Lock)
-        swaylock -l blur
+        loginctl lock-session
         ;;
     *Hibernate)
+        loginctl lock-session
         systemctl hibernate
         ;;
     *Suspend)
+        loginctl lock-session
         systemctl suspend
         ;;
     *Exit)

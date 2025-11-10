@@ -1,3 +1,4 @@
+xrdb -load ~/.Xresources
 # monitores
 bash ~/.config/mango/auto_monitor.sh &
 # systray
@@ -9,10 +10,10 @@ blueman-applet >/dev/null 2>&1 &
 swaync &
 # Autosuspend y demas
 swayidle -w \
-    timeout 600 'swaylock --image "$(cat ~/.config/swaybg)"' \
+    lock 'swaylock --image "$(cat ~/.config/swaybg)"' \
+    timeout 600 'loginctl lock-session' \
     timeout 900 'systemctl suspend' \
-    timeout 3600 'systemctl hibernate' \
-    before-sleep 'swaylock --image "$(cat ~/.config/swaybg)"' &
+    timeout 3600 'systemctl hibernate' &
 # bar
 waybar -c ~/.config/mango/config.jsonc -s ~/.config/mango/style.css >/dev/null 2>&1 &
 # fondo de pantalla
