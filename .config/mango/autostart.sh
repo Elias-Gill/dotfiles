@@ -13,6 +13,7 @@ swayidle -w \
     lock 'swaylock --image "$(cat ~/.config/swaybg)"' \
     timeout 600 'loginctl lock-session' \
     timeout 900 'systemctl suspend' \
+    before-sleep 'loginctl lock-session' \
     timeout 3600 'systemctl hibernate' &
 # bar
 waybar -c ~/.config/mango/config.jsonc -s ~/.config/mango/style.css >/dev/null 2>&1 &

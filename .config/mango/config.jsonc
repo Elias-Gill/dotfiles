@@ -46,7 +46,7 @@
       "warning": 62,
       "critical": 38
     },
-    "interval": 30,
+    "interval": 10,
     "format": "{capacity}% {icon} ",
     "format-charging": " {capacity}% {icon} ",
     "format-plugged": " plugged",

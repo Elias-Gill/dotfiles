@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Custom Rofi power menu
-options="🔒\tLock\n🚪\tExit\n🌙\tSuspend\n🛌\tHibernate\n⏻\tShutdown"
+options="🔒\tLock\n🚪\tExit\n🌙\tSuspend\n🛌\tHibernate\n⏻\tShutdown\n⟲\tRestart"
 
 chosen=$(echo -e "$options" | rofi -dmenu -i -p "Power Menu")
 
@@ -22,5 +22,8 @@ case "$chosen" in
         ;;
     *Shutdown)
         systemctl poweroff
+        ;;
+    *Restart)
+        systemctl reboot
         ;;
 esac
