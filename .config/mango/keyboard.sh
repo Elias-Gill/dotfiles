@@ -1,2 +1,6 @@
 mmsg -d switch_keyboard_layout
-notify-send "Changing keyboard layout" -i input-keyboard
+if $(mmsg -g | grep 'kb_layout' | grep us --quiet); then
+    notify-send "🇺🇸 Layout:US" -i input-keyboard
+else
+    notify-send "🇪🇸 Layout: ES" -i input-keyboard
+fi

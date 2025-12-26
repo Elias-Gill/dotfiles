@@ -45,7 +45,8 @@ fallback = [
     { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
     { run = '7z a comprimido.zip "$@"', desc = "zip" },
     { run = '7z a comprimido.7z "$@"', desc = "7zip" },
-    { run = 'dragon -a -x "$@"', desc = "Drag and drop" }
+    { run = 'dragon -a -x "$@"', desc = "Drag and drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Show file stat & ls info" },
 ]
 
 [open]
