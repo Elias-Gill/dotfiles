@@ -1,20 +1,11 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/elias/Proyectos/go_projects/poliplanner2
-    - /home/elias/Proyectos/go_projects/poliplanner2/
-    - /home/elias/Proyectos/js_projects/sl_interpreter
-    - /home/elias/Proyectos/c_projects/markdown_visualizer/
-    - /home/elias/Proyectos/c_projects/markdown_visualizer
-    - /home/elias/Proyectos/go_projects/portfolio/
-    - /home/elias/Proyectos/c_projects/image_manipulator/
-    - /home/elias/Proyectos/c_projects/image_manipulator
-    - /home/elias/Proyectos/go_projects/yt_player/
+    - /home/elias/Proyectos/poliplanner2/
+    - /home/elias/Proyectos/poliplanner2
     - /home/elias/.config/tmux
-    - /home/elias
     - /home/elias/.config/nvim
-    - /home/elias/Proyectos/go_projects/interpreter/
 startuppopupversion: 5
 didshowhunkstaginghint: true
-lastversion: 0.55.1
+lastversion: 0.57.0
 customcommandshistory: []
 hidecommandlog: false

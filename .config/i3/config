@@ -54,16 +54,14 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
-# exec --no-startup-id picom -b --config=/home/elias/picom/picom.conf
 
-# exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
+ exec --no-startup-id start-pulseaudio-x11
 # exec --no-startup-id volumeicon
-# exec --no-startup-id paplay ~/.config/dunst/sounds/startup.wav
 
+# exec --no-startup-id picom -b --config=/home/elias/picom/picom.conf
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id start_conky_maia
-# exec --no-startup-id pamac-tray
 
 #####################
 ###  Keybyndings  ###
@@ -289,16 +287,16 @@ for_window [class="(?i)virtualbox"] floating enable border pixel 1
 
 # Set shut down, restart and locking features
 bindsym $mod+backslash mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l workspace $ws10, exec --no-startup-id betterlockscreen -l blur, mode "default"
-    bindsym s workspace $ws10, exec --no-startup-id systemctl suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym l workspace $ws10, exec --no-startup-id i3exit lock, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s workspace $ws10, exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    # bindsym l exec --no-startup-id i3exit lock, mode "default"
+
+    # bindsym l exec --no-startup-id i3lock -i "/home/elias/Imágenes/lock_screen.png", mode "default"
     # bindsym s workspace $ws10, exec --no-startup-id betterlockscreen --suspend blur, mode "default"
     # bindsym s workspace $ws10, exec --no-startup-id i3exit suspend, mode "default"
 

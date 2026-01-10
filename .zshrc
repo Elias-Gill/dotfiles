@@ -320,8 +320,13 @@ bindkey -r '^T'   # borra Ctrl+T
 bindkey -r '^[c'  # borra Alt+C
 bindkey '^R' fzf-history-widget
 
+# Bind the widget to a keyboard shortcut (Ctrl-x Ctrl-e)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^x' edit-command-line
+
 # zprof
 
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# Added by flyctl installer
+export FLYCTL_INSTALL="/home/elias/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"

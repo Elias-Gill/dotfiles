@@ -105,3 +105,9 @@ Message:%n$commit_msg%n%C(reset)\" \
     side-by-side = true
     features = mellow-barbet zebra-dark
     syntax-theme = Visual Studio Dark+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

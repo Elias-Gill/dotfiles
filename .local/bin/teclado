@@ -4,20 +4,27 @@ if [ $# -eq 0 ]; then
     if setxkbmap -query | grep layout | grep --silent us; then
         echo "switching to SPANISH"
         notify-send "Keyboard Layout" "Switching to SPANISH  🇪🇸"
+
         setxkbmap -layout es
+        xset r rate 280 36
     else
         echo "switching to ENGLISH"
-        notify-send "Keyboard Layout" "Switching to ENGLISH  🇺🇸"
         setxkbmap -layout us
+        notify-send "Keyboard Layout" "Switching to ENGLISH  🇺🇸"
+
+        xset r rate 280 36
+        xset r rate 280 36
+        xmodmap -e "remove mod1 = Alt_R"
+        xmodmap -e "add mod4 = Alt_R"
+        xmodmap -e "remove mod1 = Alt_R"
+        xmodmap -e "add mod4 = Alt_R"
     fi
+else
+    # two times because one time sometimes doesn't work
+    xset r rate 280 36
+    xset r rate 280 36
+    xmodmap -e "remove mod1 = Alt_R"
+    xmodmap -e "add mod4 = Alt_R"
+    xmodmap -e "remove mod1 = Alt_R"
+    xmodmap -e "add mod4 = Alt_R"
 fi
-
-# Always apply these settings (regardless of arguments)
-xset r rate 280 36
-xset r rate 280 36
-
-xmodmap -e "remove mod1 = Alt_R"
-xmodmap -e "add mod4 = Alt_R"
-# two times because one time sometimes doesn't work
-xmodmap -e "remove mod1 = Alt_R"
-xmodmap -e "add mod4 = Alt_R"
