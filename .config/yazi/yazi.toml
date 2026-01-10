@@ -1,7 +1,7 @@
 [mgr]
 layout         = [ 1, 3, 4 ]
 sort_by        = "natural"
-sort_sensitive = true
+sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
 show_hidden    = false
