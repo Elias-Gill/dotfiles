@@ -1,6 +1,9 @@
 [mgr]
 preview_hovered = { underline = false, bg = "#383838"}
 
+[indicator]
+padding = {open = "█", close = "█"}
+
 [status]
 # separator_open = "\ue0be"
 # separator_close = "\ue0b8"
@@ -38,8 +41,9 @@ rules = [
     { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#ebdbb2" },
 
     # Fallback
-    { name = "*", fg = "#ebdbb2" },
-    { name = "*/", fg = "#93b5a8" },
+    { url = "*", is = "exec", fg = "red" },
+    { url = "*", fg = "#ebdbb2" },
+    { url = "*/", fg = "#93b5a8" },
 ]
 
 [icon]

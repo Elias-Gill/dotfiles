@@ -43,7 +43,7 @@ bindsym Ctrl+Shift+Print --release exec --no-startup-id maim -s --format=png /de
 
 #  Screen and keyboard on startup  
 exec --no-startup-id "sudo tlp start"
-exec --no-startup-id "teclado --us"
+exec --no-startup-id "sh teclado --us"
 exec --no-startup-id ~/.local/bin/screen_monitor
 
 # exec cups service only before start
@@ -85,8 +85,8 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+z exec --no-startup-id morc_menu
 
 # toggel between us and spanish layout
-bindsym $mod+Tab exec "teclado"
-bindsym $mod1+space exec "teclado"
+bindsym $mod+Tab exec "sh teclado"
+bindsym $mod1+space exec "sh teclado"
 
 # Hide borders
 hide_edge_borders none
