@@ -41,7 +41,6 @@ rules = [
     { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#ebdbb2" },
 
     # Fallback
-    { url = "*", is = "exec", fg = "red" },
     { url = "*", fg = "#ebdbb2" },
     { url = "*/", fg = "#93b5a8" },
 ]
