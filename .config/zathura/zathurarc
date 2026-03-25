@@ -1,7 +1,7 @@
 # -- options --
 set scroll-step 120
 set incremental-search
-set page-padding 4
+set page-padding 8
 set selection-clipboard clipboard
 
 # -- mappings --

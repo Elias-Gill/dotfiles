@@ -1,12 +1,14 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/elias/Proyectos/sl_interpreter/
+    - /home/elias/.config/nvim
     - /home/elias/Proyectos/poliplanner2/
     - /home/elias/Proyectos/poliplanner2
+    - /home/elias/Proyectos/malla_interactiva/
+    - /home/elias/Proyectos/malla_interactiva
+    - /home/elias/Proyectos/sl_interpreter/
     - /home/elias/.config/tmux
-    - /home/elias/.config/nvim
 startuppopupversion: 5
 didshowhunkstaginghint: true
-lastversion: 0.57.0
+lastversion: 0.59.0
 customcommandshistory: []
 hidecommandlog: false

@@ -18,12 +18,13 @@
 
 # --- custom aliases --- 
 [alias]
-    lg = "!git log --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\""
+    lg = "!git log --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\""
+    graph = "!git log --all --graph --max-count=22 --decorate --pretty=format:\"%Cgreen%h | %Creset%s%C(yellow)%d%C(reset) %Cblue[%an - %Cgreen%ar%Cblue]\""
     rf = "!git reflog --max-count=30"
     list = "!git for-each-ref --format=\"%(refname:short)\" refs/heads/ refs/remotes/"
-    compare = "!git log --left-right --oneline HEAD...\"$1\" \"$2\""
-    lcompare = "!git log --oneline \"$1\"..HEAD \"$2\""
-    rcompare = "!git log --oneline \"$2\"..HEAD \"$1\""
+    compare = "!f() { git log --graph --oneline --left-right --boundary HEAD...\"$1\"; }; f"
+    rcompare = "!f() { git log --graph --oneline --right-only \"$1\"...HEAD; }; f"
+    lcompare = "!f() { git log --graph --oneline --left-only \"$1\"...HEAD; }; f"
     url = "!git config --get remote.origin.url"
     info = "!f() { \
         branch=$(git rev-parse --abbrev-ref HEAD); \
@@ -111,3 +112,12 @@ Message:%n$commit_msg%n%C(reset)\" \
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[cola]
+	fontdiff = ComicShannsMono Nerd Font,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+	fontsize = 10
+	icontheme = dark
+	theme = flat-dark-blue
+	boldheaders = true
+	statusindent = true
+	statusshowtotals = true
+	boldfonts = false

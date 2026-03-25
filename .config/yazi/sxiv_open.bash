@@ -7,7 +7,7 @@ base="$(basename -- "$selected")"
 
 mapfile -t images < <(
   find "$dir" -maxdepth 1 -type f \
-    | grep -Ei '\.(jpg|gif|jpeg|png|webp|bmp)$' \
+    | grep -Ei '\.(jpg|gif|svg|jpeg|png|webp|bmp)$' \
     | sed "s|^$dir/||" \
     | sort -V -f
 )

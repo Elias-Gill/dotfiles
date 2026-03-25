@@ -19,18 +19,69 @@ config.bind('K', 'tab-prev', mode='normal')
 config.bind('<Ctrl-tab>', 'tab-next', mode='normal')
 config.bind('<Ctrl-shift-tab>', 'tab-prev', mode='normal')
 
+# clipboard
+config.unbind('<Ctrl-v>')
+config.bind('<Ctrl-v>', 'insert-text {clipboard}')
+config.bind('<Ctrl-i>', 'mode-enter passthrough')
+config.bind('<Ctrl-i>', 'mode-leave', mode='passthrough')
+
 # ============  OPTIONS ================
 c.input.insert_mode.auto_leave = True
 c.input.insert_mode.auto_enter = True
 c.input.insert_mode.auto_load = True
 c.input.insert_mode.plugins = True
 
-c.qt.chromium.process_model = 'process-per-site'
-c.qt.chromium.low_end_device_mode = 'always'
-c.content.notifications.enabled = False
-c.content.autoplay = False
+# enhances mem usage
+c.qt.chromium.process_model = 'single-process'
 
+# misc
+config.set('content.javascript.clipboard', 'access-paste')
+
+# downloads
+c.downloads.position = 'bottom'
+c.downloads.remove_finished = 5000
+c.downloads.location.directory = '~/Descargas'
+c.downloads.location.prompt = True
+
+# tab restoring on restart
+c.auto_save.session = True
+c.session.lazy_restore = True
+
+# search engines
 c.url.searchengines["@g"] = "https://www.google.com.ar/search?q={}"
+c.url.searchengines["@images"] = "https://yandex.com/images/search?text={}"
+c.url.searchengines["@gh"] = "https://github.com/search?q={}"
+
+# scrolling
+c.scrolling.smooth = True
+c.scrolling.bar = 'always'
+
+# ==== performance-focused config ====
+
+# Disable costly content features
+c.content.autoplay = False
+c.content.geolocation = False
+c.content.notifications.enabled = False
+c.content.media.audio_capture = False
+c.content.media.video_capture = False
+c.content.webrtc_ip_handling_policy = 'disable-non-proxied-udp'
+
+# Rendering / GPU (use software rendering by default)
+c.qt.args = [
+        '--disable-gpu',
+        '--disable-gpu-compositing',
+        ]
+
+# Reduce JavaScript overhead
+c.content.javascript.can_open_tabs_automatically = False
+
+# Cache and motion
+c.content.cache.size = 536870912  # 512 MB
+c.content.prefers_reduced_motion = True
+
+# UI / tabs (lower redraw cost)
+c.tabs.background = True
+c.tabs.show = 'always'
 
 # ==========  COLORSCHEME ==============
 
@@ -88,14 +139,17 @@ c.colors.tabs.odd.fg = '#000000'
 c.colors.tabs.even.fg = '#000000'
 
 # ---- Downloads ----
+# ni idea
 c.colors.downloads.bar.bg = '#2e2e2e'
+# error
 c.colors.downloads.error.bg = '#5a2e2e'
 c.colors.downloads.error.fg = '#ffcccc'
+# en progreso
 c.colors.downloads.start.bg = '#2e5a2e'
 c.colors.downloads.start.fg = '#ccffcc'
-c.colors.downloads.stop.bg = '#5a5a2e'
-c.colors.downloads.stop.fg = '#ffffcc'
-
+# exito
+c.colors.downloads.stop.bg = '#4b2e5a'
+c.colors.downloads.stop.fg = '#f0ccff'
 
 # ---- Hints ----
 c.colors.hints.bg = '#5a5a2e'

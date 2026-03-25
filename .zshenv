@@ -15,9 +15,9 @@ if [[ -f "$HOME/.config/secrets" ]]; then
     source "$HOME/.config/secrets"
 fi
 
-if [[ -f "$HOME/esp/esp-idf/export.sh" ]]; then
-    export IDF_TOOLS_PATH="$HOME/.local/shared/idf_tools"
-    alias get_idf='source $HOME/esp/esp-idf/export.sh'
+if [[ -f "$HOME/Plantillas/esp-idf/export.sh" ]]; then
+    export IDF_TOOLS_PATH="$HOME/Plantillas/idf_tools"
+    alias get_idf='source $HOME/Plantillas/esp-idf/export.sh'
 fi
 
 # -- Go config -- 
