@@ -1,7 +1,8 @@
 # -- options --
 set scroll-step 120
-set incremental-search
-set page-padding 8
+set incremental-search true
+set page-v-padding 8
+set page-h-padding 8
 set selection-clipboard clipboard
 
 # -- mappings --
@@ -27,9 +28,6 @@ map <C-r> rotate
 
 set recolor-darkcolor         "#EAD8C6"
 set recolor-lightcolor        "#3E3228"
-
-# set recolor-lightcolor      "#161617"
-# set recolor-darkcolor       "#c9c7cd"
 
 # -- oldworld ---
 set default-fg                "#c9c7cd"
@@ -62,3 +60,10 @@ set index-active-bg           "#232323"
 
 set render-loading-bg         "#161617"
 set render-loading-fg         "#c9c7cd"
+
+#--------------------------------
+# Custom mappings for scripts
+#--------------------------------
+
+map y exec "/home/elias/.config/zathura/scripts/copy-name.bash '$FILE'"
+map Y exec "/home/elias/.config/zathura/scripts/copy-path.bash '$FILE'"
