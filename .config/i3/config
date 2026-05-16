@@ -28,14 +28,14 @@ bindsym $mod+bracketright exec "amixer sset Master playback 5%+";
 bindsym $mod+bracketleft exec "amixer sset Master playback 5%-";
 
 # screenshots
-bindsym Print exec --no-startup-id i3-scrot
-bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -w
-bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym Ctrl+Shift+Print --release exec --no-startup-id maim -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i
+bindsym Print exec --no-startup-id i3scrot
+bindsym Ctrl+Print --release exec --no-startup-id i3scrot -w
+bindsym Shift+Print --release exec --no-startup-id i3scrot -s
+bindsym Ctrl+Shift+Print --release exec --no-startup-id scrot --select - | xclip -selection clipboard -t image/png -i
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+ #bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+ #bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 ##############################
 ###  Startup Applications  ###
@@ -79,8 +79,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
-# bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/global/rofi.rasi 
+#bindsym $mod+d exec --no-startup-id dmenu_recency
+ bindsym $mod+d exec --no-startup-id rofi -show run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -290,16 +290,12 @@ for_window [class="(?i)virtualbox"] floating enable border pixel 1
 bindsym $mod+backslash mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l workspace $ws10, exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym s workspace $ws10, exec --no-startup-id i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-
-    # bindsym l exec --no-startup-id i3lock -i "/home/elias/Imágenes/lock_screen.png", mode "default"
-    # bindsym s workspace $ws10, exec --no-startup-id betterlockscreen --suspend blur, mode "default"
-    # bindsym s workspace $ws10, exec --no-startup-id i3exit suspend, mode "default"
+    bindsym l exec /home/elias/.config/i3/scripts/blur-lock, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s workspace $ws10, exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"

@@ -1,61 +1,95 @@
 [mgr]
-layout         = [ 1, 3, 4 ]
+layout         = [1, 3, 4]
 sort_by        = "natural"
 sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
+sort_fallback  = "alphabetical"
 show_hidden    = false
 show_symlink   = true
+scrolloff      = 5
 
 [preview]
-tab_size   = 2
-max_width  = 600
-max_height = 800
-cache_dir  = "~/.cache/yazi/"
+tab_size     = 2
+max_width    = 600
+max_height   = 900
+cache_dir    = "~/.cache/yazi/"
 
 [opener]
 folder = [
     { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
     { run = 'tm-ses "$1"', block = true, desc = "Tmux session" },
+    # === Acciones comunes siempre al final ===
+    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
+
 archive = [
     { run = 'unzip "$@"', desc = "Unzip" },
-    { run = '7z x "$@"', desc = "Extract with 7z" },
-]
-image = [
-    { run = 'bash /home/elias/.config/yazi/sxiv_open.bash "$1"', orphan = true, desc = "Open with sxiv" },
+    { run = '7z x "$@"', desc = "Extract 7z" },
+    # === Acciones comunes siempre al final ===
     { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '''exiv2 "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
-    { run = 'gimp "$@"', desc = "Gimp" },
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
+
+image = [
+    { run = 'bash /home/elias/.config/yazi/sxiv_open.bash "$1"', orphan = true, desc = "sxiv" },
+    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
+    { run = '''exiv2 "$1"; echo "Press enter to exit"; read''', block = true, desc = "EXIF" },
+    { run = 'gimp "$@"', desc = "Gimp" },
+    # === Acciones comunes siempre al final ===
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
+]
+
 video = [
     { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Media Info" },
+    # === Acciones comunes siempre al final ===
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
+
 text = [
     { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
+    # === Acciones comunes siempre al final ===
+    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
+
 audio = [
     { run = 'xdg-open "$@"', desc = "Xdg-Open" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Media Info" },
+    # === Acciones comunes siempre al final ===
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
+
+# Fallback general (para archivos desconocidos)
 fallback = [
-    # NOTE: mantener linea siempre arriba, asi siempre se usara "xdg-open" por defecto
     { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
     { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
-    { run = '7z a comprimido.zip "$@"', desc = "zip" },
-    { run = '7z a comprimido.7z "$@"', desc = "7zip" },
-    { run = 'dragon-drop -a -x "$@"', desc = "Drag and drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Show file stat & ls info" },
+    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
+    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
+    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
 ]
 
 [open]
 rules = [
-    { name = "*/", use = "folder" },
+    { url = "*/", use = "folder" },
 
     { mime = "text/*", use = "text" },
-    { name = "*.md", use = "text" },
-    { name = "*.markdown", use = "text" },
+    { url = "*.md", use = "text" },
+    { url = "*.markdown", use = "text" },
     { mime = "image/*", use = "image" },
     { mime = "video/*", use = "video" },
     { mime = "audio/*", use = "audio" },
@@ -72,13 +106,10 @@ rules = [
     { mime = "application/x-7z-compressed", use = "archive" },
     { mime = "application/x-rar", use = "archive" },
 
-    { mime = "*", use = "fallback" },
+    { url = "*", use = "fallback" },
 ]
 
 [tasks]
-micro_workers = 5
-macro_workers = 10
-bizarre_retry = 5
-
-[log]
-enabled = false
+file_workers    = 5
+plugin_workers  = 5
+bizarre_retry   = 5
