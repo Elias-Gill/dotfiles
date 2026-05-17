@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/Proyectos/walldo
     - /home/elias/Proyectos/poliplanner2/
     - /home/elias/Proyectos/poliplanner2
     - /home/elias/.config/nvim
@@ -9,6 +10,14 @@ recentrepos:
     - /home/elias/.config/tmux
 startuppopupversion: 5
 didshowhunkstaginghint: true
-lastversion: 0.60.0
+lastversion: 0.61.1
 customcommandshistory: []
 hidecommandlog: false
+githubPullRequests:
+    /home/elias/Proyectos/walldo:
+        - headRefName: master
+          number: 1
+          title: Cleaned up repo with `gofumpt`
+          state: MERGED
+          url: https://github.com/Elias-Gill/Walldo/pull/1
+          headRepositoryOwner: wolveix
