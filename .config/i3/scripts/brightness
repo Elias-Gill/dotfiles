@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+if [[ -eq "$1" "up" ]]; then
+    brightnessctl set 5%+
+
+    current_value=`brightnessctl get`
+    max_value=`brightnessctl max`
+
+    notify-send 'brightness up' -h int:value:"$(( $current_value / $max_value * 100 ))"
+fi

@@ -34,8 +34,8 @@ bindsym Shift+Print --release exec --no-startup-id i3scrot -s
 bindsym Ctrl+Shift+Print --release exec --no-startup-id scrot --select - | xclip -selection clipboard -t image/png -i
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "brightnessctl set 5%+; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-; notify-send 'brightness down'"
 
 ##############################
 ###  Startup Applications  ###

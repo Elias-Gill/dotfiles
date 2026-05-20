@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+SIGNAL=5
+
+# ==================== CLICK ====================
+if [[ "$BLOCK_BUTTON" == "1" ]]; then
+
+    perf="  Performance"
+    balanced="  Balanced"
+    powersave="  Power Saver"
+
+    options="$perf\n$balanced\n$powersave"
+
+    chosen="$(echo -e "$options" | rofi \
+        -dmenu \
+        -i \
+        -p "Power Mode" \
+        -markup-rows)"
+
+    case "$chosen" in
+        "$perf")
+            tlpctl set performance
+            ;;
+        "$balanced")
+            tlpctl set balanced
+            ;;
+        "$powersave")
+            tlpctl set power-saver
+            ;;
+        *)
+            # no hacer nada
+            BLOCK_BUTTON=0
+            exec "$0"   # re-ejecutar el script para mostrar el icono
+            ;;
+    esac
+
+    # wait for tlpctl
+    sleep 0.5
+fi
+
+# Leer estado final
+current_profile="$(tlpctl get 2>/dev/null || echo 'unknown')"
+
+# Mostrar icono
+case "$current_profile" in
+    performance)
+        icon=""
+        color="#ff5555"
+        ;;
+    balanced)
+        icon=""
+        color="#f1fa8c"
+        ;;
+    power-saver)
+        icon=""
+        color="#50fa7b"
+        ;;
+    *)
+        icon="?"
+        color="#bbbbbb"
+        ;;
+esac
+
+echo "<span color=\"$color\">$icon</span>"
+
+# Forzar actualización solo cuando hubo click
+[[ "$BLOCK_BUTTON" == "1" ]] && pkill -RTMIN+$SIGNAL i3blocks 2>/dev/null

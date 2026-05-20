@@ -9,6 +9,11 @@ separator_block_width=7
 command=$HOME/.config/i3blocks/scripts/cpu
 interval=3
 
+[cpu_temp]
+command=$HOME/.config/i3blocks/scripts/cputemp
+label= 
+interval=3
+
 [separator]
 
 # RAM usage
@@ -23,6 +28,14 @@ interval=3
 command=$HOME/.config/i3blocks/scripts/battery
 markup=pango
 interval=30
+
+# Power modes
+[PowerModes]
+label=- Mode 
+command=$HOME/.config/i3blocks/scripts/power-profiles
+markup=pango
+interval=once
+signal=5
 
 [separator]
 
