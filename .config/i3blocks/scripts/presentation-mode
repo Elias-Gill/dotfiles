@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+SIGNAL=5
+INHIBIT_FILE="$HOME/.cache/power-presentation.mode"
+
+# ==================== CLICK (Toggle) ====================
+if [[ "$BLOCK_BUTTON" == "1" ]]; then
+    if [[ -f "$INHIBIT_FILE" ]]; then
+        rm -f "$INHIBIT_FILE"
+        notify-send "Modo Proyección" "Desactivado" -i preferences-system-power
+    else
+        touch "$INHIBIT_FILE"
+        notify-send "Modo Proyección" "Activado\nLa pantalla no se apagará" -i preferences-system-power
+    fi
+
+    # Forzar actualización
+    pkill -RTMIN+$SIGNAL i3blocks 2>/dev/null
+    sleep 0.2
+fi
+
+# ==================== ESTADO ACTUAL ====================
+if [[ -f "$INHIBIT_FILE" ]]; then
+    icon="󰹁  On"        # Icono de proyección / presentación
+    color="#BD93F9"     # Violeta (muy visible)
+    text="ON"
+else
+    icon="󰹂  Off"       # Icono apagado
+    color="#6272A4"     # Gris azulado
+    text="OFF"
+fi
+
+# Mostrar bloque
+echo "<span color=\"$color\">$icon</span>"
+echo "<span color=\"$color\">$icon $text</span>"   # Segunda línea (opcional)
+
+# Salida de color para i3blocks (opcional pero útil)
+echo "$color"

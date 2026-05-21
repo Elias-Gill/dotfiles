@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# ~/.config/i3/scripts/inhibit-idle
+
+INHIBIT_FILE="$HOME/.cache/presentation.mode"
+
+while true; do
+    if [[ -f "$INHIBIT_FILE" ]]; then
+        # Inhibe por 60 segundos
+        systemd-inhibit \
+            --what=idle:sleep \
+            --who="i3-presentation-mode" \
+            --why="Presentation / Gaming mode enabled" \
+            --mode=block sleep 60
+    fi
+
+    # Cuando está desactivado, revisa cada 10 segundos
+    sleep 10
+done

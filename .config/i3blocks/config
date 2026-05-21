@@ -23,16 +23,22 @@ interval=3
 
 [separator]
 
-# Battery level
 [Battery]
 command=$HOME/.config/i3blocks/scripts/battery
 markup=pango
 interval=30
 
-# Power modes
 [PowerModes]
 label=- Mode 
 command=$HOME/.config/i3blocks/scripts/power-profiles
+markup=pango
+interval=once
+signal=5
+
+[separator]
+
+[PresentationMode]
+command=$HOME/.config/i3blocks/scripts/presentation-mode
 markup=pango
 interval=once
 signal=5
