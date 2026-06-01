@@ -1,0 +1,10 @@
+[Unit]
+Description=Inhibit idle and sleep (gaming mode)
+
+[Service]
+ExecStart=/usr/bin/systemd-inhibit --what=idle:sleep --mode=block --why="Gaming mode" sleep infinity
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=default.target

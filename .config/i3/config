@@ -43,7 +43,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness "down"
 
 # lock screen on suspend
 exec --no-startup-id ~/.config/i3/scripts/auto-lock
-exec --no-startup-id ~/.config/i3/scripts/presentation-mode
+#exec --no-startup-id ~/.config/i3/scripts/presentation-mode
 
 #  Screen and keyboard on startup  
 exec --no-startup-id "sudo tlp start"

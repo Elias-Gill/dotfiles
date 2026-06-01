@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 
 SIGNAL=5
-INHIBIT_FILE="$HOME/.cache/power-presentation.mode"
+SERVICE="inhibit-idle.service"
 NOTIFICATION_ICON="/usr/share/icons/Qogir/symbolic/status/windows-quick-list-symbolic.svg"
 
-# ==================== CLICK (Toggle) ====================
+# ==================== TOGGLE ====================
 if [[ "$BLOCK_BUTTON" == "1" ]]; then
-    if [[ -f "$INHIBIT_FILE" ]]; then
-        rm -f "$INHIBIT_FILE"
-        notify-send "Modo Proyección" "Desactivado" -i $NOTIFICATION_ICON -u low
+    if systemctl --user is-active --quiet "$SERVICE"; then
+        systemctl --user stop "$SERVICE"
+        notify-send "Modo Proyección" "Desactivado" -i "$NOTIFICATION_ICON" -u low
     else
-        touch "$INHIBIT_FILE"
-        notify-send "Modo Proyección" "Activado\nLa pantalla no se apagará" -i $NOTIFICATION_ICON -u low
+        systemctl --user start "$SERVICE"
+        notify-send "Modo Proyección" "Activado" -i "$NOTIFICATION_ICON" -u low
     fi
 
-    # Forzar actualización
     pkill -RTMIN+$SIGNAL i3blocks 2>/dev/null
-    sleep 0.2
 fi
 
-# ==================== ESTADO ACTUAL ====================
-if [[ -f "$INHIBIT_FILE" ]]; then
-    icon="󰹁  On"        # Icono de proyección / presentación
-    color="#BD93F9"     # Violeta (muy visible)
+# ==================== ESTADO ====================
+if systemctl --user is-active --quiet "$SERVICE"; then
+    icon="󰹁 "
     text="ON"
+    color="#BD93F9"
 else
-    icon="󰹂  Off"       # Icono apagado
-    color="#6272A4"     # Gris azulado
+    icon="󰹂 "
     text="OFF"
+    color="#6272A4"
 fi
 
-# Mostrar bloque
-echo "<span color=\"$color\">$icon</span>"
-echo "<span color=\"$color\">$icon $text</span>"   # Segunda línea (opcional)
+# i3blocks EXPECTA:
+# line 1 = texto
+# line 2 = short_text (opcional)
+# line 3 = color (opcional)
 
-# Salida de color para i3blocks (opcional pero útil)
+echo "$icon $text"
+echo "$icon"
 echo "$color"
