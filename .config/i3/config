@@ -24,8 +24,8 @@ floating_modifier $mod
 ## sound/brightness/special-keys ##
 ###################################
 
-bindsym $mod+bracketright exec "amixer sset Master playback 5%+";
-bindsym $mod+bracketleft exec "amixer sset Master playback 5%-";
+bindsym $mod+bracketright exec --no-startup-id ~/.config/i3/scripts/volume "up"
+bindsym $mod+bracketleft exec --no-startup-id ~/.config/i3/scripts/volume "down"
 
 # screenshots
 bindsym Print exec --no-startup-id i3scrot
@@ -34,8 +34,8 @@ bindsym Shift+Print --release exec --no-startup-id i3scrot -s
 bindsym Ctrl+Shift+Print --release exec --no-startup-id scrot --select - | xclip -selection clipboard -t image/png -i
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec "brightnessctl set 5%+; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/brightness "up"
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness "down"
 
 ##############################
 ###  Startup Applications  ###
@@ -50,20 +50,17 @@ exec --no-startup-id "sudo tlp start"
 exec --no-startup-id "sh teclado --us"
 exec --no-startup-id ~/.local/bin/screen_monitor
 
-# exec cups service only before start
-exec --no-startup-id sudo systemctl start cups.service
-
-exec --no-startup-id easyeffects --hide-window --service-mode &; notify-send "Easyeffects started"
+exec --no-startup-id easyeffects --hide-window --service-mode &; notify-send "Easyeffects started" -i "/usr/share/icons/Qogir/symbolic/status/audio-input-microphone-medium-symbolic.svg"
 exec --no-startup-id clipit
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id pa-applet
+
+#exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id start-pulseaudio-x11
 # exec --no-startup-id volumeicon
-
 # exec --no-startup-id picom -b --config=/home/elias/picom/picom.conf
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id start_conky_maia
@@ -296,7 +293,7 @@ set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutd
 mode "$mode_system" {
     bindsym l exec i3lock-fancy-rapid 3 5, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s workspace $ws10, exec --no-startup-id systemctl suspend, mode "default"
+    bindsym s workspace $ws10, exec --no-startup-id systemctl suspend-then-hibernate, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"

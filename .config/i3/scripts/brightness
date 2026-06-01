@@ -1,10 +1,17 @@
 #!/bin/env bash
 
-if [[ -eq "$1" "up" ]]; then
-    brightnessctl set 5%+
+icon="/usr/share/icons/Qogir/symbolic/status/night-light-symbolic.svg"
 
-    current_value=`brightnessctl get`
-    max_value=`brightnessctl max`
+case "$1" in
+    up)
+        brightnessctl set 2%+ > /dev/null
+        ;;
+    down)
+        brightnessctl set 2%- > /dev/null
+        ;;
+esac
 
-    notify-send 'brightness up' -h int:value:"$(( $current_value / $max_value * 100 ))"
-fi
+IFS=',' read -r _ _ _ current_value _ < <(brightnessctl -m)
+current_value="${current_value%\%}"
+
+notify-send "Brightness" -h int:value:"$current_value" -i "$icon"

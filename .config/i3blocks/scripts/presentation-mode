@@ -2,15 +2,16 @@
 
 SIGNAL=5
 INHIBIT_FILE="$HOME/.cache/power-presentation.mode"
+NOTIFICATION_ICON="/usr/share/icons/Qogir/symbolic/status/windows-quick-list-symbolic.svg"
 
 # ==================== CLICK (Toggle) ====================
 if [[ "$BLOCK_BUTTON" == "1" ]]; then
     if [[ -f "$INHIBIT_FILE" ]]; then
         rm -f "$INHIBIT_FILE"
-        notify-send "Modo Proyección" "Desactivado" -i preferences-system-power
+        notify-send "Modo Proyección" "Desactivado" -i $NOTIFICATION_ICON -u low
     else
         touch "$INHIBIT_FILE"
-        notify-send "Modo Proyección" "Activado\nLa pantalla no se apagará" -i preferences-system-power
+        notify-send "Modo Proyección" "Activado\nLa pantalla no se apagará" -i $NOTIFICATION_ICON -u low
     fi
 
     # Forzar actualización

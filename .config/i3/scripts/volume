@@ -1,0 +1,21 @@
+#!/bin/env bash
+
+icon="/usr/share/icons/Qogir/symbolic/status/audio-volume-high-symbolic.svg"
+
+case "$1" in
+    up)
+        amixer sset Master playback 5%+ > /dev/null
+        ;;
+    down)
+        amixer sset Master playback 5%- > /dev/null
+        ;;
+esac
+
+current_value=$(
+    amixer sget Master |
+    grep -o '[0-9]\+%' |
+    head -n1 |
+    tr -d '%'
+)
+
+notify-send "Volume" -h int:value:"$current_value" -i "$icon"
