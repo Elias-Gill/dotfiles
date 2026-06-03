@@ -1,39 +1,38 @@
-#! /bin/bash
-# Mini script para determinar que modo de monitor usar y cambiar automaticamente cuando la entrada
-# hdmi se conecta o desconecta... INFO: rarisimo bash lgmt ajajaj
+#!/usr/bin/env bash
 
-# la primera llamada debe de ser con el contrario de hdmi conectado
-# para poder triggear el script de screen layout en el inicio
-hdmi_conectado="true"
-hdmi=$(xrandr | grep HDMI-1 | grep disconnected)
-if [[ -z $hdmi ]]; then
-    hdmi_conectado="false"
-fi
+EDID_FILE="/sys/class/drm/card1-HDMI-A-1/edid"
 
-# correr en el fondo
-while [[ true ]]; do
-    # auxiliar para determinar el cambio del hdmi
-	mode_aux=$hdmi_conectado
+apply_layout() {
+    # Revisar si no hay dispositivos HDMI conectados
+    if [[ ! -r "$EDID_FILE" || ! -s "$EDID_FILE" ]]; then
+        ~/.config/screenlayout/single.sh
+        exit 0
+    fi
 
-	# Ver si el hdmi ESTA conectado
-	hdmi=$(cat /sys/class/drm/*HDMI*/status)
-	if [[ "$hdmi" = "connected" ]]; then
-		hdmi_conectado="true"
-    else 
-		hdmi_conectado="false"
-	fi
+    # Ver cual archivo aplicar
+    edid=$(edid-decode "$EDID_FILE" 2>/dev/null)
 
-	# Si el modo se cambio, entonces...
-	if [ "$mode_aux" != "$hdmi_conectado" ]; then
-		if [[ "$hdmi_conectado" = "true" ]]; then # si el hdmi esta conectado
-			~/.config/screenlayout/redragon.sh
-            echo hdmi conectado
-			echo monitor Redragon
-		else # si el hdmi se desconecta
-			~/.config/screenlayout/single.sh
-            echo hdmi desconectado
-			echo monitor simple
-		fi
-	fi
-	sleep 3
+    if grep -q "REDRAGON" <<< "$edid"; then
+        ~/.config/screenlayout/redragon.sh
+    elif grep -q "SAMSUNG" <<< "$edid"; then
+        ~/.config/screenlayout/samsung_tv.sh
+    else
+        # Abrir arandr para dispositivos desconocidos
+        arandr
+    fi
+}
+
+# Ejecutar una vez al inicio
+apply_layout
+
+udevadm monitor --udev --subsystem-match=drm |
+while read -r line; do
+    [[ "$line" =~ change ]] || continue
+
+    echo "Evento DRM detectado"
+
+    # Dar tiempo a que DRM/Xorg actualicen estado
+    sleep 1
+
+    apply_layout
 done

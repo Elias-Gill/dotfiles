@@ -43,12 +43,13 @@ bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness "down"
 
 # lock screen on suspend
 exec --no-startup-id ~/.config/i3/scripts/auto-lock
-#exec --no-startup-id ~/.config/i3/scripts/presentation-mode
 
 #  Screen and keyboard on startup  
 exec --no-startup-id "sudo tlp start"
 exec --no-startup-id "sh teclado --us"
-exec --no-startup-id ~/.local/bin/screen_monitor
+
+#exec --no-startup-id ~/.config/i3/scripts/presentation-mode
+#exec --no-startup-id ~/.local/bin/screen_monitor
 
 exec --no-startup-id easyeffects --hide-window --service-mode &; notify-send "Easyeffects started" -i "/usr/share/icons/Qogir/symbolic/status/audio-input-microphone-medium-symbolic.svg"
 exec --no-startup-id clipit
