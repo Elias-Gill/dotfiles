@@ -4,18 +4,21 @@ EDID_FILE="/sys/class/drm/card1-HDMI-A-1/edid"
 
 apply_layout() {
     # Revisar si no hay dispositivos HDMI conectados
-    if [[ ! -r "$EDID_FILE" || ! -s "$EDID_FILE" ]]; then
+   if ! grep -q '[^[:space:]]' "$EDID_FILE" 2>/dev/null; then
         ~/.config/screenlayout/single.sh
-        exit 0
+        notify-send "Ningun dispositivo conectado" "Activando solo eDP-1"
+        return 0
     fi
 
     # Ver cual archivo aplicar
     edid=$(edid-decode "$EDID_FILE" 2>/dev/null)
 
-    if grep -q "REDRAGON" <<< "$edid"; then
+    if grep -q "GM3CC27" <<< "$edid"; then
         ~/.config/screenlayout/redragon.sh
+        notify-send "Dispositivo conectado" "REDRAGON monitor"
     elif grep -q "SAMSUNG" <<< "$edid"; then
         ~/.config/screenlayout/samsung_tv.sh
+        notify-send "Dispositivo conectado" "SAMSUNG TV"
     else
         # Abrir arandr para dispositivos desconocidos
         arandr
@@ -32,7 +35,7 @@ while read -r line; do
     echo "Evento DRM detectado"
 
     # Dar tiempo a que DRM/Xorg actualicen estado
-    sleep 1
+    sleep .5
 
     apply_layout
 done

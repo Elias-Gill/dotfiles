@@ -3,7 +3,7 @@ Description=Monitor hotplug listener
 
 [Service]
 ExecStart=%h/.local/bin/screen_monitor
-Restart=always
+Restart=on-failure
 RestartSec=2
 
 [Install]
