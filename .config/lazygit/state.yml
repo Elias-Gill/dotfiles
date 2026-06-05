@@ -1,8 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/Proyectos/poliplanner2
     - /home/elias/Proyectos/walldo
     - /home/elias/Proyectos/poliplanner2/
-    - /home/elias/Proyectos/poliplanner2
     - /home/elias/.config/nvim
     - /home/elias/Proyectos/malla_interactiva/
     - /home/elias/Proyectos/malla_interactiva
@@ -10,10 +10,11 @@ recentrepos:
     - /home/elias/.config/tmux
 startuppopupversion: 5
 didshowhunkstaginghint: true
-lastversion: 0.61.1
+lastversion: 0.62.1
 customcommandshistory: []
 hidecommandlog: false
 githubPullRequests:
+    /home/elias/Proyectos/poliplanner2: []
     /home/elias/Proyectos/walldo:
         - headRefName: master
           number: 1

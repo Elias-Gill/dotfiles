@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 EDID_FILE="/sys/class/drm/card1-HDMI-A-1/edid"
+ICON="/usr/share/icons/Qogir/symbolic/status/nvidia-ram-symbolic.svg"
 
 apply_layout() {
     # Revisar si no hay dispositivos HDMI conectados
    if ! grep -q '[^[:space:]]' "$EDID_FILE" 2>/dev/null; then
         ~/.config/screenlayout/single.sh
-        notify-send "Ningun dispositivo conectado" "Activando solo eDP-1"
+        notify-send "Ningun monitor conectado" "Activando eDP-1" -i "$ICON"
         return 0
     fi
 
@@ -15,12 +16,13 @@ apply_layout() {
 
     if grep -q "GM3CC27" <<< "$edid"; then
         ~/.config/screenlayout/redragon.sh
-        notify-send "Dispositivo conectado" "REDRAGON monitor"
+        notify-send "Dispositivo conectado" "REDRAGON monitor" -i "$ICON"
     elif grep -q "SAMSUNG" <<< "$edid"; then
         ~/.config/screenlayout/samsung_tv.sh
-        notify-send "Dispositivo conectado" "SAMSUNG TV"
+        notify-send "Dispositivo conectado" "SAMSUNG TV" -i "$ICON"
     else
         # Abrir arandr para dispositivos desconocidos
+        notify-send "Dispositivo desconocido" "Configurelo con arandr" -i "$ICON"
         arandr
     fi
 }

@@ -28,11 +28,6 @@ else
     color="#6272A4"
 fi
 
-# i3blocks EXPECTA:
-# line 1 = texto
-# line 2 = short_text (opcional)
-# line 3 = color (opcional)
-
 echo "$icon $text"
 echo "$icon"
 echo "$color"
