@@ -1,5 +1,0 @@
-#! /bin/sh
-/home/elias/.local/share/go/bin/walldo-in-go
-
-image=`awk -F "'" '{print $2}' < ~/.fehbg | tr --delete '\n'`
-betterlockscreen -u "$image" --blur 0.6 --dim 50

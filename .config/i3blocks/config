@@ -26,7 +26,7 @@ interval=3
 [Battery]
 command=$HOME/.config/i3blocks/scripts/battery
 markup=pango
-interval=30
+interval=15
 
 [PowerModes]
 label=- Mode 

@@ -41,30 +41,28 @@ bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness "down"
 ###  Startup Applications  ###
 ##############################
 
-# lock screen on suspend
-exec --no-startup-id ~/.config/i3/scripts/auto-lock
-
-#  Screen and keyboard on startup  
-exec --no-startup-id "sudo tlp start"
+# Esential services on startup  
 exec --no-startup-id "sh teclado --us"
-
-#exec --no-startup-id ~/.config/i3/scripts/presentation-mode
-#exec --no-startup-id ~/.local/bin/screen_monitor
-
-exec --no-startup-id easyeffects --hide-window --service-mode &; notify-send "Easyeffects started" -i "/usr/share/icons/Qogir/symbolic/status/audio-input-microphone-medium-symbolic.svg"
-exec --no-startup-id clipit
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
+exec --no-startup-id systemctl --user start monitor-hotplug.service
+exec --no-startup-id ~/.config/i3/scripts/auto-lock
+exec --no-startup-id easyeffects --hide-window --service-mode;
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
+# applets
+exec --no-startup-id clipit
+exec --no-startup-id nm-applet
 exec --no-startup-id pa-applet
+exec --no-startup-id blueman-applet
 
-#exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id "sudo tlp start"
+# exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id start-pulseaudio-x11
 # exec --no-startup-id volumeicon
 # exec --no-startup-id picom -b --config=/home/elias/picom/picom.conf
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id start_conky_maia
+# exec --no-startup-id ~/.config/i3/scripts/presentation-mode
+# exec --no-startup-id ~/.local/bin/screen_monitor
 
 #####################
 ###  Keybyndings  ###
@@ -80,12 +78,10 @@ bindsym $mod+Shift+r restart
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start program launcher
-#bindsym $mod+d exec --no-startup-id dmenu_recency
- bindsym $mod+d exec --no-startup-id rofi -show run
-
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+# Program launcher
+bindsym $mod+d exec --no-startup-id rofi -show run
+# bindsym $mod+d exec --no-startup-id dmenu_recency
+# bindsym $mod+z exec --no-startup-id morc_menu categorized menu
 
 # toggel between us and spanish layout
 bindsym $mod+Tab exec "sh teclado"
@@ -247,9 +243,7 @@ assign [title="main-terminal"] $ws2
 assign [class="obsidian"] $ws4
 for_window [class="obsidian"] border pixel 1
 assign [class="LibreOffice"] $ws6
-for_window [class="^Spotify"] move --no-auto-back-and-forth to workspace $ws3
-# assign [class="Xournalpp"] $ws5
-# assign [class="openboard"] $ws5
+assign [class="OnlyOffice"] $ws6
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -260,9 +254,7 @@ for_window [class="Pcmanfm"] floating enable border pixel 1
 for_window [class="Thunar"] floating enable border pixel 1
 for_window [class="Nautilus"] floating enable border pixel 1
 for_window [title="Tlp-UI"] floating enable border pixel 1
-for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border pixel 1
 for_window [class="Lightdm-settings"] floating enable
@@ -270,10 +262,9 @@ for_window [class="Lxappearance"] floating enable sticky enable border pixel 1
 for_window [class="Manjaro Settings Manager"] floating enable border pixel 1
 
 for_window [title="float_alacritty"] floating enable border pixel 1
-for_window [class="Nitrogen"] floating enable sticky enable border pixel 1;
-for_window [class="Walldo"] floating enable sticky enable border pixel 1;
+for_window [class="Nitrogen"] floating enable border pixel 1;
+for_window [class="Walldo"] floating enable border pixel 1;
 for_window [title="Pentablet"] floating enable border pixel 1
-for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
 
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -283,6 +274,13 @@ for_window [class="Simple-scan"] floating enable border pixel 1
 for_window [class="(?i)System-config-printer.py"] floating enable border pixel 1
 for_window [class="Timeset-gui"] floating enable border pixel 1
 for_window [class="(?i)virtualbox"] floating enable border pixel 1
+
+# assign [class="Xournalpp"] $ws5
+# assign [class="openboard"] $ws5
+
+#for_window [title="Fuzzy"] floating enable sticky enable border pixel 1
+#for_window [class="Clipgrab"] floating enable
+#for_window [class="fpakman"] floating enable
 
 #############################
 ###     System configs    ###

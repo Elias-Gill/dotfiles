@@ -1,23 +1,29 @@
-#! /usr/bin/bash
-current_session=$(tmux display-message -p '#S')
+#!/usr/bin/env bash
 
-# Determina el nombre seleccionado del cliente tmux utilizando fzf
-# Funciona así:
-# 1. Lista todas las sesiones tmux excepto la actual ($current_session).
-# 4. Añade la sesión actual al final de la lista usando sed.
-# 2. Usa fzf para como interfaz de selección:
-#   - Con el keybind "Ctrl+x" para terminar una sesion. Luego de eliminarla se
-#   refresca automaticamente
-# 5. Devuelve el nombre de la sesión seleccionada por el usuario.
+list_sessions() {
+    current=$(tmux display-message -p '#S' 2>/dev/null)
+
+    tmux list-sessions -F '#S' |
+        grep -v -x "$current"
+
+    if [[ -n "$current" ]] &&
+       tmux has-session -t "$current" 2>/dev/null; then
+        echo "$current"
+    fi
+}
+
+export -f list_sessions
+
 selected_name=$(
-    tmux list-sessions | cut -d : -f 1 | grep -v -x "$current_session" | awk -v session="$current_session" '1; END { print session }' |
-        fzf --bind \
-            "ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | cut -d : -f 1 | grep -v -x \"$current_session\" | awk -v session=\"$current_session\" '1; END { print session }')" \
-            --no-sort --layout=reverse --preview='tm-tree {}' --preview-window=65%
+    bash -c 'list_sessions' |
+    fzf \
+        --no-sort \
+        --layout=reverse \
+        --preview 'tm-tree {}' \
+        --preview-window=65% \
+        --bind 'ctrl-x:execute-silent(tmux kill-session -t {})+reload(bash -c "list_sessions")'
 )
 
-# Cambiar solo si se realiza una seleccion
-if [[ -z $selected_name ]]; then
-    exit 0
-fi
+[[ -z "$selected_name" ]] && exit 0
+
 tmux switch-client -t "$selected_name"
