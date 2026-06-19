@@ -4,7 +4,6 @@ SIGNAL=5
 
 # ==================== CLICK ====================
 if [[ "$BLOCK_BUTTON" == "1" ]]; then
-
     perf="  Performance"
     balanced="  Balanced"
     powersave="  Power Saver"
@@ -20,12 +19,15 @@ if [[ "$BLOCK_BUTTON" == "1" ]]; then
     case "$chosen" in
         "$perf")
             tlpctl set performance
+            notify-send "Power profile" "$perf" -i /usr/share/icons/Qogir/symbolic/status/battery-good-charging-symbolic.svg
             ;;
         "$balanced")
             tlpctl set balanced
+            notify-send "Power profile" "$balanced" -i /usr/share/icons/Qogir/symbolic/status/battery-good-charging-symbolic.svg
             ;;
         "$powersave")
             tlpctl set power-saver
+            notify-send "Power profile" "$powersave" -i /usr/share/icons/Qogir/symbolic/status/battery-good-charging-symbolic.svg
             ;;
         *)
             # no hacer nada
@@ -35,7 +37,7 @@ if [[ "$BLOCK_BUTTON" == "1" ]]; then
     esac
 
     # wait for tlpctl
-    sleep 0.5
+    sleep 1
 fi
 
 # Leer estado final

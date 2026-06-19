@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/elias/facultad/propuesta_latex
     - /home/elias/Proyectos/poliplanner2
     - /home/elias/Proyectos/walldo
     - /home/elias/Proyectos/poliplanner2/
@@ -10,7 +11,7 @@ recentrepos:
     - /home/elias/.config/tmux
 startuppopupversion: 5
 didshowhunkstaginghint: true
-lastversion: 0.62.1
+lastversion: 0.62.2
 customcommandshistory: []
 hidecommandlog: false
 githubPullRequests:
@@ -22,3 +23,4 @@ githubPullRequests:
           state: MERGED
           url: https://github.com/Elias-Gill/Walldo/pull/1
           headRepositoryOwner: wolveix
+    /home/elias/facultad/propuesta_latex: []
