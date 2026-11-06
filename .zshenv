@@ -26,13 +26,12 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/.local/share/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
 
-# -- Flutter path -- 
-export PATH="$HOME/.local/share/flutter/bin:$PATH"
-export CHROME_EXECUTABLE="/usr/bin/brave"
-
 # Maven config
-export MAVEN_HOME=$HOME/.local/share/m2/
+export MAVEN_HOME=$HOME/.local/share/m2
 export PATH=$MAVEN_HOME/bin/:$PATH
 
 # -- android config -- 
-export ANDROID_HOME=$HOME/Descargas/android/
+export ANDROID_HOME=$HOME/.android
+export PATH=$ANDROID_HOME/android-studio/bin/:$PATH 
+
+export PATH=$PATH:/usr/pgadmin4/bin

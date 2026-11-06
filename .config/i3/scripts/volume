@@ -4,10 +4,10 @@ icon="/usr/share/icons/Qogir/symbolic/status/audio-volume-high-symbolic.svg"
 
 case "$1" in
     up)
-        amixer sset Master playback 5%+ > /dev/null
+        amixer sset Master playback 2%+ > /dev/null
         ;;
     down)
-        amixer sset Master playback 5%- > /dev/null
+        amixer sset Master playback 2%- > /dev/null
         ;;
 esac
 

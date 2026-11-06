@@ -1,3 +1,6 @@
+[shortcuts]
+    context = ctrl+shift+c
+
 [global]
     transparency = 0
     frame_width = 1

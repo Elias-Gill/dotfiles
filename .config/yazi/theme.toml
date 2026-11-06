@@ -1,86 +1,19 @@
+[flavor]
+dark = "gruvbox-material"
+
 [mgr]
-preview_hovered = { underline = false, bg = "#383838"}
+border_symbol = " "
+separator_open = ""
+separator_close = ""
 
 [indicator]
-padding = {open = "█", close = "█"}
+padding = { open = "▐", close = "▌" }
+preview = {reversed = true}
 
 [status]
-# separator_open = "\ue0be"
-# separator_close = "\ue0b8"
-sep_left = {close="", open=""}
-sep_right = {close="", open=""}
-separator_style = { fg = "#3c3836", bg = "#3c3836" }
-
-# Progress
-progress_label = { fg = "#ebdbb2", bold = true }
-progress_normal = { fg = "#504945", bg = "#3c3836" }
-progress_error = { fg = "#fb4934", bg = "#3c3836" }
-
-[mode]
-normal_main = { fg = "#282828", bg = "#a89984", bold = true }
-normal_alt = { fg = "#dddddd", bg = "#555555", bold = true }
-
-select_main = { fg = "#282828", bg = "#fe8019", bold = true }
-select_alt = { fg = "#dddddd", bg = "#555555", bold = true }
-
-unset_main = { fg = "#282828", bg = "#b8bb26", bold = true }
-unset_alt = { fg = "#dddddd", bg = "#555555", bold = true }
-
-[filetype]
-
-rules = [
-    { mime = "image/*", fg = "#ebdbb2" },
-    { mime = "video/*", fg = "#b8bb26" },
-    { mime = "audio/*", fg = "#ebdbb2"},
-
-    # Archives
-    { mime = "application/*zip", fg = "#b8bb26" },
-    { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#b8bb26" },
-
-    # Documents
-    { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#ebdbb2" },
-
-    # Fallback
-    { url = "*", fg = "#ebdbb2" },
-    { url = "*/", fg = "#93b5a8" },
-]
-
-[icon]
-
-prepend_dirs = [
-  { name = "desktop", text = "", fg = "#83a598" },
-  { name = "escritorio", text = "", fg = "#83a598" },
-
-  { name = "documentos", text = "", fg = "#83a598" },
-  { name = "documents", text = "", fg = "#83a598" },
-  { name = "Proyectos", text = "", fg = "#fe8019" },
-
-  { name = "downloads", text = "", fg = "#83a598" },
-  { name = "descargas", text = "", fg = "#83a598" },
-
-  { name = "pictures", text = "", fg = "#83a598" },
-  { name = "imagenes", text = "", fg = "#83a598" },
-  { name = "imágenes", text = "", fg = "#83a598" },
-
-  { name = "music", text = "", fg = "#83a598" },
-  { name = "musica", text = "", fg = "#83a598" },
-
-  { name = "movies", text = " ", fg = "#fb4934" },
-  { name = "videos", text = " ", fg = "#fb4934" },
-
-  { name = "public", text = "", fg = "#8ec07c" },
-  { name = "library", text = "", fg = "#d79921" },
-  { name = "development", text = "", fg = "#689d6a" },
-  { name = ".config", text = "", fg = "#b16286" },
-
-  # default callbacks
-  { name = "*", text = "", fg = "#b16286" },
-  { name = "*/", text = "", fg = "#b16286" }
-]
+sep_left = { open = "▐", close = "▌" }
+sep_right = { open = "▐", close = "▌" }
 
 [tabs]
-
-active = {bg = "#83a598", fg = "#3c3836"}
-inactive = {bg = "#3c3836"}
 sep_inner = { open = "", close = "" }
 sep_outer = { open = "", close = "" }

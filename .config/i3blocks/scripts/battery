@@ -1,84 +1,291 @@
 #!/usr/bin/env python3
-#
-# Battery block for i3blocks - Porcentaje primero
-
-from subprocess import check_output
 import os
 import re
+import sys
+from pathlib import Path
+from subprocess import check_output, run
 
-config = dict(os.environ)
-status = check_output(['acpi'], universal_newlines=True).strip()
+# Configuración de iconos de FontAwesome para la Laptop
+ICONS = {
+    "Discharging": "<span font='FontAwesome'></span>",
+    "Charging": "<span color='gray'><span font='FontAwesome'></span></span>",
+    "Full": "<span font='FontAwesome'>🗲</span>",
+    "Unknown": "<span font='FontAwesome'></span> <span font='FontAwesome'></span>",
+}
 
-if not status:
-    fulltext = "<span color='red'><span font='FontAwesome'></span> No battery</span>"
-    percentleft = 100
-else:
-    batteries = [b for b in status.split("\n") if b]
-    state_batteries = []
-    percentleft_batteries = []
-    timeleft = ""
+# Iconos por categoría de dispositivo
+DEVICE_ICONS = {
+    "headset": "🎧",
+    "laptop": "💻",
+    "gamepad": "🎮",
+    "speaker": "🔊",
+    "mouse": "🖱️",
+    "keyboard": "⌨️",
+    "phone": "📱",
+    "generic": "🔋",
+}
 
-    for battery in batteries:
-        if battery:
-            parts = battery.split(": ")[1].split(", ")
-            state_batteries.append(parts[0])
+COLOR_RANGES = [
+    (5, "#7F0000"),
+    (10, "#A30000"),
+    (15, "#C90000"),
+    (20, "#E52521"),
+    (25, "#F44336"),
+    (29, "#FF5722"),
+    (33, "#FF7043"),
+    (37, "#FF8F00"),
+    (41, "#FFA000"),
+    (45, "#FFB300"),
+    (49, "#FFC107"),
+    (53, "#FFD54F"),
+    (57, "#FFEB3B"),
+    (61, "#FFEE58"),
+    (65, "#E6EE9C"),
+    (70, "#D4E157"),
+    (75, "#C0CA33"),
+    (80, "#A5D6A7"),
+    (84, "#81C784"),
+    (88, "#66BB6A"),
+    (92, "#4CAF50"),
+    (96, "#A1E8B9"),
+    (100, "#E5E9F0"),
+]
+
+
+def get_color(percent, state):
+    if state == "Charging":
+        return "white"
+    for limit, hex_color in COLOR_RANGES:
+        if percent <= limit:
+            return hex_color
+    return "#E5E9F0"
+
+
+def get_laptop_battery_info():
+    """Obtiene información de la batería de la laptop exclusivamente vía sysfs/acpi."""
+    power_supply = Path("/sys/class/power_supply")
+    bat_dirs = sorted(list(power_supply.glob("BAT*")))
+
+    if bat_dirs:
+        percentages = []
+        states = []
+        for bat in bat_dirs:
+            try:
+                cap_file = bat / "capacity"
+                stat_file = bat / "status"
+                if cap_file.exists():
+                    percentages.append(int(cap_file.read_text().strip()))
+                if stat_file.exists():
+                    states.append(stat_file.read_text().strip())
+            except Exception:
+                pass
+
+        if percentages:
+            avg_percent = sum(percentages) // len(percentages)
+            main_state = states[0] if states else "Unknown"
+
+            timeleft = ""
+            try:
+                acpi_out = check_output(["acpi"], universal_newlines=True).strip()
+                match = re.search(r"Battery \d+:.*?, \d+%(?:, (\d+:\d+))?", acpi_out)
+                if match and match.group(1):
+                    timeleft = match.group(1)
+            except Exception:
+                pass
+
+            return main_state, avg_percent, timeleft
+
+    return None, 100, ""
+
+
+def classify_device(name_or_type):
+    """Determina la categoría e icono del periférico."""
+    text = name_or_type.lower()
+
+    if any(k in text for k in ["headset", "headphone", "earbud", "audio_headset", "buds", "airpods", "auricular"]):
+        return "headset", DEVICE_ICONS["headset"]
+
+    if any(k in text for k in ["gamepad", "controller", "gaming_input", "ps3", "ps4", "ds4", "dualshock", "dualsense", "sony", "xbox", "joystick"]):
+        return "gamepad", DEVICE_ICONS["gamepad"]
+
+    if any(k in text for k in ["speaker", "soundbar", "altavoz", "parlante"]):
+        return "speaker", DEVICE_ICONS["speaker"]
+
+    if any(k in text for k in ["mouse", "raton", "trackball"]):
+        return "mouse", DEVICE_ICONS["mouse"]
+
+    if any(k in text for k in ["keyboard", "teclado"]):
+        return "keyboard", DEVICE_ICONS["keyboard"]
+
+    if any(k in text for k in ["phone", "smartphone", "android", "iphone"]):
+        return "phone", DEVICE_ICONS["phone"]
+
+    return "generic", DEVICE_ICONS["generic"]
+
+
+def get_external_devices_info():
+    """Retorna periféricos externos filtrando DisplayDevice, baterías internas y duplicados."""
+    devices = []
+    seen_keys = set()  # Para evitar duplicar por (porcentaje, categoría)
+
+    # 1. Escaneo vía UPower
+    try:
+        upower_out = check_output(["upower", "-e"], universal_newlines=True).splitlines()
+        for dev_path in upower_out:
+            path_lower = dev_path.lower()
+
+            # FILTRO: Ignorar baterías de laptop, adaptadores de corriente y DisplayDevice
+            if any(ignore in path_lower for ignore in ["displaydevice", "line_power", "battery_bat", "laptop_battery"]):
+                continue
+
+            info = check_output(["upower", "-i", dev_path], universal_newlines=True)
             
-            # Porcentaje
-            p = int(parts[1].rstrip("%"))
-            if p > 0:
-                percentleft_batteries.append(p)
-            
-            # Tiempo restante (solo del primero)
-            if not timeleft and len(parts) > 2:
-                time_match = re.search(r"(\d+:\d+)", parts[-1])
-                if time_match:
-                    timeleft = f" ({time_match.group(1)})"
+            # Doble chequeo para descartar DisplayDevice o Baterías del sistema dentro de la info
+            if "native-path:          DisplayDevice" in info or "model:                  Laptop Battery" in info:
+                continue
 
-    state = state_batteries[0] if state_batteries else "Unknown"
-    percentleft = int(sum(percentleft_batteries) / len(percentleft_batteries)) if percentleft_batteries else 0
+            percentage_match = re.search(r"percentage:\s+(\d+)%", info)
+            model_match = re.search(r"model:\s+(.+)", info)
+            vendor_match = re.search(r"vendor:\s+(.+)", info)
+            state_match = re.search(r"state:\s+(\w+)", info)
 
-    # Iconos
-    FA_BATTERY = "<span font='FontAwesome'></span>"
-    FA_LIGHTNING = "<span color='{}'><span font='FontAwesome'></span></span>".format(config.get("color_charging", "yellow"))
-    FA_PLUG = "<span font='FontAwesome'></span>"
-    FA_QUESTION = "<span font='FontAwesome'></span>"
+            if percentage_match:
+                percent = int(percentage_match.group(1))
+                state = state_match.group(1).capitalize() if state_match else "Discharging"
 
-    # Definir ícono según estado
-    if state == "Discharging":
-        icon = FA_BATTERY
-    elif state == "Charging":
-        icon = FA_LIGHTNING + " " + FA_PLUG
-    elif state == "Full":
-        icon = FA_PLUG
+                vendor = vendor_match.group(1).strip() if vendor_match else ""
+                model = model_match.group(1).strip() if model_match else ""
+
+                if vendor and model and not model.lower().startswith(vendor.lower()):
+                    full_name = f"{vendor} {model}"
+                elif model:
+                    full_name = model
+                else:
+                    full_name = dev_path.split("/")[-1]
+
+                category, icon = classify_device(f"{dev_path} {full_name}")
+
+                # Generar clave única para evitar que el mismo dispositivo aparezca 2 veces
+                dedup_key = (category, percent)
+                if dedup_key not in seen_keys:
+                    seen_keys.add(dedup_key)
+                    devices.append({
+                        "id": dev_path,
+                        "name": full_name,
+                        "category": category,
+                        "icon": icon,
+                        "state": state,
+                        "percent": percent
+                    })
+    except Exception:
+        pass
+
+    # 2. Escaneo complementario vía sysfs (/sys/class/power_supply)
+    power_supply = Path("/sys/class/power_supply")
+    if power_supply.exists():
+        for dev in power_supply.iterdir():
+            dev_name = dev.name.lower()
+
+            if dev_name.startswith("bat") or "displaydevice" in dev_name:
+                continue
+
+            cap_file = dev / "capacity"
+            stat_file = dev / "status"
+            type_file = dev / "type"
+            model_file = dev / "model_name"
+
+            if cap_file.exists():
+                try:
+                    percent = int(cap_file.read_text().strip())
+                    state = stat_file.read_text().strip() if stat_file.exists() else "Discharging"
+                    dev_type_str = type_file.read_text().strip() if type_file.exists() else ""
+
+                    if model_file.exists():
+                        full_name = model_file.read_text().strip()
+                    else:
+                        full_name = dev.name.replace("_", " ").title()
+
+                    category, icon = classify_device(f"{dev_name} {dev_type_str} {full_name}")
+
+                    dedup_key = (category, percent)
+                    if dedup_key not in seen_keys:
+                        seen_keys.add(dedup_key)
+                        devices.append({
+                            "id": dev_name,
+                            "name": full_name,
+                            "category": category,
+                            "icon": icon,
+                            "state": state,
+                            "percent": percent
+                        })
+                except ValueError:
+                    pass
+
+    return devices
+
+
+def send_notification(lap_state, lap_percent, timeleft, ext_devices):
+    lines = []
+
+    if lap_state is not None:
+        lines.append(f"{DEVICE_ICONS['laptop']} Laptop")
+        lines.append(f"      Carga: {lap_percent}% ({lap_state})")
+        if timeleft:
+            lines.append(f"      Restante: {timeleft}hs")
+
+    if ext_devices:
+        if lines:
+            lines.append("\n")
+        for dev in ext_devices:
+            lines.append(f"{dev['icon']} {dev['name']}")
+            lines.append(f"   └─ Carga: {dev['percent']}% ({dev['state']})")
+
+    if not lines:
+        lines = ["No hay baterías detectadas"]
+
+    box = ""
+    for line in lines:
+        box += f"   {line}\n"
+
+    run(
+        [
+            "notify-send",
+            "Estado de Baterías:",
+            f"<body><tt><span face='monospace'>{box}</span></tt></body>",
+        ]
+    )
+
+
+def main():
+    lap_state, lap_percent, timeleft = get_laptop_battery_info()
+    ext_devices = get_external_devices_info()
+
+    if os.environ.get("BLOCK_BUTTON"):
+        send_notification(lap_state, lap_percent, timeleft, ext_devices)
+
+    parts = []
+
+    # 1. Batería Laptop
+    if lap_state is None:
+        parts.append("<span color='red'><span font='FontAwesome'></span> No battery</span>")
     else:
-        icon = FA_QUESTION + " " + FA_BATTERY
+        lap_icon = ICONS.get(lap_state, ICONS["Unknown"])
+        lap_color = get_color(lap_percent, lap_state)
+        parts.append(f'<span color="{lap_color}">{lap_percent}% {lap_icon}</span>')
 
-    # Función de color según porcentaje
-    def get_color(percent):
-        if percent < 10:
-            return config.get("color_10", "#FF0000")
-        if percent < 20:
-            return config.get("color_20", "#FF3300")
-        if percent < 30:
-            return config.get("color_30", "#FF6600")
-        if percent < 40:
-            return config.get("color_40", "#FF9900")
-        if percent < 50:
-            return config.get("color_50", "#FFCC00")
-        if percent < 60:
-            return config.get("color_60", "#FFFF00")
-        if percent < 70:
-            return config.get("color_70", "#FFFF33")
-        if percent < 80:
-            return config.get("color_80", "#FFFF66")
-        return config.get("color_full", "#FFFFFF")
+    # 2. Periféricos externos
+    for dev in ext_devices:
+        dev_color = get_color(dev["percent"], dev["state"])
+        parts.append(f'[{dev["icon"]} {dev["percent"]}%]')
 
-    # === FORMATO FINAL: PORCENTAJE PRIMERO ===
-    color = get_color(percentleft)
-    fulltext = '<span color="{}">{}%</span> {}'.format(color, percentleft, icon)
+    fulltext = "  ".join(parts)
 
-print(fulltext)
-print(fulltext)
+    print(fulltext)
+    print(fulltext)
 
-if percentleft < 10:
-    exit(33)
+    if lap_percent is not None and lap_percent < 10:
+        sys.exit(33)
+
+
+if __name__ == "__main__":
+    main()

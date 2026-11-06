@@ -1,26 +1,16 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/elias/facultad/propuesta_latex
-    - /home/elias/Proyectos/poliplanner2
-    - /home/elias/Proyectos/walldo
+    - /home/elias/Kesopy/tukokue/server_app
     - /home/elias/Proyectos/poliplanner2/
+    - /home/elias/Proyectos/poliplanner2
+    - /home/elias/facultad/tesis/
+    - /home/elias/facultad/tesis
+    - /home/elias/Proyectos/walldo
+    - /home/elias/Proyectos/walldo/
+    - /home/elias/facultad/anteproyecto tesis/
     - /home/elias/.config/nvim
-    - /home/elias/Proyectos/malla_interactiva/
-    - /home/elias/Proyectos/malla_interactiva
-    - /home/elias/Proyectos/sl_interpreter/
     - /home/elias/.config/tmux
 startuppopupversion: 5
-didshowhunkstaginghint: true
-lastversion: 0.62.2
+lastversion: 0.66.1
 customcommandshistory: []
 hidecommandlog: false
-githubPullRequests:
-    /home/elias/Proyectos/poliplanner2: []
-    /home/elias/Proyectos/walldo:
-        - headRefName: master
-          number: 1
-          title: Cleaned up repo with `gofumpt`
-          state: MERGED
-          url: https://github.com/Elias-Gill/Walldo/pull/1
-          headRepositoryOwner: wolveix
-    /home/elias/facultad/propuesta_latex: []

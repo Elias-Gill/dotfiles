@@ -117,7 +117,7 @@ fi
 alias cl="clear"
 alias ml="neomutt"
 alias tm="tmux"
-alias v="nvim"
+alias vim="nvim"
 
 # alias only inside tmux
 if [[ ! -z $TMUX ]]; then 

@@ -1,57 +1,32 @@
 gui:
-  # stuff relating to the UI
-  screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
-  scrollHeight: 2 # how many lines you scroll by
-  scrollPastBottom: true # enable scrolling past the bottom
-  scrollOffMargin: 2 # how many lines to keep before/after the cursor when it reaches the top/bottom of the view
-  sidePanelWidth: 0.2 # number from 0 to 1
-  expandFocusedSidePanel: false
-  mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
-  language: 'auto' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko' | 'ru'
-  timeFormat: '02 Jan 06' # https://pkg.go.dev/time#Time.Format
-  shortTimeFormat: '3:04PM'
+  nerdFontsVersion: "3"
   theme:
     activeBorderColor:
-      - '#c9c7cd'
+      - "#75a1c7"
       - bold
     inactiveBorderColor:
-      - '#9f9ca6'
+      - "#404040"
     optionsTextColor:
-      - '#aca1cf'
+      - "#75a1c7"
     selectedLineBgColor:
-      - '#3a3a3c'
+      - "#212121"
+    selectedRangeBgColor:
+      - "#212121"
     cherryPickedCommitBgColor:
-      - '#3b3b3e'
+      - "#c4a8d6"
     cherryPickedCommitFgColor:
-      - '#92a2d5'
+      - "#75a1c7"
     unstagedChangesColor:
-      - '#ea83a5'
+      - "#e08585"
+    defaultFgColor:
+      - "#e4e4e8"
     searchingActiveBorderColor:
-      - '#e6b99d'
-  authorColors:
-    '*': '#85b5ba'
-  commitLength:
-    show: true
-  mouseEvents: true
-  skipDiscardChangeWarning: false
-  skipStashWarning: false
-  showFileTree: true # for rendering changes files in a tree format
-  showListFooter: true # for seeing the '5 of 20' message in list panels
-  showRandomTip: true
-  showBranchCommitHash: false # show commit hashes alongside branch names
-  showBottomLine: true # for hiding the bottom information line (unless it has important information to tell you)
-  showCommandLog: true
-  showIcons: false # deprecated: use nerdFontsVersion instead
-  nerdFontsVersion: "" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
-  commandLogSize: 8
-  splitDiff: 'never' # one of 'auto' | 'always'
-  skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
-  border: 'single' # one of 'single' | 'double' | 'rounded' | 'hidden'
-  animateExplosion: true # shows an explosion animation when nuking the working tree
+      - "#d9a35a"
+      - bold
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never
+      command: delta --dark --paging=never
   commit:
     signOff: false
   merging:

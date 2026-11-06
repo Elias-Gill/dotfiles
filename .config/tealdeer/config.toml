@@ -1,19 +1,22 @@
 [display]
-compact = true
-use_pager = true
+compact = false
+use_pager = false
+show_title = false
 
 [style.command_name]
-foreground = "red"
+foreground = "green"
 
 [style.example_text]
-foreground = "blue"
+foreground = "white"
+background = {rgb = {r=28, g=28 , b=28}}
+bold = true
 
 [style.example_code]
-foreground = "green"
+foreground = "white"
 
 [style.example_variable]
 foreground = "yellow"
-underline = true
+underline = false
 
 [updates]
 auto_update = false

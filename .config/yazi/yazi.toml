@@ -15,101 +15,11 @@ max_width    = 600
 max_height   = 900
 cache_dir    = "~/.cache/yazi/"
 
-[opener]
-folder = [
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = 'tm-ses "$1"', block = true, desc = "Tmux session" },
-    # === Acciones comunes siempre al final ===
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-archive = [
-    { run = 'unzip "$@"', desc = "Unzip" },
-    { run = '7z x "$@"', desc = "Extract 7z" },
-    # === Acciones comunes siempre al final ===
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-image = [
-    { run = 'bash /home/elias/.config/yazi/sxiv_open.bash "$1"', orphan = true, desc = "sxiv" },
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '''exiv2 "$1"; echo "Press enter to exit"; read''', block = true, desc = "EXIF" },
-    { run = 'gimp "$@"', desc = "Gimp" },
-    # === Acciones comunes siempre al final ===
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-video = [
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Media Info" },
-    # === Acciones comunes siempre al final ===
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-text = [
-    { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
-    # === Acciones comunes siempre al final ===
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-audio = [
-    { run = 'xdg-open "$@"', desc = "Xdg-Open" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Media Info" },
-    # === Acciones comunes siempre al final ===
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-# Fallback general (para archivos desconocidos)
-fallback = [
-    { run = 'xdg-open "$@"', orphan = true, desc = "Xdg-Open" },
-    { run = '$EDITOR "$@"', block = true, desc = "$EDITOR" },
-    { run = '7z a "comprimido.zip" "$@"', desc = "Comprimir zip" },
-    { run = 'dragon-drop -A -x "$@"', desc = "Drag & Drop" },
-    { run = '''bash -c 'stat "$1"; echo; ls -lh "$1"; echo "Press enter to exit"; read' -- "$1"''', block = true, desc = "Stat + ls" },
-]
-
-[open]
-rules = [
-    { url = "*/", use = "folder" },
-
-    { mime = "text/*", use = "text" },
-    { url = "*.md", use = "text" },
-    { url = "*.markdown", use = "text" },
-    { mime = "image/*", use = "image" },
-    { mime = "video/*", use = "video" },
-    { mime = "audio/*", use = "audio" },
-    { mime = "inode/x-empty", use = "text" },
-
-    { mime = "application/json", use = "text" },
-    { mime = "*/javascript", use = "text" },
-
-    { mime = "application/zip", use = "archive" },
-    { mime = "application/gzip", use = "archive" },
-    { mime = "application/x-tar", use = "archive" },
-    { mime = "application/x-bzip", use = "archive" },
-    { mime = "application/x-bzip2", use = "archive" },
-    { mime = "application/x-7z-compressed", use = "archive" },
-    { mime = "application/x-rar", use = "archive" },
-
-    { url = "*", use = "fallback" },
-]
-
 [tasks]
 file_workers    = 5
 plugin_workers  = 5
 bizarre_retry   = 5
+
+[[plugin.prepend_previewers]]
+url = "*.tar*"
+run = 'piper --format=url -- tar tf "$1"'
